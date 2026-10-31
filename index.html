@@ -91,6 +91,21 @@ img{max-width:100%;display:block}
 .nav button:hover{color:var(--ink)}
 .nav button[aria-current="page"]{background:var(--primary);color:var(--on-primary);box-shadow:0 4px 14px rgba(15,75,56,.28)}
 .tools{display:flex;align-items:center;gap:6px}
+@media (max-width:600px){
+  .topbar-in{gap:10px;row-gap:8px}
+  .brand img{height:36px}
+  .brand-name{font-size:.93rem}
+  .brand-tag{display:none}
+  .tools{margin-inline-start:auto;gap:4px}
+  .nav{order:5;flex:1 1 100%;width:100%;margin-inline-start:0;justify-content:flex-start}
+  .nav button{flex:1 1 auto;text-align:center;padding:8px 6px;font-size:.76rem}
+  .hero h1{font-size:1.55rem}
+  .hero .lead{font-size:.88rem}
+  .card{padding:16px}
+  .legend-num{width:31px;height:31px;font-size:.78rem}
+  .sec-head{margin-bottom:12px}
+}
+
 .icon-btn{display:inline-flex;align-items:center;justify-content:center;width:37px;height:37px;border-radius:10px;
   border:1px solid var(--border);background:var(--surface);cursor:pointer;transition:.18s}
 .icon-btn:hover{border-color:var(--primary);color:var(--accent-ink);transform:translateY(-1px);box-shadow:var(--shadow-sm)}
@@ -146,9 +161,13 @@ img{max-width:100%;display:block}
 .sec-num{display:inline-flex;align-items:center;justify-content:center;height:26px;padding:0 8px;border-radius:8px;background:var(--gold-soft);border:1px solid var(--gold-line);color:var(--gold-ink);font-size:.66rem;font-weight:800;letter-spacing:.6px;font-variant-numeric:tabular-nums;flex:0 0 auto}
 .legend-num{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:11px;
   background:var(--accent-soft);color:var(--accent-ink);font-size:.86rem;font-weight:800;flex:0 0 auto;border:1px solid var(--border)}
-fieldset{border:0;padding:0;margin:0;min-width:0}
-legend{padding:0;float:inline-start;width:100%;display:flex;align-items:center;gap:11px;margin-bottom:14px}
-legend h2{font-size:1rem;font-weight:800;color:var(--accent-ink)}
+fieldset{border:0;padding:0;margin:0;min-width:0;display:block}
+fieldset > *{max-width:100%}
+legend{padding:0;float:none;width:auto;display:flex;align-items:center;gap:11px;margin-bottom:14px}
+legend h2,.sec-head h2{font-size:1rem;font-weight:800;color:var(--accent-ink);line-height:1.3}
+.sec-head{display:flex;align-items:center;gap:11px;margin-bottom:14px;flex-wrap:wrap;width:100%}
+.sec-head .sec-sub{font-size:.78rem;color:var(--muted);flex:1 1 100%;margin-top:-4px}
+.card > .grid{width:100%}
 
 /* formulaire */
 .grid{display:grid;gap:13px}
@@ -658,9 +677,8 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
     </div>
 
     <!-- 1 Liquidités -->
-    <div class="card" id="cardCash">
-      <fieldset>
-        <legend><span class="legend-num">03</span><h2 data-i18n="sec.cash">Liquidités, comptes et devises</h2></legend>
+    <div class="card" id="cardCash" role="group" aria-labelledby="secCashTitle">
+        <div class="sec-head"><span class="legend-num">03</span><h2 data-i18n="sec.cash" id="secCashTitle">Liquidités, comptes et devises</h2></div>
         <div class="grid g2">
           <div class="field"><label for="cashXaf" data-i18n="f.cashXaf">Liquidités, banques et mobile money (FCFA)</label><input type="number" id="cashXaf" min="0" step="1000"></div>
           <div class="field"><label for="cashEur" data-i18n="f.cashEur">Avoirs en euros (EUR)</label><input type="number" id="cashEur" min="0" step="10"><div class="hint" data-i18n="f.cashEur.hint">Conversion automatique à la parité officielle.</div></div>
@@ -670,13 +688,11 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
           <div class="field"><label for="tontine" data-i18n="f.tontine">Tontine / épargne collective (part nette)</label><input type="number" id="tontine" min="0" step="1000"></div>
           <div class="field"><label for="crypto" data-i18n="f.crypto">Crypto-actifs et stablecoins (contre-valeur FCFA)</label><input type="number" id="crypto" min="0" step="1000"><div class="hint" data-i18n="f.crypto.hint">Évalués à la valeur de marché du jour.</div></div>
         </div>
-      </fieldset>
     </div>
 
     <!-- 2 Métaux -->
-    <div class="card" id="cardMetals">
-      <fieldset>
-        <legend><span class="legend-num">04</span><h2 data-i18n="sec.metals">Métaux précieux</h2></legend>
+    <div class="card" id="cardMetals" role="group" aria-labelledby="secMetalsTitle">
+        <div class="sec-head"><span class="legend-num">04</span><h2 data-i18n="sec.metals" id="secMetalsTitle">Métaux précieux</h2></div>
         <div class="grid g3">
           <div class="field"><label for="goldSavingsGrams" data-i18n="f.goldSavings">Or d'épargne et lingots (grammes)</label><input type="number" id="goldSavingsGrams" min="0" step="0.1"></div>
           <div class="field"><label for="goldJewelryGrams" data-i18n="f.goldJewelry">Bijoux en or (grammes)</label><input type="number" id="goldJewelryGrams" min="0" step="0.1"><div class="hint" id="jewelryHint"></div></div>
@@ -688,13 +704,11 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
           <div class="field"><label for="silverGrams" data-i18n="f.silverGrams">Argent physique et bijoux en argent (g d'argent pur)</label><input type="number" id="silverGrams" min="0" step="0.1"></div>
           <div class="field" style="justify-content:flex-end"><div class="hint" data-i18n="f.metals.hint">L'or est converti en or pur selon les carats ; l'argent est saisi en grammes purs.</div></div>
         </div>
-      </fieldset>
     </div>
 
     <!-- 3 Commerce -->
-    <div class="card" id="cardTrade">
-      <fieldset>
-        <legend><span class="legend-num">05</span><h2 data-i18n="sec.trade">Commerce et investissements</h2></legend>
+    <div class="card" id="cardTrade" role="group" aria-labelledby="secTradeTitle">
+        <div class="sec-head"><span class="legend-num">05</span><h2 data-i18n="sec.trade" id="secTradeTitle">Commerce et investissements</h2></div>
         <div class="grid g2">
           <div class="field"><label for="stock" data-i18n="f.stock">Stock de marchandises (valeur marchande)</label><input type="number" id="stock" min="0" step="1000"></div>
           <div class="field"><label for="receivables" data-i18n="f.receivables">Créances sûres et recouvrables</label><input type="number" id="receivables" min="0" step="1000"><div class="hint" data-i18n="f.receivables.hint">Ventes à crédit dont le recouvrement est quasi certain.</div></div>
@@ -704,24 +718,20 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
           <div class="field"><label for="rentalIncome" data-i18n="f.rental">Revenus locatifs nets accumulés</label><input type="number" id="rentalIncome" min="0" step="1000"><div class="hint" data-i18n="f.rental.hint">Seul le cumul non consommé entre dans l'assiette.</div></div>
           <div class="field"><label for="shares" data-i18n="f.shares">Actions, parts sociales et OPCVM</label><input type="number" id="shares" min="0" step="1000"><div class="hint" data-i18n="f.shares.hint">Retenues à leur valeur de marché à l'échéance.</div></div>
         </div>
-      </fieldset>
     </div>
 
     <!-- 4 Dettes -->
-    <div class="card" id="cardDebts">
-      <fieldset>
-        <legend><span class="legend-num">06</span><h2 data-i18n="sec.debts">Dettes et passifs</h2></legend>
+    <div class="card" id="cardDebts" role="group" aria-labelledby="secDebtsTitle">
+        <div class="sec-head"><span class="legend-num">06</span><h2 data-i18n="sec.debts" id="secDebtsTitle">Dettes et passifs</h2></div>
         <div class="grid g2">
           <div class="field"><label for="shortTermDebts" data-i18n="f.shortDebts">Dettes à court terme et factures exigibles</label><input type="number" id="shortTermDebts" min="0" step="1000"></div>
           <div class="field"><label for="longTermDebtAnnual" data-i18n="f.longDebts">Dettes à long terme — échéances des 12 prochains mois</label><input type="number" id="longTermDebtAnnual" min="0" step="1000"><div class="hint" data-i18n="f.longDebts.hint">Seules les échéances de l'année sont déductibles (AAOIFI n°35).</div></div>
         </div>
-      </fieldset>
     </div>
 
     <!-- 5 Hawl -->
-    <div class="card" id="cardHawl">
-      <fieldset>
-        <legend><span class="legend-num">07</span><h2 data-i18n="sec.hawl">Cycle du hawl</h2></legend>
+    <div class="card" id="cardHawl" role="group" aria-labelledby="secHawlTitle">
+        <div class="sec-head"><span class="legend-num">07</span><h2 data-i18n="sec.hawl" id="secHawlTitle">Cycle du hawl</h2></div>
         <div class="grid g2">
           <div class="field"><label for="hawlStart" data-i18n="f.hawlStart">Date d'ouverture du cycle</label><input type="date" id="hawlStart"><div class="hint" data-i18n="f.hawlStart.hint">Jour où le patrimoine a atteint le nissab pour la première fois.</div></div>
           <div class="field"><label for="hawlDue" data-i18n="f.hawlDue">Échéance théorique</label><input type="text" id="hawlDue" readonly></div>
@@ -730,7 +740,6 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
           <button class="btn ghost sm" id="icsBtn" type="button"><svg><use href="#i-calendar"/></svg><span data-i18n="act.ics">Rappel (.ics)</span></button>
           <button class="btn ghost sm" id="resetFieldsBtn" type="button"><svg><use href="#i-refresh"/></svg><span data-i18n="act.clearFields">Vider les champs</span></button>
         </div>
-      </fieldset>
     </div>
   </section>
 
@@ -884,7 +893,7 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
     <div class="card">
       <div class="card-head"><span class="icon-tile"><svg><use href="#i-info"/></svg></span><div><h3 data-i18n="set.about">À propos et avertissement</h3></div></div>
       <div id="aboutBody" style="font-size:.8rem;color:var(--muted);line-height:1.6;margin-top:8px"></div>
-      <div class="kv" style="margin-top:10px"><span data-i18n="set.version">Version</span><b id="versionLabel">5.0</b></div>
+      <div class="kv" style="margin-top:10px"><span data-i18n="set.version">Version</span><b id="versionLabel">5.0.1</b></div>
       <div class="kv"><span data-i18n="set.storage">Stockage</span><b id="storageLabel"></b></div>
     </div>
   </section>
@@ -1991,7 +2000,7 @@ ar: {
     "legal.mentions":"Mentions légales","legal.warn":"Avertissements",
     "legal.title":"Aide, FAQ et documents juridiques",
     "legal.sub":"Conditions d'utilisation, confidentialité et avertissements.",
-    "foot.legal":"Version 5.0 — documents juridiques révisés le 31 octobre 2026 (version 1.0).",
+    "foot.legal":"Version 5.0.1 — documents juridiques révisés le 31 octobre 2026 (version 1.0).",
     "consent.title":"Avant de commencer",
     "consent.check":"J'ai lu et j'accepte les conditions d'utilisation et la politique de confidentialité.",
     "consent.accept":"Accepter et continuer","consent.decline":"Refuser",
@@ -2007,7 +2016,7 @@ ar: {
     "legal.mentions":"Legal notice","legal.warn":"Disclaimers",
     "legal.title":"Help, FAQ and legal documents",
     "legal.sub":"Terms of use, privacy and disclaimers.",
-    "foot.legal":"Version 5.0 — legal documents revised on 31 October 2026 (version 1.0).",
+    "foot.legal":"Version 5.0.1 — legal documents revised on 31 October 2026 (version 1.0).",
     "consent.title":"Before you begin",
     "consent.check":"I have read and accept the terms of use and the privacy policy.",
     "consent.accept":"Accept and continue","consent.decline":"Decline",
@@ -2023,7 +2032,7 @@ ar: {
     "legal.mentions":"الإشعارات القانونية","legal.warn":"التنبيهات",
     "legal.title":"المساعدة والأسئلة الشائعة والوثائق القانونية",
     "legal.sub":"شروط الاستخدام والخصوصية والتنبيهات.",
-    "foot.legal":"الإصدار 5.0 — وثائق قانونية مُراجعة في 31 أكتوبر 2026 (النسخة 1.0).",
+    "foot.legal":"الإصدار 5.0.1 — وثائق قانونية مُراجعة في 31 أكتوبر 2026 (النسخة 1.0).",
     "consent.title":"قبل أن تبدأ",
     "consent.check":"قرأت شروط الاستخدام وسياسة الخصوصية وأقبلهما.",
     "consent.accept":"أقبل وأتابع","consent.decline":"أرفض",
@@ -2043,7 +2052,7 @@ ar: {
 const LANGS = ["fr","en","ar"];
 const LOCALES = { fr:"fr-FR", en:"en-GB", ar:"ar-EG-u-nu-latn" };
 const EUR_XAF = 655.957, GOLD_NISSAB_G = 85, SILVER_NISSAB_G = 595, TROY_OZ_G = 31.1034768;
-const VERSION = "5.0";
+const VERSION = "5.0.1";
 const KEY_STATE = "zakat_al_mal_state_v5";
 const KEY_PIN = "zakat_al_mal_pin_v5";
 const KEY_AUTH = "zakat_al_mal_auth_v5";
@@ -2490,8 +2499,25 @@ function crc32(bytes) {
   for (let i = 0; i < bytes.length; i++) c = table[(c ^ bytes[i]) & 0xFF] ^ (c >>> 8);
   return (c ^ 0xFFFFFFFF) >>> 0;
 }
+/* Encodage UTF-8 sans dépendre de TextEncoder (navigateurs anciens, environnements isolés) */
+function utf8Bytes(str) {
+  if (typeof TextEncoder !== "undefined") { try { return new TextEncoder().encode(str); } catch (e) {} }
+  const out = [];
+  for (let i = 0; i < str.length; i++) {
+    let cp = str.charCodeAt(i);
+    if (cp >= 0xd800 && cp <= 0xdbff && i + 1 < str.length) {
+      const lo = str.charCodeAt(i + 1);
+      if (lo >= 0xdc00 && lo <= 0xdfff) { cp = ((cp - 0xd800) << 10) + (lo - 0xdc00) + 0x10000; i += 1; }
+    }
+    if (cp < 0x80) out.push(cp);
+    else if (cp < 0x800) out.push(0xc0 | (cp >> 6), 0x80 | (cp & 63));
+    else if (cp < 0x10000) out.push(0xe0 | (cp >> 12), 0x80 | ((cp >> 6) & 63), 0x80 | (cp & 63));
+    else out.push(0xf0 | (cp >> 18), 0x80 | ((cp >> 12) & 63), 0x80 | ((cp >> 6) & 63), 0x80 | (cp & 63));
+  }
+  return new Uint8Array(out);
+}
 function zipStore(files) {
-  const enc = new TextEncoder();
+  const enc = { encode: utf8Bytes };
   const parts = [], central = [];
   let offset = 0;
   files.forEach(f => {
@@ -2779,7 +2805,7 @@ async function hashPin(pin) {
   const data = pin + SALT;
   if (window.crypto && window.crypto.subtle && window.crypto.subtle.digest) {
     try {
-      const buf = await window.crypto.subtle.digest("SHA-256", new TextEncoder().encode(data));
+      const buf = await window.crypto.subtle.digest("SHA-256", (typeof TextEncoder !== "undefined" ? new TextEncoder().encode(data) : utf8Bytes(data)));
       return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
     } catch (e) {}
   }
@@ -3563,7 +3589,7 @@ const LEGAL = {
     title: "Aide, FAQ et documents juridiques",
     sub: "Conditions d'utilisation, confidentialité et avertissements.",
     tabs: { faq: "FAQ", cgu: "Conditions d'utilisation", privacy: "Confidentialité", mentions: "Mentions légales", warn: "Avertissements" },
-    meta: "Version 5.0 · documents révisés le 31 octobre 2026 · version 1.0",
+    meta: "Version 5.0.1 · documents révisés le 31 octobre 2026 · version 1.0",
     accepted: "Conditions acceptées le ",
     notAccepted: "Conditions non encore acceptées.",
     faqLead: "Quatorze réponses courtes aux questions les plus fréquentes. Les documents complets sont accessibles par les onglets ci-dessus.",
@@ -3586,7 +3612,7 @@ const LEGAL = {
     docs: {
       cgu: {
         title: "Conditions générales d'utilisation",
-        lead: "Les présentes conditions régissent l'utilisation de l'application Zakat Al Mal, version 5.0. Elles doivent être lues et acceptées avant toute utilisation.",
+        lead: "Les présentes conditions régissent l'utilisation de l'application Zakat Al Mal, version 5.0.1. Elles doivent être lues et acceptées avant toute utilisation.",
         sections: [
           { h: "1. Objet et éditeur", p: ["L'application est un outil autonome de calcul et de tenue de registre de la zakat al-mal, exécuté dans le navigateur de l'utilisateur. Elle est éditée à titre personnel et non commercial par le titulaire du présent fichier, ci-après « l'éditeur ».", "Les mentions d'identification figurent dans l'onglet « Mentions légales »."] },
           { h: "2. Acceptation", p: ["L'utilisation de l'application vaut acceptation pleine et entière des présentes conditions. En cas de refus, l'utilisateur s'abstient d'utiliser l'outil.", "L'acceptation est horodatée et conservée localement, avec le numéro de version des conditions acceptées."] },
@@ -3649,7 +3675,7 @@ const LEGAL = {
     title: "Help, FAQ and legal documents",
     sub: "Terms of use, privacy and disclaimers.",
     tabs: { faq: "FAQ", cgu: "Terms of use", privacy: "Privacy", mentions: "Legal notice", warn: "Disclaimers" },
-    meta: "Version 5.0 · documents revised on 31 October 2026 · version 1.0",
+    meta: "Version 5.0.1 · documents revised on 31 October 2026 · version 1.0",
     accepted: "Terms accepted on ",
     notAccepted: "Terms not yet accepted.",
     faqLead: "Fourteen short answers to the most frequent questions. The full documents are available through the tabs above.",
@@ -3672,7 +3698,7 @@ const LEGAL = {
     docs: {
       cgu: {
         title: "Terms of use",
-        lead: "These terms govern the use of the Zakat Al Mal application, version 5.0. They must be read and accepted before any use.",
+        lead: "These terms govern the use of the Zakat Al Mal application, version 5.0.1. They must be read and accepted before any use.",
         sections: [
           { h: "1. Purpose and publisher", p: ["The application is a standalone tool for calculating and keeping the register of zakat al-mal, executed in the user's browser. It is published on a personal, non-commercial basis by the holder of this file, hereinafter “the publisher”.", "Identification details appear in the “Legal notice” tab."] },
           { h: "2. Acceptance", p: ["Use of the application constitutes full and unreserved acceptance of these terms. In case of refusal, the user refrains from using the tool.", "Acceptance is time-stamped and stored locally, together with the version number of the terms accepted."] },
@@ -3735,7 +3761,7 @@ const LEGAL = {
     title: "المساعدة والأسئلة الشائعة والوثائق القانونية",
     sub: "شروط الاستخدام والخصوصية والتنبيهات.",
     tabs: { faq: "الأسئلة الشائعة", cgu: "شروط الاستخدام", privacy: "الخصوصية", mentions: "الإشعارات القانونية", warn: "التنبيهات" },
-    meta: "الإصدار 5.0 · وثائق مُراجعة في 31 أكتوبر 2026 · النسخة 1.0",
+    meta: "الإصدار 5.0.1 · وثائق مُراجعة في 31 أكتوبر 2026 · النسخة 1.0",
     accepted: "قُبلت الشروط في ",
     notAccepted: "لم تُقبل الشروط بعد.",
     faqLead: "أربعة عشر جوابًا موجزًا عن أكثر المسائل تكرارًا. والوثائق الكاملة متاحة في التبويبات أعلاه.",
