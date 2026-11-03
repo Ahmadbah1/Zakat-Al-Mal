@@ -42,7 +42,7 @@ comptez cinq minutes, dont deux de téléversement.
    > `index.html` doit se retrouver à la racine du dépôt, pas dans un sous-dossier.
 
 3. Dans le champ du message de validation, écrivez :
-   `Zakat Al Mal 5.0 — application autonome, FR/EN/AR`
+   `Zakat Al Mal 5.0.1 — application autonome, FR/EN/AR`
 4. Cliquez **Commit changes**.
 
 ### Le fichier `.nojekyll`

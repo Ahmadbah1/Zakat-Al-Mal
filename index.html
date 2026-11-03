@@ -390,6 +390,36 @@ td.num,th.num{text-align:end;font-variant-numeric:tabular-nums}
 .tour-art{width:100%;height:104px;object-fit:cover;border-radius:12px;margin-bottom:12px;border:1px solid var(--border)}
 .tour-center{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:16px}
 
+/* 10c2. Présentation initiale */
+.intro-overlay{padding:16px;z-index:255;background:linear-gradient(165deg,#07110d 0%,#0f2e23 55%,#3a2f14 100%);align-items:flex-start;overflow-y:auto}
+.intro{width:min(760px,100%);margin:auto;background:var(--surface);border-radius:22px;box-shadow:var(--shadow-lg);padding:26px;border:1px solid var(--border)}
+@media(max-width:600px){.intro{padding:18px;border-radius:18px}}
+.intro-head{display:flex;gap:16px;align-items:flex-start}
+.intro-head img{height:64px;width:auto;flex:0 0 auto;filter:var(--logo-filter)}
+@media(max-width:520px){.intro-head img{height:48px}}
+.intro-eyebrow{font-size:.64rem;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--gold-ink);
+  background:var(--gold-soft);border:1px solid var(--gold-line);padding:4px 10px;border-radius:99px;display:inline-block;margin-bottom:8px}
+.intro h2{font-family:var(--font-display);font-size:1.32rem;line-height:1.22;color:var(--accent-ink);margin-bottom:8px}
+.intro-lead{font-size:.88rem;color:var(--ink);line-height:1.6}
+.intro-steps{display:grid;gap:10px;margin:18px 0 14px}
+.istep{display:flex;gap:12px;align-items:flex-start;background:var(--surface-2);border:1px solid var(--border);border-radius:13px;padding:12px 14px}
+.istep-num{flex:0 0 auto;width:26px;height:26px;border-radius:9px;display:grid;place-items:center;
+  background:var(--primary);color:var(--on-primary);font-size:.78rem;font-weight:800}
+.istep strong{display:block;font-size:.87rem;color:var(--accent-ink);margin-bottom:3px}
+.istep p{font-size:.8rem;color:var(--muted);line-height:1.55}
+.intro-example{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;background:var(--gold-soft);
+  border:1px solid var(--gold-line);border-radius:12px;padding:11px 13px;font-size:.79rem;color:var(--ink);line-height:1.55}
+.intro-example b{font-size:.64rem;letter-spacing:.8px;text-transform:uppercase;color:var(--gold-ink);flex:0 0 100%}
+.intro-next{margin-top:14px;border-inline-start:3px solid var(--primary);background:var(--accent-soft);
+  border-radius:0 12px 12px 0;padding:12px 14px}
+.intro-next .in-lab{font-size:.78rem;font-weight:800;color:var(--accent-ink);margin-bottom:4px}
+.intro-next p{font-size:.8rem;color:var(--ink);line-height:1.6}
+.intro-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.intro-actions .btn{flex:1 1 190px;justify-content:center}
+.intro-foot{font-size:.7rem;color:var(--muted);text-align:center;margin-top:12px;line-height:1.5}
+.ob-why{margin-top:14px;font-size:.76rem;color:var(--ink);line-height:1.55;background:var(--accent-soft);
+  border:1px solid var(--border);border-radius:11px;padding:10px 12px}
+
 /* 10d. FAQ & documents juridiques */
 .appfoot{max-width:1240px;margin:28px auto 0;text-align:center;font-size:.7rem;color:var(--muted);line-height:1.7;
   border-top:1px solid var(--border);padding:16px 14px 26px}
@@ -871,6 +901,7 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
           <p data-i18n="set.help.p">Revoir la visite guidée, section par section.</p>
           <div class="btn-row">
             <button class="btn quiet sm" id="replayTourBtn" type="button" data-i18n="act.tour">Revoir le tutoriel</button>
+            <button class="btn ghost sm" id="introReplayBtn" type="button"><svg><use href="#i-spark"/></svg><span data-i18n="intro.replay">Présentation</span></button>
             <button class="btn ghost sm" id="openFaqBtn" type="button"><svg><use href="#i-help"/></svg><span data-i18n="legal.faq">FAQ</span></button>
           </div>
         </div>
@@ -893,7 +924,7 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
     <div class="card">
       <div class="card-head"><span class="icon-tile"><svg><use href="#i-info"/></svg></span><div><h3 data-i18n="set.about">À propos et avertissement</h3></div></div>
       <div id="aboutBody" style="font-size:.8rem;color:var(--muted);line-height:1.6;margin-top:8px"></div>
-      <div class="kv" style="margin-top:10px"><span data-i18n="set.version">Version</span><b id="versionLabel">5.0.1</b></div>
+      <div class="kv" style="margin-top:10px"><span data-i18n="set.version">Version</span><b id="versionLabel">5.0.2</b></div>
       <div class="kv"><span data-i18n="set.storage">Stockage</span><b id="storageLabel"></b></div>
     </div>
   </section>
@@ -946,6 +977,35 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
   <div class="af-line" style="margin-top:8px" data-i18n="foot.legal">Version 5.0 — documents juridiques révisés le 31 octobre 2026 (version 1.0).</div>
 </footer>
 
+<!-- ============ PRÉSENTATION (avant le verrou) ============ -->
+<div class="overlay intro-overlay" id="introOverlay">
+  <div class="intro" role="dialog" aria-modal="true" aria-labelledby="introTitle">
+    <div class="intro-head">
+      <img src="" data-logo alt="">
+      <div>
+        <div class="intro-eyebrow" data-i18n="intro.eyebrow">Bienvenue</div>
+        <h2 id="introTitle" data-i18n="intro.title">En deux mots : à quoi sert cette application</h2>
+        <p class="intro-lead" id="introLead" data-i18n="intro.lead">Elle calcule la zakat que vous devez sur votre argent, puis elle garde la trace de ce que vous avez déjà versé. Vous remplissez des cases, elle fait le calcul.</p>
+      </div>
+    </div>
+    <div class="intro-steps">
+      <div class="istep"><span class="istep-num">1</span><div><strong data-i18n="intro.s1.t">Vous dites ce que vous possédez</strong><p data-i18n="intro.s1.p">Argent des comptes et du mobile money, or et bijoux, marchandises, argent qu'on vous doit — et ce que vous devez payer dans l'année.</p></div></div>
+      <div class="istep"><span class="istep-num">2</span><div><strong data-i18n="intro.s2.t">Elle calcule</strong><p data-i18n="intro.s2.p">Elle compare le total au seuil minimum, le nissab, puis applique le taux de 2,5 %. En dessous du seuil, elle l'écrit clairement : rien à verser.</p></div></div>
+      <div class="istep"><span class="istep-num">3</span><div><strong data-i18n="intro.s3.t">Elle garde la mémoire</strong><p data-i18n="intro.s3.p">Chaque don versé est enregistré avec un reçu numéroté. L'an prochain l'historique est déjà là, et un clic produit un bilan ou un tableau Excel.</p></div></div>
+    </div>
+    <div class="intro-example"><b data-i18n="intro.example.lab">Exemple concret</b><span data-i18n="intro.example">5 000 000 FCFA d'économies, aucune dette, or à 50 000 FCFA le gramme : le seuil est de 4 250 000 FCFA, donc 125 000 FCFA de zakat à verser.</span></div>
+    <div class="intro-next">
+      <div class="in-lab" data-i18n="intro.next.lab">Pourquoi un code ou une empreinte juste après ?</div>
+      <p data-i18n="intro.next.p">Vous allez choisir un code à 4 chiffres ou votre empreinte digitale. Ce n'est pas une inscription : c'est un simple verrou, comme le code de votre téléphone, pour que personne d'autre ne puisse ouvrir vos montants. Aucun compte à créer, aucun mot de passe à retenir.</p>
+    </div>
+    <div class="intro-actions">
+      <button class="btn" id="introStart" type="button"><span data-i18n="intro.start">Compris, continuer</span><svg><use href="#i-chev-r"/></svg></button>
+      <button class="btn ghost" id="introLearn" type="button"><svg><use href="#i-help"/></svg><span data-i18n="intro.learn">Questions fréquentes</span></button>
+    </div>
+    <p class="intro-foot" data-i18n="intro.foot">Aucune donnée ne part sur Internet : tout reste sur cet appareil, et vous pouvez tout exporter ou effacer quand vous voulez.</p>
+  </div>
+</div>
+
 <!-- ============ ONBOARDING ============ -->
 <div class="overlay" id="onboardOverlay">
   <div class="onboard" role="dialog" aria-modal="true" aria-labelledby="obTitle">
@@ -969,6 +1029,7 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
             <span data-i18n="onboard.bio.desc">Face ID, Touch ID ou lecteur d'empreinte de l'appareil.</span>
           </button>
         </div>
+        <div class="ob-why" data-i18n="onboard.why">Rappel : ce code ne crée aucun compte et n'envoie rien. Il sert seulement à fermer l'application sur cet appareil, comme le verrou de votre téléphone.</div>
         <div class="ob-note" data-i18n="onboard.note">Le verrou protège l'écran d'un regard indiscret. La sauvegarde exportée reste la seule protection réelle des données.</div>
       </div>
 
@@ -2000,7 +2061,7 @@ ar: {
     "legal.mentions":"Mentions légales","legal.warn":"Avertissements",
     "legal.title":"Aide, FAQ et documents juridiques",
     "legal.sub":"Conditions d'utilisation, confidentialité et avertissements.",
-    "foot.legal":"Version 5.0.1 — documents juridiques révisés le 31 octobre 2026 (version 1.0).",
+    "foot.legal":"Version 5.0.2 — documents juridiques révisés le 31 octobre 2026 (version 1.0).",
     "consent.title":"Avant de commencer",
     "consent.check":"J'ai lu et j'accepte les conditions d'utilisation et la politique de confidentialité.",
     "consent.accept":"Accepter et continuer","consent.decline":"Refuser",
@@ -2016,7 +2077,7 @@ ar: {
     "legal.mentions":"Legal notice","legal.warn":"Disclaimers",
     "legal.title":"Help, FAQ and legal documents",
     "legal.sub":"Terms of use, privacy and disclaimers.",
-    "foot.legal":"Version 5.0.1 — legal documents revised on 31 October 2026 (version 1.0).",
+    "foot.legal":"Version 5.0.2 — legal documents revised on 31 October 2026 (version 1.0).",
     "consent.title":"Before you begin",
     "consent.check":"I have read and accept the terms of use and the privacy policy.",
     "consent.accept":"Accept and continue","consent.decline":"Decline",
@@ -2032,7 +2093,7 @@ ar: {
     "legal.mentions":"الإشعارات القانونية","legal.warn":"التنبيهات",
     "legal.title":"المساعدة والأسئلة الشائعة والوثائق القانونية",
     "legal.sub":"شروط الاستخدام والخصوصية والتنبيهات.",
-    "foot.legal":"الإصدار 5.0.1 — وثائق قانونية مُراجعة في 31 أكتوبر 2026 (النسخة 1.0).",
+    "foot.legal":"الإصدار 5.0.2 — وثائق قانونية مُراجعة في 31 أكتوبر 2026 (النسخة 1.0).",
     "consent.title":"قبل أن تبدأ",
     "consent.check":"قرأت شروط الاستخدام وسياسة الخصوصية وأقبلهما.",
     "consent.accept":"أقبل وأتابع","consent.decline":"أرفض",
@@ -2047,12 +2108,85 @@ ar: {
   Object.keys(extra).forEach(function (lang) { Object.assign(I18N[lang], extra[lang]); });
 })();
 
+/* ===== v5.0.2 : présentation avant le verrou ===== */
+(function () {
+  var extra = {
+  fr: {
+    "intro.eyebrow":"Bienvenue",
+    "intro.title":"En deux mots : à quoi sert cette application",
+    "intro.lead":"Elle calcule la zakat que vous devez sur votre argent, puis elle garde la trace de ce que vous avez déjà versé. Vous remplissez des cases, elle fait le calcul.",
+    "intro.s1.t":"Vous dites ce que vous possédez",
+    "intro.s1.p":"Argent des comptes et du mobile money, or et bijoux, marchandises, argent qu'on vous doit — et ce que vous devez payer dans l'année.",
+    "intro.s2.t":"Elle calcule",
+    "intro.s2.p":"Elle compare le total au seuil minimum, le nissab, puis applique le taux de 2,5 %. En dessous du seuil, elle l'écrit clairement : rien à verser.",
+    "intro.s3.t":"Elle garde la mémoire",
+    "intro.s3.p":"Chaque don versé est enregistré avec un reçu numéroté. L'an prochain l'historique est déjà là, et un clic produit un bilan ou un tableau Excel.",
+    "intro.example.lab":"Exemple concret",
+    "intro.example":"5 000 000 FCFA d'économies, aucune dette, or à 50 000 FCFA le gramme : le seuil est de 4 250 000 FCFA, donc 125 000 FCFA de zakat à verser.",
+    "intro.next.lab":"Pourquoi un code ou une empreinte juste après ?",
+    "intro.next.p":"Vous allez choisir un code à 4 chiffres ou votre empreinte digitale. Ce n'est pas une inscription : c'est un simple verrou, comme le code de votre téléphone, pour que personne d'autre ne puisse ouvrir vos montants. Aucun compte à créer, aucun mot de passe à retenir.",
+    "intro.start":"Compris, continuer",
+    "intro.learn":"Questions fréquentes",
+    "intro.foot":"Aucune donnée ne part sur Internet : tout reste sur cet appareil, et vous pouvez tout exporter ou effacer quand vous voulez.",
+    "intro.replay":"Présentation",
+    "onboard.why":"Rappel : ce code ne crée aucun compte et n'envoie rien. Il sert seulement à fermer l'application sur cet appareil, comme le verrou de votre téléphone.",
+    "onboard.title":"Protégez l'accès",
+    "onboard.sub":"Choisissez un code à 4 chiffres ou votre empreinte. Ce verrou reste sur cet appareil : aucun compte n'est créé."
+  },
+  en: {
+    "intro.eyebrow":"Welcome",
+    "intro.title":"In short: what this application is for",
+    "intro.lead":"It calculates the zakat due on your wealth, then keeps track of what you have already paid. You fill in boxes, it does the arithmetic.",
+    "intro.s1.t":"You state what you own",
+    "intro.s1.p":"Money in accounts and mobile money, gold and jewellery, goods, money owed to you — and what you must pay during the year.",
+    "intro.s2.t":"It calculates",
+    "intro.s2.p":"It compares the total with the minimum threshold, the nissab, then applies the 2.5 % rate. Below the threshold, it says so plainly: nothing to pay.",
+    "intro.s3.t":"It keeps the record",
+    "intro.s3.p":"Each payment is recorded with a numbered receipt. Next year the history is already there, and one click produces a statement or an Excel workbook.",
+    "intro.example.lab":"A concrete example",
+    "intro.example":"5,000,000 FCFA in savings, no debt, gold at 50,000 FCFA per gram: the threshold is 4,250,000 FCFA, so 125,000 FCFA of zakat is due.",
+    "intro.next.lab":"Why a code or a fingerprint right after?",
+    "intro.next.p":"You will choose a 4-digit code or your fingerprint. This is not a registration: it is simply a lock, like your phone's passcode, so that nobody else can open your figures. No account to create, no password to remember.",
+    "intro.start":"Understood, continue",
+    "intro.learn":"Frequently asked questions",
+    "intro.foot":"No data leaves your device: everything stays here, and you may export or erase it whenever you wish.",
+    "intro.replay":"Introduction",
+    "onboard.why":"Reminder: this code creates no account and sends nothing. It only locks the application on this device, like your phone's passcode.",
+    "onboard.title":"Protect access",
+    "onboard.sub":"Choose a 4-digit code or your fingerprint. This lock stays on this device: no account is created."
+  },
+  ar: {
+    "intro.eyebrow":"مرحبًا",
+    "intro.title":"باختصار: ما فائدة هذا التطبيق",
+    "intro.lead":"يحسب الزكاة الواجبة في مالك، ثم يحفظ أثر ما أدّيته منه. أنت تملأ الخانات، وهو يقوم بالحساب.",
+    "intro.s1.t":"تُبيّن ما تملكه",
+    "intro.s1.p":"المال في الحسابات والمحفظة الإلكترونية، والذهب والحُليّ، والبضائع، والمال الذي يُستحق لك — وما عليك دفعه خلال السنة.",
+    "intro.s2.t":"يحسب",
+    "intro.s2.p":"يقارن المجموع بالحد الأدنى، وهو النصاب، ثم يطبّق النسبة 2,5٪. وإن كنت دون النصاب بيّن ذلك صراحة: لا شيء عليك.",
+    "intro.s3.t":"يحفظ السجل",
+    "intro.s3.p":"كل صدقة تُؤدّى تُسجَّل بإيصال مرقّم. وفي العام المقبل يكون السجل حاضرًا، وتكفي نقرة لإصدار بيان أو مصنف Excel.",
+    "intro.example.lab":"مثال محسوس",
+    "intro.example":"خمسة ملايين فرنك سيفا مدّخرات، ولا ديون، والذهب بخمسين ألف فرنك للغرام: النصاب أربعة ملايين ومئتا ألف وخمسون ألفًا، فتجب زكاة قدرها مئة وخمسة وعشرون ألف فرنك.",
+    "intro.next.lab":"لماذا رمز أو بصمة بعد ذلك مباشرة؟",
+    "intro.next.p":"ستختار رمزًا من أربعة أرقام أو بصمة إصبعك. وهذا ليس تسجيلًا: إنه قفل بسيط، كرمز هاتفك، حتى لا يفتح أحد غيرك مبالغك. لا حساب تُنشئه ولا كلمة مرور تحفظها.",
+    "intro.start":"فهمت، تابع",
+    "intro.learn":"الأسئلة الشائعة",
+    "intro.foot":"لا تغادر أي بيانات جهازك: كل شيء يبقى هنا، ولك تصديره أو محوه متى شئت.",
+    "intro.replay":"العرض التقديمي",
+    "onboard.why":"تذكير: هذا الرمز لا يُنشئ حسابًا ولا يُرسل شيئًا. وظيفته أن يقفل التطبيق على هذا الجهاز، كقفل هاتفك.",
+    "onboard.title":"احمِ الوصول",
+    "onboard.sub":"اختر رمزًا من أربعة أرقام أو بصمة إصبعك. ويبقى هذا القفل على هذا الجهاز: لا يُنشأ أي حساب."
+  }
+  };
+  Object.keys(extra).forEach(function (lang) { Object.assign(I18N[lang], extra[lang]); });
+})();
+
 
 /* ============================ 2. CONSTANTES ============================ */
 const LANGS = ["fr","en","ar"];
 const LOCALES = { fr:"fr-FR", en:"en-GB", ar:"ar-EG-u-nu-latn" };
 const EUR_XAF = 655.957, GOLD_NISSAB_G = 85, SILVER_NISSAB_G = 595, TROY_OZ_G = 31.1034768;
-const VERSION = "5.0.1";
+const VERSION = "5.0.2";
 const KEY_STATE = "zakat_al_mal_state_v5";
 const KEY_PIN = "zakat_al_mal_pin_v5";
 const KEY_AUTH = "zakat_al_mal_auth_v5";
@@ -3589,7 +3723,7 @@ const LEGAL = {
     title: "Aide, FAQ et documents juridiques",
     sub: "Conditions d'utilisation, confidentialité et avertissements.",
     tabs: { faq: "FAQ", cgu: "Conditions d'utilisation", privacy: "Confidentialité", mentions: "Mentions légales", warn: "Avertissements" },
-    meta: "Version 5.0.1 · documents révisés le 31 octobre 2026 · version 1.0",
+    meta: "Version 5.0.2 · documents révisés le 31 octobre 2026 · version 1.0",
     accepted: "Conditions acceptées le ",
     notAccepted: "Conditions non encore acceptées.",
     faqLead: "Quatorze réponses courtes aux questions les plus fréquentes. Les documents complets sont accessibles par les onglets ci-dessus.",
@@ -3612,7 +3746,7 @@ const LEGAL = {
     docs: {
       cgu: {
         title: "Conditions générales d'utilisation",
-        lead: "Les présentes conditions régissent l'utilisation de l'application Zakat Al Mal, version 5.0.1. Elles doivent être lues et acceptées avant toute utilisation.",
+        lead: "Les présentes conditions régissent l'utilisation de l'application Zakat Al Mal, version 5.0.2. Elles doivent être lues et acceptées avant toute utilisation.",
         sections: [
           { h: "1. Objet et éditeur", p: ["L'application est un outil autonome de calcul et de tenue de registre de la zakat al-mal, exécuté dans le navigateur de l'utilisateur. Elle est éditée à titre personnel et non commercial par le titulaire du présent fichier, ci-après « l'éditeur ».", "Les mentions d'identification figurent dans l'onglet « Mentions légales »."] },
           { h: "2. Acceptation", p: ["L'utilisation de l'application vaut acceptation pleine et entière des présentes conditions. En cas de refus, l'utilisateur s'abstient d'utiliser l'outil.", "L'acceptation est horodatée et conservée localement, avec le numéro de version des conditions acceptées."] },
@@ -3675,7 +3809,7 @@ const LEGAL = {
     title: "Help, FAQ and legal documents",
     sub: "Terms of use, privacy and disclaimers.",
     tabs: { faq: "FAQ", cgu: "Terms of use", privacy: "Privacy", mentions: "Legal notice", warn: "Disclaimers" },
-    meta: "Version 5.0.1 · documents revised on 31 October 2026 · version 1.0",
+    meta: "Version 5.0.2 · documents revised on 31 October 2026 · version 1.0",
     accepted: "Terms accepted on ",
     notAccepted: "Terms not yet accepted.",
     faqLead: "Fourteen short answers to the most frequent questions. The full documents are available through the tabs above.",
@@ -3698,7 +3832,7 @@ const LEGAL = {
     docs: {
       cgu: {
         title: "Terms of use",
-        lead: "These terms govern the use of the Zakat Al Mal application, version 5.0.1. They must be read and accepted before any use.",
+        lead: "These terms govern the use of the Zakat Al Mal application, version 5.0.2. They must be read and accepted before any use.",
         sections: [
           { h: "1. Purpose and publisher", p: ["The application is a standalone tool for calculating and keeping the register of zakat al-mal, executed in the user's browser. It is published on a personal, non-commercial basis by the holder of this file, hereinafter “the publisher”.", "Identification details appear in the “Legal notice” tab."] },
           { h: "2. Acceptance", p: ["Use of the application constitutes full and unreserved acceptance of these terms. In case of refusal, the user refrains from using the tool.", "Acceptance is time-stamped and stored locally, together with the version number of the terms accepted."] },
@@ -3761,7 +3895,7 @@ const LEGAL = {
     title: "المساعدة والأسئلة الشائعة والوثائق القانونية",
     sub: "شروط الاستخدام والخصوصية والتنبيهات.",
     tabs: { faq: "الأسئلة الشائعة", cgu: "شروط الاستخدام", privacy: "الخصوصية", mentions: "الإشعارات القانونية", warn: "التنبيهات" },
-    meta: "الإصدار 5.0.1 · وثائق مُراجعة في 31 أكتوبر 2026 · النسخة 1.0",
+    meta: "الإصدار 5.0.2 · وثائق مُراجعة في 31 أكتوبر 2026 · النسخة 1.0",
     accepted: "قُبلت الشروط في ",
     notAccepted: "لم تُقبل الشروط بعد.",
     faqLead: "أربعة عشر جوابًا موجزًا عن أكثر المسائل تكرارًا. والوثائق الكاملة متاحة في التبويبات أعلاه.",
@@ -3907,6 +4041,29 @@ function closeLegal() {
   if (!shown0("consentOverlay")) document.body.style.overflow = "";
 }
 function shown0(id) { const el = $(id); return !!el && el.classList.contains("show"); }
+
+/* --- présentation initiale --- */
+function needsIntro() { return !state.meta.introSeen; }
+function openIntro() {
+  $("introOverlay").classList.add("show");
+  document.body.style.overflow = "hidden";
+  setTimeout(() => { try { $("introStart").focus(); } catch (e) {} }, 80);
+}
+function closeIntro() {
+  $("introOverlay").classList.remove("show");
+  if (!shown0("consentOverlay")) document.body.style.overflow = "";
+}
+function introContinue() {
+  state.meta.introSeen = true;
+  store.set(KEY_STATE, JSON.stringify(state));
+  closeIntro();
+  if (needsLegalConsent()) openConsent();
+  else {
+    if (state.settings.priceMode === "auto") refreshPrices();
+    startPriceAutoRefresh();
+    gateAccess();
+  }
+}
 
 /* --- consentement initial --- */
 function needsLegalConsent() { return state.meta.legalVersion !== LEGAL_VERSION; }
@@ -4282,6 +4439,9 @@ function bind() {
   on("legalCloseBtn", "click", closeLegal);
   on("legalTourBtn", "click", () => { closeLegal(); openTour(0); });
   on("openFaqBtn", "click", () => openLegal("faq"));
+  on("introStart", "click", introContinue);
+  on("introLearn", "click", () => openLegal("faq"));
+  on("introReplayBtn", "click", openIntro);
   on("consentCheck", "change", e => { $("consentAccept").disabled = !e.target.checked; $("consentErr").textContent = ""; });
   on("consentAccept", "click", acceptConsent);
   on("consentDecline", "click", declineConsent);
@@ -4321,7 +4481,10 @@ function boot() {
   const v = state.meta.view && VIEWS.indexOf(state.meta.view) >= 0 ? state.meta.view : "calc";
   switchView(v, { instant: true });
   if (!state.meta.hawlStartDefaulted) { state.meta.hawlStartDefaulted = true; save(); }
-  if (needsLegalConsent()) {
+  if (needsIntro()) {
+    renderPrices();
+    openIntro();
+  } else if (needsLegalConsent()) {
     renderPrices();
     openConsent();
   } else {

@@ -78,7 +78,7 @@ GITHUB_USER=moncompte GITHUB_TOKEN=**** bash creer-depot.sh
 git init
 git branch -M main
 git add .
-git commit -m "Zakat Al Mal 5.0 — application autonome, FR/EN/AR"
+git commit -m "Zakat Al Mal 5.0.1 — application autonome, FR/EN/AR"
 git remote add origin https://github.com/<votre-compte>/zakat-al-mal.git
 git push -u origin main
 ```
