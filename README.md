@@ -10,6 +10,12 @@ accès par code PIN ou empreinte digitale, export Excel dynamique, visite guidé
 
 ---
 
+## Version 5.2.1 — lisibilité des montants
+
+Les champs de saisie groupent les chiffres par trois avec une espace insécable (`5 000 000`), le
+curseur reste à sa place pendant la frappe et le séparateur décimal suit la langue. La saisie sans
+séparateur reste acceptée.
+
 ## Version 5.2.0 — ce qui est nouveau
 
 - **Calcul** : seuil argent proposé par défaut (avec explication et bascule en un clic), école

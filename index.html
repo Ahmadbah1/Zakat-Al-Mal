@@ -1263,7 +1263,7 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
     <div class="card">
       <div class="card-head"><span class="icon-tile"><svg><use href="#i-info"/></svg></span><div><h3 data-i18n="set.about">À propos et avertissement</h3></div></div>
       <div id="aboutBody" style="font-size:.8rem;color:var(--muted);line-height:1.6;margin-top:8px"></div>
-      <div class="kv" style="margin-top:10px"><span data-i18n="set.version">Version</span><b id="versionLabel">5.2.0</b></div>
+      <div class="kv" style="margin-top:10px"><span data-i18n="set.version">Version</span><b id="versionLabel">5.2.1</b></div>
       <div class="kv"><span data-i18n="set.storage">Stockage</span><b id="storageLabel"></b></div>
     </div>
   </section>
@@ -2836,7 +2836,7 @@ ar: {
 const LANGS = ["fr","en","ar"];
 const LOCALES = { fr:"fr-FR", en:"en-GB", ar:"ar-EG-u-nu-latn" };
 const EUR_XAF = 655.957, GOLD_NISSAB_G = 85, SILVER_NISSAB_G = 595, TROY_OZ_G = 31.1034768;
-const VERSION = "5.2.0";
+const VERSION = "5.2.1";
 const KEY_STATE = "zakat_al_mal_state_v5";
 const KEY_PIN = "zakat_al_mal_pin_v5";
 const KEY_AUTH = "zakat_al_mal_auth_v5";
@@ -2917,9 +2917,14 @@ function defaultState() {
 }
 var state = defaultState();
 
+const TEXT_SETTINGS = ["madhhab", "nissabType", "calendarType", "priceDate", "hawlStart", "lang", "theme", "priceMode", "debtRule", "cropMode"];
 function save() {
-  FIELD_KEYS.forEach(k => { const el = $(k); if (el) state.fields[k] = parseFloat(el.value) || 0; });
-  SETTING_KEYS.forEach(k => { const el = $(k); if (el) state.settings[k] = el.value; });
+  FIELD_KEYS.forEach(k => { const el = $(k); if (el) state.fields[k] = numVal(el.value); });
+  SETTING_KEYS.forEach(k => {
+    const el = $(k);
+    if (!el) return;
+    state.settings[k] = TEXT_SETTINGS.indexOf(k) >= 0 ? el.value : numVal(el.value);
+  });
   persistState();
 }
 /* Écriture réelle : clair, ou chiffrée si le chiffrement sur l'appareil est actif */
@@ -2931,6 +2936,7 @@ function persistState() {
 function syncInputs() {
   SETTING_KEYS.forEach(k => { const el = $(k); if (el && state.settings[k] !== undefined) el.value = state.settings[k]; });
   FIELD_KEYS.forEach(k => { const el = $(k); if (el) el.value = state.fields[k] || 0; });
+  if (typeof formatAllGrouped === "function") formatAllGrouped();
 }
 function load() {
   const stored = store.get(KEY_STATE);
@@ -2968,10 +2974,72 @@ function applyState(raw) {
   if (!state.payees || typeof state.payees !== "object") state.payees = {};
   SETTING_KEYS.forEach(k => { const el = $(k); if (el && state.settings[k] !== undefined) el.value = state.settings[k]; });
   FIELD_KEYS.forEach(k => { const el = $(k); if (el) el.value = state.fields[k] || 0; });
+  if (typeof formatAllGrouped === "function") formatAllGrouped();
 }
 
 /* ============================ 5. OUTILS ============================ */
 const $ = id => document.getElementById(id);
+const GROUP_SPACE = "\u00a0";
+
+/* Lit un nombre saisi, même groupé par espaces (« 5 000 000 » → 5000000) */
+function numVal(v) {
+  let s = String(v == null ? "" : v).replace(/[\s\u00a0\u202f\u2009\u2007]/g, "");
+  if (s.indexOf(".") < 0 && s.indexOf(",") >= 0) {
+    s = s.split(",").length === 2 ? s.replace(",", ".") : s.replace(/,/g, "");
+  } else {
+    s = s.replace(/,/g, "");
+  }
+  const n = parseFloat(s);
+  return isFinite(n) ? n : 0;
+}
+/* Séparateur décimal affiché dans les champs, selon la langue */
+function decSep() { return state.settings.lang === "fr" ? "," : "."; }
+/* Groupe les chiffres par trois en gardant la partie décimale en cours de frappe */
+function formatDigits(raw) {
+  let s = String(raw == null ? "" : raw).replace(/[^\d.,]/g, "").replace(/,/g, ".");
+  const dot = s.indexOf(".");
+  let int = dot >= 0 ? s.slice(0, dot) : s;
+  let dec = dot >= 0 ? s.slice(dot + 1).replace(/\./g, "").slice(0, 6) : "";
+  int = int.replace(/^0+(?=\d)/, "");
+  if (int === "" && dec !== "") int = "0";
+  const grouped = int.replace(/\B(?=(\d{3})+(?!\d))/g, GROUP_SPACE);
+  return grouped + (dot >= 0 ? decSep() + dec : "");
+}
+/* Reformate un champ en conservant la position du curseur */
+function applyGrouping(el) {
+  const before = el.value;
+  if (before === decSep()) { el.value = "0" + decSep(); return; }
+  const caret = (typeof el.selectionStart === "number") ? el.selectionStart : before.length;
+  const digitsBefore = before.slice(0, caret).replace(/[^\d]/g, "").length;
+  const out = formatDigits(before);
+  if (out === before) return;
+  el.value = out;
+  let pos = 0, seen = 0;
+  while (pos < out.length && seen < digitsBefore) { if (/\d/.test(out[pos])) seen++; pos++; }
+  try { el.setSelectionRange(pos, pos); } catch (e) {}
+}
+function groupInput(inp) {
+  if (!inp || inp.tagName !== "INPUT" || inp.type === "date" || inp.type === "password") return;
+  inp.setAttribute("type", "text");
+  inp.setAttribute("inputmode", "decimal");
+  inp.setAttribute("autocomplete", "off");
+  inp.classList.add("grouped");
+  if (inp.readOnly) return;
+  if (inp.__grouped) return;
+  inp.__grouped = true;
+  inp.addEventListener("input", () => applyGrouping(inp));
+}
+function initGroupedInputs() {
+  document.querySelectorAll('input[type="number"]').forEach(groupInput);
+  formatAllGrouped();
+}
+function formatAllGrouped() {
+  document.querySelectorAll("input.grouped").forEach(inp => {
+    if (inp.readOnly || document.activeElement === inp) return;
+    const out = formatDigits(inp.value);
+    if (out !== inp.value) inp.value = out;
+  });
+}
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 function t(key, params) {
   const dict = I18N[state.settings.lang] || I18N.fr;
@@ -2981,17 +3049,18 @@ function t(key, params) {
   if (params) Object.keys(params).forEach(p => { s = s.split("{" + p + "}").join(params[p]); });
   return s;
 }
+function thins(s) { return String(s).replace(/[\u202f\u2009]/g, GROUP_SPACE); }
 function fmt(n) {
   const loc = LOCALES[state.settings.lang] || "fr-FR";
-  return new Intl.NumberFormat(loc, { maximumFractionDigits: 0 }).format(Math.round(n || 0)) + " FCFA";
+  return thins(new Intl.NumberFormat(loc, { maximumFractionDigits: 0 }).format(Math.round(n || 0))) + " FCFA";
 }
 function fmtG(n) {
   const loc = LOCALES[state.settings.lang] || "fr-FR";
-  return new Intl.NumberFormat(loc, { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n || 0) + " g";
+  return thins(new Intl.NumberFormat(loc, { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n || 0)) + " g";
 }
 function fmtNum(n, d) {
   const loc = LOCALES[state.settings.lang] || "fr-FR";
-  return new Intl.NumberFormat(loc, { minimumFractionDigits: d || 0, maximumFractionDigits: d || 0 }).format(n || 0);
+  return thins(new Intl.NumberFormat(loc, { minimumFractionDigits: d || 0, maximumFractionDigits: d || 0 }).format(n || 0));
 }
 function fmtDate(d) {
   if (!d) return "—";
@@ -3256,6 +3325,7 @@ async function refreshPrices(opts) {
       if ($("silverPrice")) $("silverPrice").value = state.settings.silverPrice;
       if ($("usdRate")) $("usdRate").value = state.settings.usdRate;
       if ($("priceDate")) $("priceDate").value = state.settings.priceDate;
+      if (typeof formatAllGrouped === "function") formatAllGrouped();
     }
     save();
     renderSummary(); renderPrices();
@@ -4059,7 +4129,7 @@ function renderBeneficiaries() {
   });
 }
 function addPayment() {
-  const amount = parseFloat($("payAmount").value);
+  const amount = numVal($("payAmount").value);
   if (!isFinite(amount) || amount <= 0) { toast(t("pay.amount") + " > 0", true); return; }
   const p = {
     id: Date.now(),
@@ -4936,9 +5006,9 @@ function chooseNoLock() {
 
 /* ============================ 27. ZAKAT AL-FITR ============================ */
 function fitrAmount() {
-  const p = parseFloat(state.settings.fitrPersons) || 0;
-  const kg = parseFloat(state.settings.fitrKg) || 0;
-  const price = parseFloat(state.settings.fitrPrice) || 0;
+  const p = numVal(state.settings.fitrPersons);
+  const kg = numVal(state.settings.fitrKg);
+  const price = numVal(state.settings.fitrPrice);
   return Math.round(p * kg * price);
 }
 function renderFitr() {
@@ -5842,7 +5912,7 @@ function cryptoPrice(k) {
   const manual = state.settings.priceMode === "manual";
   const live = m[k] ? Number(m[k]) : 0;
   if (!manual && live > 0) return live;
-  const v = parseFloat(state.settings[k + "Price"]);
+  const v = numVal(state.settings[k + "Price"]);
   return isFinite(v) ? v : 0;
 }
 function cryptoValue(f) {
@@ -5891,11 +5961,11 @@ const UNIT_GRAMS = { g: 1, kg: 1000, ozt: TROY_OZ_G, oz: 28.3495231, tola: 11.66
 function updateConverter() {
   const out = $("convOut");
   if (!out) return;
-  const v = parseFloat($("convValue").value) || 0;
+  const v = numVal($("convValue").value);
   const unit = $("convUnit").value || "g";
   const metal = $("convMetal").value || "gold";
   const grams = v * (UNIT_GRAMS[unit] || 1);
-  const price = metal === "gold" ? (parseFloat(state.settings.goldPrice) || 0) : (parseFloat(state.settings.silverPrice) || 0);
+  const price = metal === "gold" ? numVal(state.settings.goldPrice) : numVal(state.settings.silverPrice);
   out.textContent = fmtG(grams) + " · " + fmt(grams * price);
 }
 
@@ -5966,7 +6036,7 @@ async function addMember() {
   if (!res) return;
   const name = (res.shift() || "").trim().slice(0, 40) || t("hh.th.name");
   const f = blankMemberFields();
-  MEMBER_KEYS.forEach((k, i) => { f[k] = parseFloat(res[i]) || 0; });
+  MEMBER_KEYS.forEach((k, i) => { f[k] = numVal(res[i]); });
   if (!state.household || !Array.isArray(state.household.members)) state.household = { members: [] };
   state.household.members.push({ id: "m" + Date.now(), name: name, fields: f });
   save(); renderAll();
@@ -5980,7 +6050,7 @@ async function editMember(id) {
   const res = await openModal({ title: t("hh.editTitle"), text: t("hh.editText"), fields: fields, okLabel: t("btn.confirm") });
   if (!res) return;
   m.name = (res.shift() || "").trim().slice(0, 40) || m.name;
-  MEMBER_KEYS.forEach((k, i) => { m.fields[k] = parseFloat(res[i]) || 0; });
+  MEMBER_KEYS.forEach((k, i) => { m.fields[k] = numVal(res[i]); });
   save(); renderAll();
   toast(t("hh.saved"));
 }
@@ -5995,8 +6065,8 @@ async function removeMember(id) {
 /* ============================ 35. RÉCOLTES ET CHEPTEL ============================ */
 function cropZakat() {
   const s = state.settings;
-  const kg = parseFloat(s.cropKg) || 0;
-  const price = parseFloat(s.cropPrice) || 0;
+  const kg = numVal(s.cropKg);
+  const price = numVal(s.cropPrice);
   const rate = s.cropMode === "irrigated" ? 0.05 : 0.10;
   const eligible = kg >= 653;
   return { kg: kg, price: price, rate: rate, eligible: eligible, due: eligible ? Math.round(kg * price * rate) : 0 };
@@ -6040,9 +6110,9 @@ function herdWord(kind, n) {
 }
 function livestockZakat() {
   const s = state.settings;
-  const sheep = Math.floor(parseFloat(s.livestockSheep) || 0);
-  const cattle = Math.floor(parseFloat(s.livestockCattle) || 0);
-  const camels = Math.floor(parseFloat(s.livestockCamels) || 0);
+  const sheep = Math.floor(numVal(s.livestockSheep));
+  const cattle = Math.floor(numVal(s.livestockCattle));
+  const camels = Math.floor(numVal(s.livestockCamels));
   const parts = [];
   const dS = sheepDue(sheep), dC = cattleDue(cattle), dK = camelDue(camels);
   if (dS > 0) parts.push(dS + " " + herdWord("sheep", dS));
@@ -6130,9 +6200,9 @@ function renderRegChart() {
 
 /* ============================ 37. CALCUL EXPRESS ============================ */
 function expressEstimate() {
-  const cash = parseFloat(($("expCash") || {}).value) || 0;
-  const goldG = parseFloat(($("expGold") || {}).value) || 0;
-  const debts = parseFloat(($("expDebts") || {}).value) || 0;
+  const cash = numVal(($("expCash") || {}).value);
+  const goldG = numVal(($("expGold") || {}).value);
+  const debts = numVal(($("expDebts") || {}).value);
   const s = state.settings;
   const net = Math.max(0, cash + goldG * (parseFloat(s.goldPrice) || 0) - debts);
   const nissab = nissabValue();
@@ -6491,6 +6561,7 @@ function renderFxHints() {
   }
 }
 function renderLots() {
+  if (typeof formatAllGrouped === "function") formatAllGrouped();
   renderFxHints();
   updateConverter();
   renderCrypto();
@@ -6502,6 +6573,7 @@ function renderLots() {
   renderPayeeList();
 }
 function initLots() {
+  initGroupedInputs();
   on("expressBtn", "click", openExpress);
   on("expClose", "click", closeExpress);
   on("expApply", "click", applyExpress);
@@ -6585,6 +6657,7 @@ function openModal(o) {
       if (fd.type === "tel" || fd.type === "password") inp.setAttribute("inputmode", "numeric");
       if (fd.maxLength) inp.maxLength = fd.maxLength;
       if (fd.value != null) inp.value = fd.value;
+      if (fd.type === "number") groupInput(inp);
       wrap.appendChild(lab); wrap.appendChild(inp); f.appendChild(wrap);
     });
     $("modalCancel").classList.toggle("hidden", !!o.hideCancel);

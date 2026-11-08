@@ -108,11 +108,11 @@ https://<votre-compte>.github.io/zakat-al-mal/
 
 ---
 
-*Zakat Al Mal 5.2.0 — documents juridiques révisés le 31 octobre 2026 (version 1.1).*
+*Zakat Al Mal 5.2.1 — documents juridiques révisés le 31 octobre 2026 (version 1.1).*
 
 ---
 
-## Version 5.2.0 — à savoir avant de publier
+## Version 5.2.1 — à savoir avant de publier
 
 - **Image de partage** : `og-image.png` est déjà à la racine. Si votre site est à une adresse du type
   `https://votrenom.github.io/zakat-al-mal/`, remplacez dans `index.html` les deux lignes
@@ -125,5 +125,5 @@ https://<votre-compte>.github.io/zakat-al-mal/
 - **Rappels du hawl** : ils fonctionnent sans serveur, mais seulement quand l'application est
   ouverte (le navigateur ne réveille pas une application fermée sans service de push). Le bouton
   « Tester » vérifie que l'autorisation est bien accordée.
-- **Service worker** : le cache passe en `zakat-al-mal-v9`. À la première visite après mise à jour,
+- **Service worker** : le cache passe en `zakat-al-mal-v10`. À la première visite après mise à jour,
   rechargez une fois la page pour que la nouvelle version soit prise en compte.

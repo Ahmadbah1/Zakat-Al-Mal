@@ -1,5 +1,5 @@
 /* Zakat Al Mal — service worker minimal (coque applicative hors ligne) */
-const CACHE = "zakat-al-mal-v9";
+const CACHE = "zakat-al-mal-v10";
 const ASSETS = [
   "./", "./index.html", "./manifest.webmanifest",
   "./assets/icon-192.png", "./assets/icon-512.png", "./assets/emblem_300.png",
