@@ -10,13 +10,29 @@ accès par code PIN ou empreinte digitale, export Excel dynamique, visite guidé
 
 ---
 
+## Version 5.2.0 — ce qui est nouveau
+
+- **Calcul** : seuil argent proposé par défaut (avec explication et bascule en un clic), école
+  hanbalite, convertisseur tola / once troy, cinq devises (EUR, USD, GBP, CAD, NGN) avec taux du
+  marché, crypto-actifs en direct (BTC, ETH, USDT), règle de prudence sur les dettes.
+- **Foyer** : plusieurs membres, chacun avec son propre nissab et sa propre zakat, additionnés au total.
+- **Agriculture** : zakat des récoltes (nissab 653 kg, 10 % / 5 %) et zakat du cheptel en têtes,
+  avec fiche de comptage imprimable.
+- **Rapidité** : calcul express en 60 secondes, fiche bénéficiaire (Orange Money / MTN MoMo),
+  reçu partageable, graphique annuel du registre.
+- **Sécurité** : chiffrement optionnel du stockage local (AES-GCM 256, PBKDF2 150 000 itérations)
+  avec phrase secrète demandée au démarrage ; conservation permanente demandée au navigateur.
+- **Rappels** : notification locale sept jours avant l'échéance du hawl puis le jour même.
+- **Référencement** : `og-image.png`, données structurées `WebApplication`, `hreflang` fr / en / ar.
+- Documents juridiques en **version 1.1** (chiffrement, notifications, membres du foyer, fiches bénéficiaires).
+
 ## Aperçu
 
 | | |
 |---|---|
 | **Stack** | HTML, CSS et JavaScript natifs. Aucune dépendance, aucun build, aucun serveur. |
-| **Poids** | un seul fichier `index.html` (~545 Ko), images et polices comprises |
-| **Langues** | français, anglais, arabe (RTL) — 425 clés par langue |
+| **Poids** | un seul fichier `index.html` (~700 Ko), images et polices comprises |
+| **Langues** | français, anglais, arabe (RTL) — 570 clés par langue |
 | **Thème** | clair, sombre, automatique |
 | **Données** | stockage local du navigateur uniquement, export/import JSON |
 | **Hors ligne** | oui, service worker (`sw.js`) et manifeste PWA |
@@ -25,7 +41,7 @@ accès par code PIN ou empreinte digitale, export Excel dynamique, visite guidé
 
 - Calcul de la zakat : liquidités, devises, métaux précieux avec conversion par carat, commerce et
   investissements, dettes exigibles, cycle du hawl (354 / 365 jours), nissab or 85 g ou argent 595 g.
-- Écoles malikite, hanafite et chaféite.
+- Écoles malikite, hanafite, chaféite et hanbalite.
 - Cours de l'or, de l'argent et du dollar récupérés en direct, convertis en francs CFA, et **toujours
   modifiables à la main**.
 - Versements, reçus numérotés, carnet des bénéficiaires, attestation, clôture d'exercice.
@@ -78,7 +94,7 @@ GITHUB_USER=moncompte GITHUB_TOKEN=**** bash creer-depot.sh
 git init
 git branch -M main
 git add .
-git commit -m "Zakat Al Mal 5.0.1 — application autonome, FR/EN/AR"
+git commit -m "Zakat Al Mal 5.2.0 — application autonome, FR/EN/AR"
 git remote add origin https://github.com/<votre-compte>/zakat-al-mal.git
 git push -u origin main
 ```
@@ -114,4 +130,4 @@ intégrés à l'application.
 
 ## Version
 
-5.0 — documents juridiques révisés le 31 octobre 2026 (version 1.0).
+5.2.0 — documents juridiques révisés le 31 octobre 2026 (version 1.1).

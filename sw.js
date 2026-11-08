@@ -1,8 +1,9 @@
 /* Zakat Al Mal — service worker minimal (coque applicative hors ligne) */
-const CACHE = "zakat-al-mal-v6";
+const CACHE = "zakat-al-mal-v9";
 const ASSETS = [
   "./", "./index.html", "./manifest.webmanifest",
-  "./assets/icon-192.png", "./assets/icon-512.png", "./assets/emblem_300.png"
+  "./assets/icon-192.png", "./assets/icon-512.png", "./assets/emblem_300.png",
+  "./og-image.png"
 ];
 
 self.addEventListener("install", event => {
@@ -31,4 +32,26 @@ self.addEventListener("fetch", event => {
       return res;
     }).catch(() => caches.match("./index.html")))
   );
+});
+
+/* Rappels de hawl : la notification est produite localement par la page.
+   Le clic sur la notification ramène simplement à l'application. */
+self.addEventListener("notificationclick", event => {
+  event.notification.close();
+  event.waitUntil(
+    self.clients.matchAll({ type: "window", includeUncontrolled: true }).then(list => {
+      for (const c of list) { if ("focus" in c) return c.focus(); }
+      if (self.clients.openWindow) return self.clients.openWindow("./index.html");
+    })
+  );
+});
+
+self.addEventListener("message", event => {
+  const data = event.data || {};
+  if (data.type === "hawl-reminder" && data.title) {
+    self.registration.showNotification(data.title, {
+      body: data.body || "", icon: "./assets/icon-192.png", badge: "./assets/icon-192.png",
+      tag: "hawl", renotify: false, data: { url: "./index.html" }
+    });
+  }
 });

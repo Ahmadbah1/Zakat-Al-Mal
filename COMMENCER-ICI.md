@@ -26,6 +26,7 @@ comptez cinq minutes, dont deux de téléversement.
    manifest.webmanifest
    sw.js
    404.html
+   og-image.png       (image de partage pour les réseaux)
    assets/            (dossier, avec ses 3 images)
    README.md
    LICENSE.md
@@ -42,7 +43,7 @@ comptez cinq minutes, dont deux de téléversement.
    > `index.html` doit se retrouver à la racine du dépôt, pas dans un sous-dossier.
 
 3. Dans le champ du message de validation, écrivez :
-   `Zakat Al Mal 5.0.1 — application autonome, FR/EN/AR`
+   `Zakat Al Mal 5.2.0 — application autonome, FR/EN/AR`
 4. Cliquez **Commit changes**.
 
 ### Le fichier `.nojekyll`
@@ -107,4 +108,22 @@ https://<votre-compte>.github.io/zakat-al-mal/
 
 ---
 
-*Zakat Al Mal 5.0 — documents juridiques révisés le 31 octobre 2026 (version 1.0).*
+*Zakat Al Mal 5.2.0 — documents juridiques révisés le 31 octobre 2026 (version 1.1).*
+
+---
+
+## Version 5.2.0 — à savoir avant de publier
+
+- **Image de partage** : `og-image.png` est déjà à la racine. Si votre site est à une adresse du type
+  `https://votrenom.github.io/zakat-al-mal/`, remplacez dans `index.html` les deux lignes
+  `<meta property="og:image" content="og-image.png">` et `<meta name="twitter:image" ...>` par
+  l'adresse complète (`https://votrenom.github.io/zakat-al-mal/og-image.png`) : certains réseaux
+  exigent une adresse absolue.
+- **Chiffrement sur l'appareil** (réglages → « Chiffrer maintenant ») : demandez à vos testeurs de
+  noter leur phrase secrète. Sans elle, les données sont définitivement illisibles ; c'est le prix
+  de la protection.
+- **Rappels du hawl** : ils fonctionnent sans serveur, mais seulement quand l'application est
+  ouverte (le navigateur ne réveille pas une application fermée sans service de push). Le bouton
+  « Tester » vérifie que l'autorisation est bien accordée.
+- **Service worker** : le cache passe en `zakat-al-mal-v9`. À la première visite après mise à jour,
+  rechargez une fois la page pour que la nouvelle version soit prise en compte.
