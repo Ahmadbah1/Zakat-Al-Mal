@@ -10,6 +10,31 @@ accès par code PIN ou empreinte digitale, export Excel dynamique, visite guidé
 
 ---
 
+## Version 5.4.0 — utiliser et répartir
+
+- **Épargne longue et retraite** : trois traitements (non compté, au prorata, intégral), ligne dédiée
+  dans le bilan et dans l'export Excel.
+- **Plan de paiement échelonné** : 1 à 24 échéances datées, états suivis par les versements réels,
+  échéancier `.ics`.
+- **Répartition entre les huit catégories** : parts en pourcentage, alerte à 100 %, fiche imprimable.
+- Cache du service worker en `v13`.
+
+## Version 5.3.0 — comprendre et suivre
+
+- **Simulateur « et si… ? »** : trois curseurs (prix du gramme, dettes, épargne) et une courbe de
+  franchissement du nissab. Calcul jetable, sans effet sur vos données.
+- **Mon évolution** (registre) : variation d'assiette par rapport à l'exercice clos précédent,
+  total versé, composition de l'assiette en anneau et phrase de synthèse.
+- Milliers groupés par espace insécable en arabe également. Cache du service worker en `v12`.
+
+## Version 5.2.2 — relecture de l'arabe
+
+Relecture des textes arabes (interface, glossaire, visite guidée, documents juridiques) : nombre du
+nissab corrigé, terme « zakāt al-fiṭr » unifié, « al-amwāl al-zakawiyya » au lieu du calque,
+tanwīn rétabli, virgule décimale remplacée par le point dans un texte RTL, mention d'un code PIN
+par défaut supprimée. Aucune donnée existante n'est touchée ; le cache du service worker passe en
+`v11`.
+
 ## Version 5.2.1 — lisibilité des montants
 
 Les champs de saisie groupent les chiffres par trois avec une espace insécable (`5 000 000`), le

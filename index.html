@@ -585,6 +585,67 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
 .verify-list li::marker{color:var(--gold-ink);font-weight:800}
 .verify-list b{color:var(--accent-ink)}
 .verify-refs{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+/* ---- v5.3 : simulateur « et si » ---- */
+.sim-body{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:880px){.sim-body{grid-template-columns:minmax(250px,.85fr) 1.15fr;align-items:start}}
+.sim-controls{display:flex;flex-direction:column;gap:13px}
+.sim-row{display:flex;flex-direction:column;gap:6px}
+.sim-row label{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:.72rem;font-weight:700;color:var(--muted)}
+.sim-row label b{font-size:.82rem;color:var(--accent-ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+.sim-row input[type=range]{width:100%;height:26px;accent-color:var(--primary);cursor:pointer}
+.sim-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.sim-kpi,.evo-kpi{background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:8px 10px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.sim-kpi span,.evo-kpi span{font-size:.58rem;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);line-height:1.3}
+.sim-kpi b,.evo-kpi b{font-size:.84rem;font-weight:800;color:var(--accent-ink);font-variant-numeric:tabular-nums;line-height:1.25;overflow-wrap:anywhere}
+.sim-kpi.gold,.evo-kpi.gold{background:var(--gold-soft);border-color:var(--gold-line)}
+.sim-kpi.gold b,.evo-kpi.gold b{color:var(--gold-ink)}
+.sim-verdict{font-size:.78rem;font-weight:650;line-height:1.5;color:var(--accent-ink);background:var(--accent-soft);border:1px solid var(--border-strong);border-radius:10px;padding:8px 11px;margin-top:10px}
+.sim-verdict.no{background:var(--warn-bg);border-color:var(--warn-border);color:var(--warn)}
+.sim-chart-wrap{margin-top:12px}
+.sim-chart{width:100%;height:108px;display:block;overflow:visible}
+.rc-head h4{font-size:.76rem;font-weight:800;color:var(--accent-ink)}
+/* ---- v5.4 : épargne longue, plan de paiement, répartition ---- */
+.ret-out{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;
+  margin-top:14px;padding:12px 14px;border-radius:12px;background:var(--gold-soft);border:1px solid var(--gold-line)}
+.ret-out .fo-lab{font-size:.62rem;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--gold-ink)}
+.ret-out .fo-val{font-size:1.05rem;font-weight:800;color:var(--gold-ink);font-variant-numeric:tabular-nums;margin-top:2px}
+#retireShareField.off{opacity:.45;pointer-events:none}
+.plan-progress{margin-top:14px;display:flex;flex-direction:column;gap:8px}
+.plan-progress .line{display:flex;justify-content:space-between;gap:10px;font-size:.76rem;color:var(--muted)}
+.plan-progress .line b{color:var(--accent-ink);font-variant-numeric:tabular-nums}
+.plan-table{max-height:290px;overflow:auto;margin-top:10px;border:1px solid var(--border);border-radius:12px}
+.plan-table table{margin:0}
+.plan-table thead th{position:sticky;top:0;background:var(--surface-2);z-index:1}
+.st-dot{display:inline-flex;align-items:center;gap:6px;font-size:.7rem;font-weight:700;white-space:nowrap}
+.st-dot i{width:8px;height:8px;border-radius:99px;flex:none;display:inline-block}
+.st-dot.paid{color:var(--ok)} .st-dot.paid i{background:var(--ok)}
+.st-dot.late{color:var(--danger)} .st-dot.late i{background:var(--danger)}
+.st-dot.soon{color:var(--gold-ink)} .st-dot.soon i{background:var(--gold)}
+.st-dot.wait{color:var(--muted)} .st-dot.wait i{background:var(--border-strong)}
+#splitBody input{width:84px;text-align:end;padding:6px 8px;font-variant-numeric:tabular-nums}
+.split-note{font-size:.72rem;color:var(--muted);line-height:1.5}
+/* ---- v5.3 : tableau de bord de l'évolution ---- */
+.evo-block{margin-top:18px;border-top:1px solid var(--border);padding-top:14px}
+.evo-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+@media(max-width:720px){.evo-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.evo-kpi b.up{color:var(--ok)}
+.evo-kpi b.down{color:var(--danger)}
+.evo-mix{display:grid;grid-template-columns:132px 1fr;gap:16px;align-items:center;margin-top:14px}
+@media(max-width:600px){.evo-mix{grid-template-columns:1fr;justify-items:center;gap:10px}.evo-legend{width:100%}}
+.donut{width:132px;height:132px;flex:none}
+.donut circle{fill:none;stroke-width:15;transition:stroke-dasharray .45s ease,stroke-dashoffset .45s ease}
+.donut .dn-bg{stroke:var(--surface-3)}
+.donut .dn-c{stroke-linecap:butt}
+.donut .dn-lab{fill:var(--accent-ink);font:800 20px/1 var(--font);text-anchor:middle}
+.donut .dn-sub{fill:var(--muted);font:700 8px/1 var(--font);text-anchor:middle;letter-spacing:.6px}
+.evo-legend{display:flex;flex-direction:column;gap:7px;min-width:0}
+.lg-head{font-size:.62rem;font-weight:800;letter-spacing:.7px;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.lg-row{display:flex;align-items:center;gap:9px;font-size:.75rem;min-width:0}
+.lg-dot{width:10px;height:10px;border-radius:3px;flex:none}
+.lg-lab{color:var(--muted);flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lg-row b{font-variant-numeric:tabular-nums;color:var(--accent-ink);white-space:nowrap}
+.lg-row i{font-style:normal;color:var(--muted);font-size:.66rem;white-space:nowrap;min-width:34px;text-align:end}
+.evo-sentence{font-size:.8rem;line-height:1.6;color:var(--ink);margin:14px 0 0;padding:10px 13px;background:var(--surface-2);border:1px solid var(--border);border-inline-start:3px solid var(--gold);border-radius:10px}
 .reg-chart-block{margin-top:18px;border-top:1px solid var(--border);padding-top:14px}
 .rc-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:10px}
 .rc-head h3{font-size:.86rem;font-weight:800;color:var(--accent-ink)}
@@ -1002,6 +1063,29 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
         <div class="line total" style="border-top:0"><span data-i18n="hh.total">Total du foyer</span><b id="memberTotal">0 FCFA</b></div>
     </div>
 
+    <!-- Épargne longue et retraite -->
+    <div class="card" id="cardRetire">
+      <div class="card-head">
+        <span class="icon-tile"><svg><use href="#i-shield"/></svg></span>
+        <div><h3 data-i18n="ret.title">Épargne longue et retraite</h3>
+        <div class="card-sub" data-i18n="ret.sub">Retraite complémentaire, plan d'épargne bloqué, assurance-vie : dites ce qui est réellement disponible.</div></div>
+      </div>
+      <div class="grid g3">
+        <div class="field"><label for="retireValue" data-i18n="ret.value">Valeur actuelle du plan</label><input type="number" id="retireValue" min="0" step="1000"></div>
+        <div class="field"><label for="retireMode" data-i18n="ret.mode">Traitement retenu</label>
+          <select id="retireMode">
+            <option value="none" data-i18n="ret.mode.none">Non compté — droit futur</option>
+            <option value="part" data-i18n="ret.mode.part">Compté au prorata disponible</option>
+            <option value="full" data-i18n="ret.mode.full">Compté intégralement</option>
+          </select></div>
+        <div class="field" id="retireShareField"><label for="retireShare" data-i18n="ret.share">Part disponible (%)</label><input type="number" id="retireShare" min="0" max="100" step="5" value="0"></div>
+      </div>
+      <div class="ret-out">
+        <div><div class="fo-lab" data-i18n="ret.counted">Montant retenu dans l'assiette</div><div class="fo-val" id="retireCounted">0 FCFA</div></div>
+      </div>
+      <div class="hint" data-i18n="ret.hint">Une retraite non encore accessible n'est pas un bien dont vous disposez : la plupart des savants ne la soumettent à la zakat qu'à l'encaissement. Choisissez « au prorata » si une part est déblocable.</div>
+    </div>
+
     <!-- Vérification -->
     <div class="card" id="verifyCard">
       <div class="card-head">
@@ -1021,6 +1105,45 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
         <span class="ref" data-i18n="ref.hadith85">Hadith — 85 g d'or ou 595 g d'argent</span>
         <span class="ref" data-i18n="ref.aaoifi">AAOIFI n°35</span>
         <span class="ref" data-i18n="ref.rate">2,5 % — un quarantième</span>
+      </div>
+    </div>
+
+    <!-- Simulateur et si -->
+    <div class="card" id="cardWhatIf" role="group" aria-labelledby="simTitle">
+      <div class="card-head">
+        <span class="icon-tile"><svg><use href="#i-trend"/></svg></span>
+        <div><h3 data-i18n="sim.title" id="simTitle">Simulateur — et si… ?</h3>
+        <div class="card-sub" data-i18n="sim.sub">Bougez les curseurs : le nissab et la zakat se recalculent, sans rien changer à votre calcul réel.</div></div>
+      </div>
+      <div class="sim-body">
+        <div class="sim-controls">
+          <div class="sim-row">
+            <label for="simPrice"><span id="simPriceLab">Prix du gramme</span><b id="simPriceVal">—</b></label>
+            <input type="range" id="simPrice" min="1" max="100" step="1" value="50" aria-describedby="simNote">
+          </div>
+          <div class="sim-row">
+            <label for="simDebts"><span data-i18n="sim.debts">Dettes déduites</span><b id="simDebtsVal">—</b></label>
+            <input type="range" id="simDebts" min="0" max="100" step="1" value="0">
+          </div>
+          <div class="sim-row">
+            <label for="simSave"><span data-i18n="sim.save">Épargne ajoutée</span><b id="simSaveVal">—</b></label>
+            <input type="range" id="simSave" min="0" max="100" step="1" value="0">
+          </div>
+          <button class="btn quiet sm" id="simReset" type="button"><svg><use href="#i-refresh"/></svg><span data-i18n="sim.reset">Revenir à mes chiffres</span></button>
+        </div>
+        <div class="sim-out">
+          <div class="sim-kpis">
+            <div class="sim-kpi"><span data-i18n="sim.nissab">Nissab simulé</span><b id="simNissab">—</b></div>
+            <div class="sim-kpi"><span data-i18n="sim.net">Base nette</span><b id="simNet">—</b></div>
+            <div class="sim-kpi gold"><span data-i18n="sim.zakat">Zakat simulée</span><b id="simZakat">—</b></div>
+          </div>
+          <div class="sim-verdict" id="simVerdict" aria-live="polite"></div>
+          <div class="sim-chart-wrap">
+            <div class="rc-head"><h4 data-i18n="sim.chart">Zakat due selon le prix du gramme</h4></div>
+            <svg class="sim-chart" id="simChart" viewBox="0 0 320 104" preserveAspectRatio="none" aria-hidden="true"></svg>
+          </div>
+          <div class="hint" id="simNote" data-i18n="sim.note">Ces curseurs ne modifient ni vos champs ni votre registre.</div>
+        </div>
       </div>
     </div>
   </section>
@@ -1046,6 +1169,24 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
           <th class="num" data-i18n="reg.th.zakat">Zakat due</th><th class="num" data-i18n="reg.th.paid">Versé</th>
           <th class="num" data-i18n="reg.th.rest">Reste</th><th data-i18n="reg.th.actions">Actions</th>
         </tr></thead><tbody id="regBody"></tbody></table>
+      </div>
+      <div class="evo-block" id="cardEvo">
+        <div class="rc-head"><h3 data-i18n="evo.title">Mon évolution</h3>
+          <span class="hint" data-i18n="evo.sub">Comparaison avec l'exercice précédent, composition de l'assiette et part déjà versée.</span></div>
+        <div class="evo-kpis">
+          <div class="evo-kpi"><span data-i18n="evo.cur">Assiette de l'exercice en cours</span><b id="evoCur">—</b></div>
+          <div class="evo-kpi"><span data-i18n="evo.prev">Exercice précédent</span><b id="evoPrev">—</b></div>
+          <div class="evo-kpi"><span data-i18n="evo.delta">Variation</span><b id="evoDelta">—</b></div>
+          <div class="evo-kpi gold"><span data-i18n="evo.paidTotal">Total versé</span><b id="evoPaid">—</b></div>
+        </div>
+        <div class="evo-mix">
+          <div class="donut-wrap"><svg id="evoDonut" class="donut" viewBox="0 0 120 120" role="img" aria-labelledby="evoMixTitle"></svg></div>
+          <div class="evo-legend">
+            <div class="lg-head" data-i18n="evo.mix" id="evoMixTitle">Composition de l'assiette imposable</div>
+            <div id="evoLegend"></div>
+          </div>
+        </div>
+        <p class="evo-sentence" id="evoSentence"></p>
       </div>
       <div class="reg-chart-block">
         <div class="rc-head"><h3 data-i18n="reg.chart">Zakat due par exercice</h3>
@@ -1101,6 +1242,32 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
       <div class="pay-list" id="payList"></div>
     </div>
 
+    <div class="card" id="cardPlan">
+      <div class="card-head"><span class="icon-tile"><svg><use href="#i-calendar"/></svg></span>
+        <div><h3 data-i18n="plan.title">Plan de paiement échelonné</h3>
+        <div class="card-sub" data-i18n="plan.sub">Répartissez la zakat due sur plusieurs mois : chaque échéance reçoit sa date, son montant et un rappel.</div></div>
+      </div>
+      <div class="grid g3">
+        <div class="field"><label for="planCount" data-i18n="plan.count">Nombre d'échéances</label><input type="number" id="planCount" min="1" max="24" step="1" value="12"></div>
+        <div class="field"><label for="planStart" data-i18n="plan.start">Première échéance</label><input type="date" id="planStart"></div>
+        <div class="field"><label for="planEach" data-i18n="plan.each">Montant par échéance</label><input type="text" id="planEach" readonly></div>
+      </div>
+      <div class="plan-progress">
+        <div class="progress"><span id="planBar" style="width:0%"></span></div>
+        <div class="line" style="border-top:0"><span id="planProgressText"></span><b id="planPaidTxt"></b></div>
+      </div>
+      <div class="table-wrap plan-table">
+        <table><thead><tr>
+          <th data-i18n="plan.th.n">N°</th><th data-i18n="plan.th.date">Date</th>
+          <th class="num" data-i18n="plan.th.amount">Montant</th><th data-i18n="plan.th.state">État</th>
+        </tr></thead><tbody id="planBody"></tbody></table>
+      </div>
+      <div class="btn-row" style="margin-top:12px">
+        <button class="btn ghost sm" id="planIcsBtn" type="button"><svg><use href="#i-calendar"/></svg><span data-i18n="plan.ics">Rappels (.ics)</span></button>
+        <button class="btn quiet sm" id="planResetBtn" type="button"><svg><use href="#i-refresh"/></svg><span data-i18n="plan.reset">Recalculer</span></button>
+      </div>
+    </div>
+
     <div class="card">
       <div class="card-head"><span class="icon-tile"><svg><use href="#i-coins"/></svg></span><div><h3 data-i18n="pay.benefTitle">Carnet des bénéficiaires</h3><div class="card-sub" data-i18n="pay.benefSub">Cumul des versements par bénéficiaire.</div></div></div>
       <div class="table-wrap" style="margin-top:12px">
@@ -1135,6 +1302,27 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
         <button class="btn ghost sm" id="shareAttestBtn" type="button"><svg><use href="#i-receipt"/></svg><span data-i18n="payee.sheet">Fiche (PDF)</span></button>
       </div>
       <div class="alert info" style="margin-top:12px"><svg><use href="#i-info"/></svg><div data-i18n="payee.noFunds">Zakat Al Mal n'encaisse ni ne transfère d'argent. La fiche sert seulement à organiser le versement, que vous faites vous-même par mobile money, en espèces ou par virement.</div></div>
+    </div>
+
+    <div class="card" id="cardSplit">
+      <div class="card-head"><span class="icon-tile gold"><svg><use href="#i-compass"/></svg></span>
+        <div><h3 data-i18n="split.title">Répartition entre les huit catégories</h3>
+        <div class="card-sub" data-i18n="split.sub">Fixez la part de chaque catégorie coranique ; le total doit faire 100 %.</div></div>
+      </div>
+      <div class="table-wrap">
+        <table><thead><tr>
+          <th data-i18n="asnaf.th.cat">Catégorie</th>
+          <th class="num" data-i18n="split.th.pct">Part %</th>
+          <th class="num" data-i18n="split.th.amount">Montant</th>
+        </tr></thead><tbody id="splitBody"></tbody></table>
+      </div>
+      <div class="line total" style="border-top:0"><span data-i18n="split.total">Total réparti</span><b id="splitTotal">0 %</b></div>
+      <div class="alert warn hidden" id="splitWarn" style="margin-top:10px"><svg><use href="#i-alert"/></svg><div data-i18n="split.warn">Le total n'est pas de 100 % : ajustez une part.</div></div>
+      <div class="hint" data-i18n="split.hint">La répartition égale n'est qu'un point de départ : le Coran nomme les huit catégories sans imposer l'égalité entre elles.</div>
+      <div class="btn-row" style="margin-top:12px">
+        <button class="btn ghost sm" id="splitEven" type="button"><svg><use href="#i-scale"/></svg><span data-i18n="split.even">Répartir également</span></button>
+        <button class="btn sm" id="splitPrint" type="button"><svg><use href="#i-printer"/></svg><span data-i18n="split.print">Fiche de répartition</span></button>
+      </div>
     </div>
 
     <div class="card" id="cardAsnaf">
@@ -1263,7 +1451,7 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
     <div class="card">
       <div class="card-head"><span class="icon-tile"><svg><use href="#i-info"/></svg></span><div><h3 data-i18n="set.about">À propos et avertissement</h3></div></div>
       <div id="aboutBody" style="font-size:.8rem;color:var(--muted);line-height:1.6;margin-top:8px"></div>
-      <div class="kv" style="margin-top:10px"><span data-i18n="set.version">Version</span><b id="versionLabel">5.2.1</b></div>
+      <div class="kv" style="margin-top:10px"><span data-i18n="set.version">Version</span><b id="versionLabel">5.4.0</b></div>
       <div class="kv"><span data-i18n="set.storage">Stockage</span><b id="storageLabel"></b></div>
     </div>
   </section>
@@ -1288,6 +1476,7 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
       <div class="line"><span data-i18n="sum.trade">Commerce et investissements</span><b id="sTrade">0 FCFA</b></div>
       <div class="line"><span data-i18n="sum.debts">Dettes déduites</span><b id="sDebts">− 0 FCFA</b></div>
       <div class="line total"><span data-i18n="sum.net">Assiette nette</span><b id="sNet">0 FCFA</b></div>
+      <div class="line memo hidden" id="sRetireLine"><span data-i18n="sum.retire">Épargne longue comptée</span><b id="sRetire">0 FCFA</b></div>
       <div class="line memo hidden" id="sDoubtfulLine"><span data-i18n="sum.doubtful">Créances douteuses (hors assiette)</span><b id="sDoubtful">0 FCFA</b></div>
       <div class="line memo hidden" id="sHouseholdLine"><span data-i18n="sum.household">Zakat du foyer</span><b id="sHousehold">0 FCFA</b></div>
       <div class="line memo hidden" id="sCropLine"><span data-i18n="sum.crops">Récoltes (zakat à part)</span><b id="sCrop">0 FCFA</b></div>
@@ -1316,7 +1505,7 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
     <button type="button" data-legal="mentions" data-i18n="legal.mentions">Mentions légales</button>
     <button type="button" data-legal="warn" data-i18n="legal.warn">Avertissements</button>
   </nav>
-  <div class="af-line" style="margin-top:8px" data-i18n="foot.legal">Version 5.0 — documents juridiques révisés le 31 octobre 2026 (version 1.0).</div>
+  <div class="af-line" style="margin-top:8px" id="footLegal"></div>
 </footer>
 
 <!-- ============ PRÉSENTATION (avant le verrou) ============ -->
@@ -1668,7 +1857,7 @@ fr: {
 
   "pin.title":"Accès protégé", "pin.sub":"Saisissez votre code à 4 chiffres.",
   "pin.unlock":"Déverrouiller",
-  "pin.note":"Code par défaut : 1234. Le PIN protège l'accès à l'écran, il ne chiffre pas les données.",
+  "pin.note":"Aucun code par défaut : vous choisissez le vôtre. Le PIN protège l'écran, il ne chiffre pas les données.",
   "pin.bad":"Code incorrect. Tentatives restantes : {n}.",
   "pin.format":"Le code doit comporter exactement 4 chiffres.",
   "pin.locked":"Trop de tentatives. Réessayez dans {n} secondes.",
@@ -1882,7 +2071,7 @@ en: {
 
   "pin.title":"Protected access", "pin.sub":"Enter your four-digit code.",
   "pin.unlock":"Unlock",
-  "pin.note":"Default code: 1234. The PIN secures the screen; it does not encrypt the stored data.",
+  "pin.note":"No default code: you choose your own. The PIN secures the screen; it does not encrypt stored data.",
   "pin.bad":"Incorrect code. Attempts remaining: {n}.",
   "pin.format":"The code must contain exactly four digits.",
   "pin.locked":"Too many attempts. Try again in {n} seconds.",
@@ -1978,7 +2167,7 @@ ar: {
   "cfg.madhhab.hanafi":"الحنفي — الحلي خاضع للزكاة",
   "cfg.madhhab.shafi":"الشافعي والحنبلي — الحلي خاضع للزكاة",
   "cfg.madhhab.hint":"يحدد معالجة حلي الذهب والفضة.",
-  "cfg.nissab":"حد النصاب",
+  "cfg.nissab":"النصاب",
   "cfg.nissab.gold":"الذهب — 85 غراماً من الذهب الخالص",
   "cfg.nissab.silver":"الفضة — 595 غراماً من الفضة الخالصة",
   "cfg.nissab.hint":"نصاب الفضة أدنى، فيُدخل عدداً أكبر من المكلفين.",
@@ -2012,7 +2201,7 @@ ar: {
   "f.silverGrams":"الفضة الفعلية والحلي الفضية (غرام من الفضة الخالصة)",
   "f.metals.hint":"يُحوَّل الذهب إلى مكافئه الخالص حسب العيار، وتُدخَل الفضة بالغرام الخالص.",
   "f.stock":"قيمة المخزون التجاري السوقية",
-  "f.receivables":"الديون المرجو سدادها",
+  "f.receivables":"الديون المضمونة السداد",
   "f.receivables.hint":"مبيعات آجلة يُرجى تحصيلها بدرجة عالية من اليقين.",
   "f.realEstate":"العقارات والأراضي المعدّة للبيع",
   "f.rental":"الإيرادات الإيجارية الصافية المتراكمة",
@@ -2035,7 +2224,7 @@ ar: {
   "sum.status":"الحالة", "sum.zakat":"الزكاة المستحقة",
   "sum.note":"حساب استرشادي وفق معيار أيوفي 35. تحقق من الأسعار والأهلية مع أهل العلم.",
   "foot.line":"زكاة المال — أداة مساعدة على القرار. معيار أيوفي 35. البيانات محفوظة على جهازك.",
-  "status.eligible":"مستحق", "status.notEligible":"دون النصاب", "status.zero":"وعاء معدوم",
+  "status.eligible":"تجب الزكاة", "status.notEligible":"دون النصاب", "status.zero":"لا مال زكوي",
   "hawl.none":"الحول: أدخل تاريخ بداية الدورة.",
   "hawl.dueIn":"الحول: الاستحقاق في {date}، بعد {n} يوماً.",
   "hawl.today":"الحول: الاستحقاق اليوم.",
@@ -2086,7 +2275,7 @@ ar: {
   "set.reset":"مسح الكل", "set.about":"حول التطبيق وتنبيه",
   "set.version":"الإصدار", "set.storage":"التخزين", "set.storage.local":"ذاكرة المتصفح",
   "set.storage.memory":"جلسة مؤقتة (غير محفوظة)",
-  "set.about.p1":"يطبّق «زكاة المال» المنهج المقرر في معيار أيوفي رقم 35: تقويم الأصول الزكوية في تاريخ الاستحقاق، وخصم الالتزامات الحالة، ومقارنة الوعاء بالنصاب، وتطبيق معدل 2.5% على السنة القمرية.",
+  "set.about.p1":"يطبّق «زكاة المال» المنهج المقرر في معيار أيوفي رقم 35: تقويم الأموال الزكوية في تاريخ الاستحقاق، وخصم الالتزامات الحالّة، ومقارنة الوعاء بالنصاب، وتطبيق معدل 2.5% على السنة القمرية.",
   "set.about.p2":"تختلف الآراء في مسائل عدة (حلي الزينة، الأسهم، الديون طويلة الأجل)؛ ويعرض التطبيق القاعدة المعتمدة ليبقى الناتج قابلاً للتحقق.",
   "set.about.p3":"تنبيه: هذا التطبيق أداة مساعدة، ولا يقوم مقام فتوى عالم أو لجنة إفتاء.",
   "set.pinInfo":"المحاولات المتبقية: {n} من {max}.",
@@ -2096,7 +2285,7 @@ ar: {
 
   "pin.title":"دخول محمي", "pin.sub":"أدخل الرمز المكوّن من أربعة أرقام.",
   "pin.unlock":"فتح",
-  "pin.note":"الرمز الافتراضي: 1234. يحمي الشاشة ولا يشفّر البيانات.",
+  "pin.note":"لا رمز افتراضي: أنتم تختارون رمزكم. ويحمي الرمز الشاشة ولا يشفّر البيانات.",
   "pin.bad":"رمز خاطئ. المحاولات المتبقية: {n}.",
   "pin.format":"يجب أن يتكون الرمز من أربعة أرقام.",
   "pin.locked":"محاولات كثيرة. أعد المحاولة بعد {n} ثانية.",
@@ -2135,9 +2324,9 @@ ar: {
   "doc.cash":"النقود والحسابات والعملات والادخار الجماعي والأصول الرقمية",
   "doc.gold":"الذهب — {g} من المكافئ الخالص", "doc.silver":"الفضة — {g} بسعر الغرام",
   "doc.trade":"المخزون والديون والعقارات المعدة للبيع والإيرادات الإيجارية والأسهم",
-  "doc.gross":"مجموع الأصول الزكوية", "doc.debts":"الديون والأقساط المخصومة",
-  "doc.net":"الوعاء الزكوي الصافي", "doc.nissabLine":"حد النصاب المعتمد",
-  "doc.status":"الحالة", "doc.eligible":"مستحق", "doc.notEligible":"غير مستحق",
+  "doc.gross":"مجموع الأموال الزكوية", "doc.debts":"الديون والأقساط المخصومة",
+  "doc.net":"الوعاء الزكوي الصافي", "doc.nissabLine":"النصاب المعتمد",
+  "doc.status":"الحالة", "doc.eligible":"تجب الزكاة", "doc.notEligible":"دون النصاب",
   "doc.zakatDue":"الزكاة المستحقة", "doc.payments":"المدفوعات المنفذة",
   "doc.th.category":"الصنف", "doc.th.date":"التاريخ", "doc.th.benef":"المستفيد", "doc.th.receipt":"رقم الإيصال",
   "doc.totalPaid":"مجموع المدفوع", "doc.remaining":"المتبقي للتوزيع",
@@ -2369,17 +2558,17 @@ ar: {
     "xl.total":"المجموع","xl.param":"المعيار","xl.value":"القيمة",
     "xl.sheet.dash":"لوحة المؤشرات","xl.sheet.ex":"الدورات","xl.sheet.pay":"المدفوعات","xl.sheet.set":"الإعدادات",
     "xl.kpi":"المؤشرات","xl.assets":"توزيع الوعاء","xl.exports":"الدورات المُقفلة",
-    "tut.s1.t":"مرحباً","tut.s1.b":"تشير هذه الجولة إلى كل منطقة من الشاشة وتبيّن فائدتها. لا تستغرق سوى لحظات، ويمكنك إعادتها متى شئت.","tut.s1.p":"المنهج كله وفق معيار أيوفي 35: الأصول الزكوية، والالتزامات الحالة، والنصاب، ثم المعدل.",
+    "tut.s1.t":"مرحباً","tut.s1.b":"تشير هذه الجولة إلى كل منطقة من الشاشة وتبيّن فائدتها. لا تستغرق سوى لحظات، ويمكنك إعادتها متى شئت.","tut.s1.p":"المنهج كله وفق معيار أيوفي 35: الأموال الزكوية، والالتزامات الحالّة، والنصاب، ثم المعدل.",
     "tut.s2.t":"المساحات الأربع","tut.s2.b":"احسب مالك وسجّله؛ وأرشف كل سنة؛ واحفظ أدلة الأداء؛ واضبط اللغة والمظهر والنسخ الاحتياطي.","tut.s2.p":"تحتفظ كل مساحة بحالة إدخالها بشكل مستقل عن غيرها.",
     "tut.s3.t":"قاعدة الحساب","tut.s3.b":"المذهب الفقهي وحد النصاب والتقويم: هذه الخيارات الثلاثة تحدد الناتج، ويُعاد حسابه فوراً.","tut.s3.p":"الحلي: معفاة في المالكي، وخاضعة في غيره. نصاب الفضة 595 غراماً، والذهب 85 غراماً.",
     "tut.s4.t":"أسعار السوق","tut.s4.b":"يُجلب الذهب والفضة والدولار مباشرةً ثم تُحوَّل إلى الفرنك. ويمكنك تصحيحها إذا اختلف سوقك المحلي.","tut.s4.p":"أونصة تروي (31.1035 غرام) × السعر الفوري × سعر الدولار؛ ويُحفظ تاريخ التسعير في الكشف.",
     "tut.s5.t":"النقود والعملات","tut.s5.b":"الحسابات والمحافظ الإلكترونية وجمعيات الادخار واليورو والدولار والأصول الرقمية: كل ما هو متاح يدخل الوعاء.","tut.s5.p":"اليورو بتعادل ثابت 655.957؛ والدولار بسعر اليوم.",
     "tut.s6.t":"الذهب والفضة والحلي","tut.s6.b":"أدخل الغرامات والعيار: يردّ التطبيق الكل إلى ذهب خالص قبل التقويم.","tut.s6.p":"التحويل بالعيار يمنع المبالغة في تقويم ذهب عيار 18؛ وتُدخَل الفضة بالغرام الخالص.",
-    "tut.s7.t":"التجارة والديون","tut.s7.b":"المخزون والديون المرجوة والعقارات المعدة للبيع والإيرادات الإيجارية والأسهم من جهة؛ والديون الحالة وأقساط السنة من جهة أخرى.","tut.s7.p":"لا تُخصم إلا الأقساط المستحقة خلال اثني عشر شهراً: فرأس مال القرض الطويل ليس ديناً حالاً.",
+    "tut.s7.t":"التجارة والديون","tut.s7.b":"المخزون والديون المرجوة والعقارات المعدة للبيع والإيرادات الإيجارية والأسهم من جهة؛ والديون الحالّة وأقساط السنة من جهة أخرى.","tut.s7.p":"لا تُخصم إلا الأقساط المستحقة خلال اثني عشر شهراً: فرأس مال القرض الطويل ليس ديناً حالاً.",
     "tut.s8.t":"الحول","tut.s8.b":"أدخل تاريخ بلوغ مالك النصاب: يظهر الاستحقاق ويمكن إضافته إلى تقويمك.","tut.s8.p":"354 يوماً في الهجري، و365 في الشمسي؛ ويصبح المعدل الشمسي 2.5775%.",
     "tut.s9.t":"الكشف الفوري","tut.s9.b":"تتحدّث هذه اللوحة مع كل إدخال: الوعاء الصافي، ومقارنته بالنصاب، والزكاة المستحقة، والجزء المسدَّد.","tut.s9.p":"زر PDF يُصدر وثيقة مؤرّخة تذكر القاعدة المطبقة والمعدل ومرجع التسعير.",
     "tut.s10.t":"المدفوعات والإيصالات","tut.s10.b":"سجّل كل دفع مع صنفه ومستفيده: يُصدر إيصال مرقّم ويتناقص المتبقي.","tut.s10.p":"يجمع سجل المستفيدين المبالغ لكل شخص؛ وتضم الشهادة الجميع.",
-    "tut.s11.t":"السجل","tut.s11.b":"في نهاية الدورة أقفل الدورة: تُؤرشف صورة الكشف. ثم صدّر إلى Excel لمحاسبتك.","tut.s11.p":"يحتوي المصنّف على معادلات وتنسيق: وتُعاد المجاميع تلقائياً عند الفتح.",
+    "tut.s11.t":"السجل","tut.s11.b":"في نهاية الدورة أقفلها: تُؤرشف صورة الكشف. ثم صدّرها إلى Excel لمحاسبتك.","tut.s11.p":"يحتوي المصنّف على معادلات وتنسيق: وتُعاد المجاميع تلقائياً عند الفتح.",
     "tut.s13.t":"زكاة الفطر",
     "tut.s13.b":"صدقة طعام تُؤدّى في ختام رمضان عن كل فرد من الأسرة: أدخل عدد الأفراد وسعر الكيلو، فيحسب المبلغ ويضيفه إلى مدفوعاتك.",
     "tut.s13.p":"نحو كيلوغرامين ونصف من طعام البلد للفرد، بلا شرط النصاب. وتُسجَّل الصدقة بإيصال كغيرها.",
@@ -2553,7 +2742,7 @@ ar: {
     "intro.s1.t":"تُبيّن ما تملكه",
     "intro.s1.p":"المال في الحسابات والمحفظة الإلكترونية، والذهب والحُليّ، والبضائع، والمال الذي يُستحق لك — وما عليك دفعه خلال السنة.",
     "intro.s2.t":"يحسب",
-    "intro.s2.p":"يقارن المجموع بالحد الأدنى، وهو النصاب، ثم يطبّق النسبة 2,5٪. وإن كنت دون النصاب بيّن ذلك صراحة: لا شيء عليك.",
+    "intro.s2.p":"يقارن المجموع بالحد الأدنى، وهو النصاب، ثم يطبّق النسبة 2.5%. وإن كنت دون النصاب بيّن ذلك صراحة: لا شيء عليك.",
     "intro.s3.t":"يحفظ السجل",
     "intro.s3.p":"كل صدقة تُؤدّى تُسجَّل بإيصال مرقّم. وفي العام المقبل يكون السجل حاضرًا، وتكفي نقرة لإصدار بيان أو مصنف Excel.",
     "intro.example.lab":"مثال محسوس",
@@ -2581,9 +2770,9 @@ ar: {
     "gloss.help":"Voir la définition",
     "gloss.back":"Mots simples",
     "gloss.nissab.t":"Nissab",
-    "gloss.nissab.p":"Le seuil à partir duquel la zakat est due : 85 g d'or ou 595 g d'argent, au cours du jour. En dessous, rien à verser. Ici, avec l'or à 50 000 FCFA le gramme, le seuil est de 4 250 000 FCFA.",
+    "gloss.nissab.p":"Le seuil à partir duquel la zakat est due : 85 g d'or ou 595 g d'argent, au cours du jour. En dessous, rien à verser. Ici, avec l'argent à 930 FCFA le gramme, le seuil est de 553 350 FCFA.",
     "gloss.hawl.t":"Hawl",
-    "gloss.hawl.p":"L'année qui doit s'écouler sur un patrimoine resté au-dessus du nissab. Comptée en 354 jours (calendrier hégirien) ou 365 jours (calendrier solaire). C'est seulement à la fin de cette année que la zakat devient due.",
+    "gloss.hawl.p":"L'année qui doit s'écouler sur un patrimoine resté au niveau du nissab ou au-dessus. Comptée en 354 jours (calendrier hégirien) ou 365 jours (calendrier solaire). C'est seulement à la fin de cette année que la zakat devient due.",
     "gloss.assiette.t":"Assiette nette",
     "gloss.assiette.p":"Ce qui reste après avoir additionné ce que vous possédez et retiré ce que vous devez. C'est ce montant, et non votre fortune brute, qui est comparé au nissab.",
     "gloss.madhhab.t":"École juridique",
@@ -2665,9 +2854,9 @@ ar: {
     "gloss.help":"See the definition",
     "gloss.back":"Plain words",
     "gloss.nissab.t":"Nissab",
-    "gloss.nissab.p":"The threshold from which zakat is due: 85 g of gold or 595 g of silver, at the price of the day. Below it, nothing to pay. Here, with gold at 50,000 FCFA per gram, the threshold is 4,250,000 FCFA.",
+    "gloss.nissab.p":"The threshold from which zakat is due: 85 g of gold or 595 g of silver, at the price of the day. Below it, nothing to pay. Here, with silver at 930 FCFA per gram, the threshold is 553,350 FCFA.",
     "gloss.hawl.t":"Hawl",
-    "gloss.hawl.p":"The year that must elapse on wealth kept above the nissab. Counted as 354 days (Hijri calendar) or 365 days (solar calendar). Zakat becomes due only at the end of that year.",
+    "gloss.hawl.p":"The year that must elapse on wealth kept at or above the nissab. Counted as 354 days (Hijri calendar) or 365 days (solar calendar). Zakat becomes due only at the end of that year.",
     "gloss.assiette.t":"Net base",
     "gloss.assiette.p":"What remains once you have added everything you own and deducted what you owe. It is this amount, not your gross wealth, that is compared with the nissab.",
     "gloss.madhhab.t":"School of law",
@@ -2749,9 +2938,9 @@ ar: {
     "gloss.help":"اطّلع على التعريف",
     "gloss.back":"كلمات بسيطة",
     "gloss.nissab.t":"النصاب",
-    "gloss.nissab.p":"الحد الذي تجب فيه الزكاة: خمسة وثمانون غرامًا من الذهب أو خمسمائة وخمسة وتسعون من الفضة بسعر اليوم. ودونه لا شيء عليك. وهنا، والذهب بخمسين ألف فرنك للغرام، يكون النصاب أربعة ملايين ومئتي ألف وخمسين ألفًا.",
+    "gloss.nissab.p":"الحد الذي تجب فيه الزكاة: خمسة وثمانون غرامًا من الذهب أو خمسمائة وخمسة وتسعون غرامًا من الفضة بسعر اليوم. ودونه لا شيء عليك. وهنا، والفضة بتسع مئة وثلاثين فرنكًا للغرام، يكون النصاب خمس مئة وثلاثة وخمسين ألفًا وثلاث مئة وخمسين فرنكًا.",
     "gloss.hawl.t":"الحول",
-    "gloss.hawl.p":"السنة التي يجب أن تمضي على مال بقي فوق النصاب، وتُحسب 354 يومًا في التقويم الهجري أو 365 يومًا في التقويم الشمسي. ولا تجب الزكاة إلا بانتهائها.",
+    "gloss.hawl.p":"السنة التي يجب أن تمضي على مال بلغ النصاب واستمرّ عليه، وتُحسب 354 يومًا في التقويم الهجري أو 365 يومًا في التقويم الشمسي. ولا تجب الزكاة إلا بانتهائها.",
     "gloss.assiette.t":"الوعاء الصافي",
     "gloss.assiette.p":"ما يبقى بعد جمع ما تملكه وخصم ما عليك. وهذا المبلغ، لا ثروتك الإجمالية، هو ما يقارَن بالنصاب.",
     "gloss.madhhab.t":"المذهب",
@@ -2761,11 +2950,11 @@ ar: {
     "gloss.creance.t":"الدين المضمون والدين المشكوك فيه",
     "gloss.creance.p":"مال يُستحق لك. فإن كان تحصيله مؤكدًا حُسب الآن، وإن كان مشكوكًا فيه لم يُحسب إلا يوم تقبضه فعلًا: ويحفظه التطبيق جانبًا خارج الحساب.",
     "gloss.asnaf.t":"الأصناف الثمانية",
-    "gloss.asnaf.p":"حدد القرآن ثمانية أصناف: الفقراء، والمساكين، والعاملين عليها، والمؤلفة قلوبهم، وفي الرقاب، والغارمين، وفي سبيل الله، وابن السبيل. وكل صدقة تُصنَّف في واحد منها، فيُتحقق من التوزيع.",
+    "gloss.asnaf.p":"بيّن القرآن ثمانية أصناف: الفقراء، والمساكين، والعاملين عليها، والمؤلفة قلوبهم، وفي الرقاب، والغارمين، وفي سبيل الله، وابن السبيل. وتُصنَّف كل صدقة في واحد منها، فيتحقّق التوزيع.",
     "gloss.fitr.t":"زكاة الفطر",
     "gloss.fitr.p":"صدقة طعام تُؤدّى في ختام رمضان عن كل فرد من الأسرة، بلا شرط النصاب: نحو كيلوغرامين ونصف من طعام البلد للفرد.",
-    "gloss.taux.t":"2,5٪ أو 2,5775٪",
-    "gloss.taux.p":"2,5٪ هي النسبة المعتمدة على السنة الهجرية البالغة 354 يومًا. وعلى السنة الشمسية البالغة 365 يومًا تُطبَّق 2,5775٪ حتى لا تُنقص الدورة الأطول من الزكاة.",
+    "gloss.taux.t":"2.5% أو 2.5775%",
+    "gloss.taux.p":"2.5% هي النسبة المعتمدة على السنة الهجرية البالغة 354 يومًا. وعلى السنة الشمسية البالغة 365 يومًا تُطبَّق 2.5775% حتى لا تُنقص الدورة الأطول من الزكاة.",
     "demo.try":"جرّب بمثال",
     "demo.banner":"نمط المثال: المبالغ المعروضة افتراضية، وبياناتك محفوظة كما هي.",
     "demo.clear":"محو المثال",
@@ -2823,7 +3012,7 @@ ar: {
     "f.receivablesDoubtful":"ديون مشكوك فيها (خارج الحساب)",
     "f.receivablesDoubtful.hint":"مال يُستحق لك دون يقين: يُحسب عند القبض فقط.",
     "sum.doubtful":"ديون مشكوك فيها (خارج الوعاء)",
-    "sec.fitr":"صدقة ختام رمضان",
+    "sec.fitr":"زكاة الفطر",
     "set.a11y":"إمكانية الوصول",
     "a11y.link":"بيان إمكانية الوصول"
   }
@@ -2836,7 +3025,7 @@ ar: {
 const LANGS = ["fr","en","ar"];
 const LOCALES = { fr:"fr-FR", en:"en-GB", ar:"ar-EG-u-nu-latn" };
 const EUR_XAF = 655.957, GOLD_NISSAB_G = 85, SILVER_NISSAB_G = 595, TROY_OZ_G = 31.1034768;
-const VERSION = "5.2.1";
+const VERSION = "5.4.0";
 const KEY_STATE = "zakat_al_mal_state_v5";
 const KEY_PIN = "zakat_al_mal_pin_v5";
 const KEY_AUTH = "zakat_al_mal_auth_v5";
@@ -2884,10 +3073,12 @@ migrateOldKeys();
 /* ============================ 4. ÉTAT ============================ */
 const FIELD_KEYS = ["cashXaf","cashEur","cashUsd","cashGbp","cashCad","cashNgn","cashOther","tontine","crypto",
   "btcQty","ethQty","usdtQty","goldSavingsGrams","goldJewelryGrams","silverGrams",
-  "stock","receivables","receivablesDoubtful","realEstateTrade","rentalIncome","shares","shortTermDebts","longTermDebtAnnual"];
+  "stock","receivables","receivablesDoubtful","realEstateTrade","rentalIncome","shares","shortTermDebts","longTermDebtAnnual",
+  "retireValue"];
 const SETTING_KEYS = ["madhhab","nissabType","calendarType","goldPrice","silverPrice","usdRate","goldKarat","priceDate","hawlStart","lang","theme","priceMode",
   "fitrPersons","fitrKg","fitrPrice","debtRule","cropKg","cropPrice","cropMode","livestockSheep","livestockCattle","livestockCamels",
-  "btcPrice","ethPrice","usdtPrice","rateGbp","rateCad","rateNgn"];
+  "btcPrice","ethPrice","usdtPrice","rateGbp","rateCad","rateNgn",
+  "retireMode","retireShare","planCount","planStart"];
 
 function defaultState() {
   const iso = new Date().toISOString().slice(0, 10);
@@ -2903,7 +3094,9 @@ function defaultState() {
       cropKg: 0, cropPrice: 500, cropMode: "rain",
       livestockSheep: 0, livestockCattle: 0, livestockCamels: 0,
       btcPrice: 60000000, ethPrice: 2000000, usdtPrice: 600,
-      rateGbp: 760, rateCad: 430, rateNgn: 0.42
+      rateGbp: 760, rateCad: 430, rateNgn: 0.42,
+      retireMode: "none", retireShare: 0,
+      planCount: 12, planStart: iso
     },
     fields: FIELD_KEYS.reduce((o, k) => (o[k] = 0, o), {}),
     market: { gold: null, silver: null, usd: null, at: null, src: "", ok: false, history: { gold: [], silver: [], usd: [] }, crypto: null, fx: null },
@@ -2911,13 +3104,14 @@ function defaultState() {
     exercises: [],
     household: { members: [] },
     payees: {},
+    split: { poor: 12.5, needy: 12.5, amil: 12.5, convert: 12.5, captive: 12.5, debt: 12.5, path: 12.5, traveler: 12.5 },
     meta: { tourDone: false, lastBackup: null, attempts: 0, lockUntil: 0, view: "calc", receiptSeq: 0,
       introSeen: false, textSize: "m", legalVersion: null, legalDate: null, atRest: false, reminders: false }
   };
 }
 var state = defaultState();
 
-const TEXT_SETTINGS = ["madhhab", "nissabType", "calendarType", "priceDate", "hawlStart", "lang", "theme", "priceMode", "debtRule", "cropMode"];
+const TEXT_SETTINGS = ["madhhab", "nissabType", "calendarType", "priceDate", "hawlStart", "lang", "theme", "priceMode", "debtRule", "cropMode", "retireMode", "planStart"];
 function save() {
   FIELD_KEYS.forEach(k => { const el = $(k); if (el) state.fields[k] = numVal(el.value); });
   SETTING_KEYS.forEach(k => {
@@ -2962,6 +3156,8 @@ function applyState(raw) {
       exercises: Array.isArray(raw.exercises) ? raw.exercises : [],
       household: (raw.household && Array.isArray(raw.household.members)) ? raw.household : { members: [] },
       payees: (raw.payees && typeof raw.payees === "object") ? raw.payees : {},
+      split: Object.assign({ poor: 0, needy: 0, amil: 0, convert: 0, captive: 0, debt: 0, path: 0, traveler: 0 },
+        (raw.split && typeof raw.split === "object") ? raw.split : base.split),
       meta: Object.assign(base.meta, raw.meta || {})
     };
   } else state = base;
@@ -3050,17 +3246,22 @@ function t(key, params) {
   return s;
 }
 function thins(s) { return String(s).replace(/[\u202f\u2009]/g, GROUP_SPACE); }
+/* En arabe, les milliers s'écrivent avec l'espace insécable comme en français,
+   pour ne pas confondre la virgule de groupement avec la virgule arabe. */
+function groupNorm(s) {
+  return state.settings.lang === "ar" ? thins(s).replace(/,/g, GROUP_SPACE) : thins(s);
+}
 function fmt(n) {
   const loc = LOCALES[state.settings.lang] || "fr-FR";
-  return thins(new Intl.NumberFormat(loc, { maximumFractionDigits: 0 }).format(Math.round(n || 0))) + " FCFA";
+  return groupNorm(new Intl.NumberFormat(loc, { maximumFractionDigits: 0 }).format(Math.round(n || 0))) + " FCFA";
 }
 function fmtG(n) {
   const loc = LOCALES[state.settings.lang] || "fr-FR";
-  return thins(new Intl.NumberFormat(loc, { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n || 0)) + " g";
+  return groupNorm(new Intl.NumberFormat(loc, { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n || 0)) + " g";
 }
 function fmtNum(n, d) {
   const loc = LOCALES[state.settings.lang] || "fr-FR";
-  return thins(new Intl.NumberFormat(loc, { minimumFractionDigits: d || 0, maximumFractionDigits: d || 0 }).format(n || 0));
+  return groupNorm(new Intl.NumberFormat(loc, { minimumFractionDigits: d || 0, maximumFractionDigits: d || 0 }).format(n || 0));
 }
 function fmtDate(d) {
   if (!d) return "—";
@@ -3145,13 +3346,9 @@ function cyclePayments() {
   return state.payments.filter(p => !p.cycle || p.cycle === start);
 }
 function nissabValue() {
-  const s = state.settings;
-  return s.nissabType === "gold"
-    ? (parseFloat(s.goldPrice) || 0) * GOLD_NISSAB_G
-    : (parseFloat(s.silverPrice) || 0) * SILVER_NISSAB_G;
+  return computeCore(state.settings, state.fields).nissab;
 }
-function compute() {
-  const s = state.settings, f = state.fields;
+function computeCore(s, f) {
   const jewelryTaxable = s.madhhab !== "maliki";
   const karat = parseFloat(s.goldKarat) || 24;
   const pureGold = (f.goldSavingsGrams + (jewelryTaxable ? f.goldJewelryGrams : 0)) * (karat / 24);
@@ -3160,20 +3357,28 @@ function compute() {
   const gold = pureGold * (parseFloat(s.goldPrice) || 0);
   const silver = f.silverGrams * (parseFloat(s.silverPrice) || 0);
   const trade = f.stock + f.receivables + f.realEstateTrade + f.rentalIncome + f.shares;
+  const retireMode = s.retireMode || "none";
+  const retirePct = retireMode === "full" ? 1 : (retireMode === "part" ? clamp(Number(s.retireShare) || 0, 0, 100) / 100 : 0);
+  const retirement = Math.round((Number(f.retireValue) || 0) * retirePct);
   const longDebts = s.debtRule === "due" ? 0 : f.longTermDebtAnnual;
   const debts = f.shortTermDebts + longDebts;
-  const gross = cash + gold + silver + trade;
+  const gross = cash + gold + silver + trade + retirement;
   const net = Math.max(0, gross - debts);
-  const nissab = nissabValue();
+  const nissab = s.nissabType === "gold"
+    ? (parseFloat(s.goldPrice) || 0) * GOLD_NISSAB_G
+    : (parseFloat(s.silverPrice) || 0) * SILVER_NISSAB_G;
   const rate = s.calendarType === "hijri" ? 0.025 : 0.025775;
   const eligible = net > 0 && nissab > 0 && net >= nissab;
   const ownZakat = eligible ? Math.round(net * rate) : 0;
+  return { pureGold, cash, gold, silver, trade, retirement, retireMode, debts, gross, net, nissab, rate, eligible, ownZakat,
+    jewelryTaxable, doubtful: f.receivablesDoubtful || 0 };
+}
+function compute() {
+  const c = computeCore(state.settings, state.fields);
   const household = householdTotals();
-  const zakat = ownZakat + household.zakat;
+  const zakat = c.ownZakat + household.zakat;
   const paid = cyclePayments().reduce((sum, p) => sum + (Number(p.amount) || 0), 0);
-  const remaining = Math.max(0, zakat - paid);
-  return { pureGold, cash, gold, silver, trade, debts, gross, net, nissab, rate, eligible, zakat, ownZakat, household,
-    paid, remaining, jewelryTaxable, doubtful: f.receivablesDoubtful || 0 };
+  return Object.assign({}, c, { household, zakat, paid, remaining: Math.max(0, zakat - paid) });
 }
 function hawlInfo() {
   const s = state.settings;
@@ -3195,7 +3400,7 @@ function renderSummary() {
   $("sDebts").textContent = "− " + fmt(c.debts);
   $("sNet").textContent = fmt(c.net);
   $("sNissab").textContent = fmt(c.nissab);
-  $("sRate").textContent = (c.rate * 100).toFixed(4).replace(".", ",") + " %";
+  $("sRate").textContent = (c.rate * 100).toFixed(4).replace(".", decSep()) + " %";
   $("sPureGold").textContent = fmtG(c.pureGold);
   $("sZakat").textContent = fmt(c.zakat);
   $("sZakatSub").textContent = c.zakat > 0 ? t("sum.ofZakat", { a: fmt(c.paid) }) : "";
@@ -3262,6 +3467,8 @@ function renderAll() {
   renderStaticSettings();
   renderBackupBanner();
   if (typeof renderLots === "function") renderLots();
+  if (typeof renderPackA === "function") renderPackA();
+  if (typeof renderPackB === "function") renderPackB();
 }
 
 
@@ -3565,32 +3772,33 @@ function buildWorkbook() {
   /* --- Feuille Exercices --- */
   const exHead = [t("reg.th.label"), t("reg.th.date"), t("reg.th.net"), t("reg.th.nissab"), t("sum.rate"),
     t("reg.th.zakat"), t("reg.th.paid"), t("reg.th.rest"), t("sum.status"),
-    t("sum.cash"), t("sum.gold"), t("sum.silver"), t("sum.trade"), t("sum.debts")];
+    t("sum.cash"), t("sum.gold"), t("sum.silver"), t("sum.trade"), t("sum.retire"), t("sum.debts")];
   const exRows = [exHead.map(h => ({ v: h, s: 2 }))];
-  const COLS_STYLE = [0, 7, 4, 4, 6, 4, 4, 4, 0, 4, 4, 4, 4, 4];
+  const COLS_STYLE = [0, 7, 4, 4, 6, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4];
   const closed = wp.sortedExercises();
   closed.forEach(e => exRows.push([
     e.label, new Date(e.closedAt), e.computed.net, e.computed.nissab, e.computed.rate, e.computed.zakat,
     e.computed.paid, e.computed.remaining, e.computed.eligible ? t("doc.eligible") : t("doc.notEligible"),
-    e.computed.cash, e.computed.gold, e.computed.silver, e.computed.trade, e.computed.debts
+    e.computed.cash, e.computed.gold, e.computed.silver, e.computed.trade, e.computed.retirement || 0, e.computed.debts
   ].map((v, i) => ({ v: v, s: COLS_STYLE[i] }))));
   const currentRowIdx = exRows.length + 1;
   exRows.push([
     t("reg.current") + " — " + currentExerciseLabel(), new Date(), { v: c.net, s: 4 }, { v: c.nissab, s: 4 },
     { v: c.rate, s: 6 }, { v: c.zakat, s: 4 }, { v: c.paid, s: 4 }, { v: c.remaining, s: 4 },
     c.eligible ? t("doc.eligible") : t("doc.notEligible"),
-    { v: c.cash, s: 4 }, { v: c.gold, s: 4 }, { v: c.silver, s: 4 }, { v: c.trade, s: 4 }, { v: c.debts, s: 4 }
+    { v: c.cash, s: 4 }, { v: c.gold, s: 4 }, { v: c.silver, s: 4 }, { v: c.trade, s: 4 },
+    { v: c.retirement || 0, s: 4 }, { v: c.debts, s: 4 }
   ]);
   const lastData = exRows.length;
   const totalRow = [t("xl.total").toUpperCase(), "", "", "", "",
     { f: "SUM(F2:F" + lastData + ")" }, { f: "SUM(G2:G" + lastData + ")" }, { f: "SUM(H2:H" + lastData + ")" }, "",
     { f: "SUM(J2:J" + lastData + ")" }, { f: "SUM(K2:K" + lastData + ")" }, { f: "SUM(L2:L" + lastData + ")" },
-    { f: "SUM(M2:M" + lastData + ")" }, { f: "SUM(N2:N" + lastData + ")" }]
+    { f: "SUM(M2:M" + lastData + ")" }, { f: "SUM(N2:N" + lastData + ")" }, { f: "SUM(O2:O" + lastData + ")" }]
     .map((v, i) => ({ v: typeof v === "object" ? v : v, s: 9 }));
   exRows.push(totalRow);
   const exXml = sheetXml(exRows, {
-    cols: [30, 13, 15, 15, 14, 15, 15, 15, 14, 15, 14, 14, 15, 14],
-    freeze: true, filter: "A1:N" + lastData
+    cols: [30, 13, 15, 15, 14, 15, 15, 15, 14, 15, 14, 14, 15, 14, 15],
+    freeze: true, filter: "A1:O" + lastData
   });
 
   /* --- Feuille Versements --- */
@@ -3645,8 +3853,8 @@ function buildWorkbook() {
   put([{ v: t("sum.status"), s: 1 }, { f: SH.ex + "!I" + r }]);
   put([]);
   put([{ v: t("xl.assets"), s: 2 }, { v: t("xl.value"), s: 2 }, { v: "%", s: 2 }]);
-  const aStart = dash.length + 1, aEnd = aStart + 4;
-  [["cash", "J"], ["gold", "K"], ["silver", "L"], ["trade", "M"], ["debts", "N"]].forEach(function (pair) {
+  const aStart = dash.length + 1, aEnd = aStart + 5;
+  [["cash", "J"], ["gold", "K"], ["silver", "L"], ["trade", "M"], ["retire", "N"], ["debts", "O"]].forEach(function (pair) {
     const rowNo = dash.length + 1;
     put([{ v: t("sum." + pair[0]), s: 1 }, { f: SH.ex + "!" + pair[1] + r, s: 4 },
       { f: "IFERROR(B" + rowNo + "/SUM($B$" + aStart + ":$B$" + aEnd + "),0)", s: 6 }]);
@@ -4265,11 +4473,12 @@ function statementHtml(ex) {
     "<tr><td>" + escapeHtml(t("doc.gold", { g: fmtG(c.pureGold) })) + '</td><td class="num">' + escapeHtml(fmt(c.gold)) + "</td></tr>" +
     "<tr><td>" + escapeHtml(t("doc.silver", { g: fmtG((ex.fields && ex.fields.silverGrams) || 0) })) + '</td><td class="num">' + escapeHtml(fmt(c.silver)) + "</td></tr>" +
     "<tr><td>" + escapeHtml(t("doc.trade")) + '</td><td class="num">' + escapeHtml(fmt(c.trade)) + "</td></tr>" +
+    (((c.retirement || 0) > 0) ? "<tr><td>" + escapeHtml(t("sum.retire")) + '</td><td class="num">' + escapeHtml(fmt(c.retirement)) + "</td></tr>" : "") +
     '<tr class="tot"><td>' + escapeHtml(t("doc.gross")) + '</td><td class="num">' + escapeHtml(fmt(c.gross)) + "</td></tr>" +
     "<tr><td>" + escapeHtml(t("doc.debts")) + '</td><td class="num">− ' + escapeHtml(fmt(c.debts)) + "</td></tr>" +
     '<tr class="tot"><td>' + escapeHtml(t("doc.net")) + '</td><td class="num">' + escapeHtml(fmt(c.net)) + "</td></tr>" +
     "<tr><td>" + escapeHtml(t("doc.nissabLine")) + " (" + escapeHtml(s.nissabType === "gold" ? "85 g" : "595 g") + '</td><td class="num">' + escapeHtml(fmt(c.nissab)) + "</td></tr>" +
-    "<tr><td>" + escapeHtml(t("doc.meta.rate")) + '</td><td class="num">' + (c.rate * 100).toFixed(4).replace(".", ",") + " %</td></tr>" +
+    "<tr><td>" + escapeHtml(t("doc.meta.rate")) + '</td><td class="num">' + (c.rate * 100).toFixed(4).replace(".", decSep()) + " %</td></tr>" +
     "<tr><td>" + escapeHtml(t("doc.status")) + '</td><td class="num">' + escapeHtml(c.eligible ? t("doc.eligible") : t("doc.notEligible")) + "</td></tr>" +
     "</tbody></table>" +
     '<div class="doc-zakat">' + escapeHtml(t("doc.zakatDue")) + " : " + escapeHtml(fmt(c.zakat)) + "</div>" +
@@ -4571,7 +4780,7 @@ const LEGAL = {
     docs: {
       cgu: {
         title: "Conditions générales d'utilisation",
-        lead: "Les présentes conditions régissent l'utilisation de l'application Zakat Al Mal, version 5.1.0. Elles doivent être lues et acceptées avant toute utilisation.",
+        lead: "Les présentes conditions régissent l'utilisation de l'application Zakat Al Mal, dans sa version en vigueur. Elles doivent être lues et acceptées avant toute utilisation.",
         sections: [
           { h: "1. Objet et éditeur", p: ["L'application est un outil autonome de calcul et de tenue de registre de la zakat al-mal, exécuté dans le navigateur de l'utilisateur. Elle est éditée à titre personnel et non commercial par le titulaire du présent fichier, ci-après « l'éditeur ».", "Les mentions d'identification figurent dans l'onglet « Mentions légales »."] },
           { h: "2. Acceptation", p: ["L'utilisation de l'application vaut acceptation pleine et entière des présentes conditions. En cas de refus, l'utilisateur s'abstient d'utiliser l'outil.", "L'acceptation est horodatée et conservée localement, avec le numéro de version des conditions acceptées."] },
@@ -4661,7 +4870,7 @@ const LEGAL = {
     docs: {
       cgu: {
         title: "Terms of use",
-        lead: "These terms govern the use of the Zakat Al Mal application, version 5.1.0. They must be read and accepted before any use.",
+        lead: "These terms govern the use of the Zakat Al Mal application, in its current version. They must be read and accepted before any use.",
         sections: [
           { h: "1. Purpose and publisher", p: ["The application is a standalone tool for calculating and keeping the register of zakat al-mal, executed in the user's browser. It is published on a personal, non-commercial basis by the holder of this file, hereinafter “the publisher”.", "Identification details appear in the “Legal notice” tab."] },
           { h: "2. Acceptance", p: ["Use of the application constitutes full and unreserved acceptance of these terms. In case of refusal, the user refrains from using the tool.", "Acceptance is time-stamped and stored locally, together with the version number of the terms accepted."] },
@@ -4740,7 +4949,7 @@ const LEGAL = {
       { q: "هل يمكنني إدخال الأسعار بنفسي؟", a: "نعم، دائمًا. فإدخال سعر ينقل التطبيق إلى النمط اليدوي مع إشارة ظاهرة؛ ويُعيد زر «العودة إلى سعر السوق» النمط التلقائي. وهذا هو المسلك السليم حين يختلف سوقك المحلي أو عند انعدام الشبكة." },
       { q: "ما هو النصاب؟", a: "هو الحد الأدنى للمال الذي تجب فيه الزكاة: خمسة وثمانون غرامًا من الذهب أو خمسمائة وخمسة وتسعون غرامًا من الفضة، مُقيَّمة بسعر اليوم. ويقارن التطبيق الوعاء الصافي بهذا الحد ويُظهر الحالة المقابلة." },
       { q: "هل تدخل حُليّي في الحساب؟", a: "يتوقف ذلك على المذهب المختار: ففي المذهب المالكي تُعفى الحُليّ المعدّة للاستعمال الشخصي؛ وفي الحنفي والشافعي تجب فيها الزكاة. ويطبّق التطبيق المذهب الذي تختاره ويُبيّن الأثر تحت الحقل المعني." },
-      { q: "لماذا 2,5٪ وأحيانًا 2,5775٪؟", a: "النسبة المرجعية 2,5٪ على السنة الهجرية البالغة 354 يومًا. وعلى السنة الشمسية البالغة 365 يومًا تكون النسبة المتناسبة 2,5775٪، حتى لا تُنقص الدورة الأطول من الزكاة الواجبة." },
+      { q: "لماذا 2.5% وأحيانًا 2.5775%؟", a: "النسبة المرجعية 2.5% على السنة الهجرية البالغة 354 يومًا. وعلى السنة الشمسية البالغة 365 يومًا تكون النسبة المتناسبة 2.5775%، حتى لا تُنقص الدورة الأطول من الزكاة الواجبة." },
       { q: "أي الديون يجوز خصمها؟", a: "الديون الحالّة خلال الاثني عشر شهرًا فقط: أقساط السنة، والإيجارات والمستحقات للتجار، والديون المؤكدة. أما أصل القرض الطويل غير الحالّ فلا يُخصم." },
       { q: "هل يُؤدّي التطبيق الزكاة؟", a: "لا. فهو لا يجمع أموالًا ولا يحتفظ بها ولا يحوّلها، ولا يعرف أي وسيلة دفع. إنما يُسجّل مدفوعاتك ويُصدر إيصالات وشهادات قابلة للطبع تقوم أنت بتسليمها للمستحقين." },
       { q: "ماذا يتضمن مصنف Excel؟", a: "ملف ‎.xlsx‎ من أربع أوراق — لوحة المعلومات والدورات والمدفوعات والإعدادات — مع صيغ وتنسيق ومرشّحات. ويُنتَج على جهازك انطلاقًا من بياناتك وحدها." },
@@ -4751,7 +4960,7 @@ const LEGAL = {
     docs: {
       cgu: {
         title: "شروط الاستخدام العامة",
-        lead: "تنظّم هذه الشروط استخدام تطبيق «زكاة المال»، الإصدار 5.0. ويجب قراءتها وقبولها قبل أي استعمال.",
+        lead: "تنظّم هذه الشروط استخدام تطبيق «زكاة المال» في إصداره النافذ. ويجب قراءتها وقبولها قبل أي استعمال.",
         sections: [
           { h: "1. الموضوع والناشر", p: ["التطبيق أداة مستقلة لحساب زكاة المال ومسك سجلها، يعمل داخل متصفح المستخدم. وينشره على سبيل شخصي غير تجاري حائز هذا الملف، ويُسمّى فيما يلي «الناشر».", "وترد بيانات التعريف في تبويب «الإشعارات القانونية»."] },
           { h: "2. القبول", p: ["يُعدّ استعمال التطبيق قبولًا تامًا وغير مشروط لهذه الشروط. وفي حال الرفض يمتنع المستخدم عن استعمال الأداة.", "ويُسجَّل القبول بتوقيت زمني ويُحفظ محليًا مع رقم نسخة الشروط المقبولة."] },
@@ -5791,13 +6000,13 @@ async function exportJsonEncrypted() {
     "payee.op":"وسيلة الدفع",
     "payee.op.orange":"أورنج موني",
     "payee.op.mtn":"إم تي إن موبو",
-    "payee.op.other":"أخرى / نقدا",
+    "payee.op.other":"أخرى / نقدًا",
     "payee.phone":"رقم الهاتف",
     "payee.save":"حفظ البطاقة",
     "payee.saved":"تم حفظ بطاقة المستفيد",
     "payee.share":"مشاركة البطاقة",
     "payee.sheet":"البطاقة (PDF)",
-    "payee.noFunds":"لا تجمع «زكاة المال» أموالا ولا تحوّلها. البطاقة تنظيمية فقط، وأنتم من يؤدّي الدفع عبر المحفظة أو نقدا أو تحويلا.",
+    "payee.noFunds":"لا تجمع «زكاة المال» أموالًا ولا تحوّلها. البطاقة تنظيمية فقط، وأنتم من يؤدّي الدفع عبر المحفظة أو نقدًا أو تحويلًا.",
     "payee.needName":"أدخل اسم المستفيد أولا.",
     "payee.unknown":"لا توجد بطاقة محفوظة لهذا المستفيد.",
     "payee.shared":"تمت مشاركة البطاقة",
@@ -6165,7 +6374,7 @@ function printHerdSheet() {
 /* ============================ 36. GRAPHIQUE DU REGISTRE ============================ */
 function shortMoney(n) {
   const v = Math.abs(n || 0);
-  if (v >= 1000000) return (v / 1000000).toFixed(v >= 10000000 ? 0 : 1).replace(".", ",") + " M";
+  if (v >= 1000000) return (v / 1000000).toFixed(v >= 10000000 ? 0 : 1).replace(".", decSep()) + " M";
   if (v >= 1000) return Math.round(v / 1000) + " k";
   return fmtNum(v, 0);
 }
@@ -6218,7 +6427,7 @@ function renderExpress() {
     st.textContent = r.eligible ? t("status.eligible") : (r.net > 0 ? t("status.notEligible") : t("status.zero"));
     st.className = "badge " + (r.eligible ? "ok" : "no");
   }
-  if (note) note.textContent = t("express.note", { nissab: fmt(r.nissab), rate: (r.rate * 100).toFixed(4).replace(".", ",") + " %" });
+  if (note) note.textContent = t("express.note", { nissab: fmt(r.nissab), rate: (r.rate * 100).toFixed(4).replace(".", decSep()) + " %" });
 }
 function openExpress() {
   if ($("expCash")) $("expCash").value = state.fields.cashXaf || "";
@@ -6624,6 +6833,731 @@ function initLots() {
     if (typeof finishBoot === "function") finishBoot({ resumed: true });
   });
 }
+
+/* ===== v5.3 — Pack A : simulateur « et si » et tableau de bord de l'évolution ===== */
+(function () {
+  var extra = {
+  fr: {
+    "sim.title":"Simulateur — et si… ?",
+    "sim.sub":"Bougez les curseurs : le nissab et la zakat se recalculent instantanément, sans rien changer à votre calcul réel.",
+    "sim.price":"Prix du gramme ({metal})",
+    "sim.metal.gold":"or",
+    "sim.metal.silver":"argent",
+    "sim.debts":"Dettes déduites",
+    "sim.save":"Épargne ajoutée",
+    "sim.nissab":"Nissab simulé","sim.net":"Base nette","sim.zakat":"Zakat simulée",
+    "sim.gap":"Il vous manque {x} pour atteindre le nissab.",
+    "sim.above":"Vous dépassez le nissab de {x}.",
+    "sim.zero":"Sans patrimoine net, aucune zakat n'est due.",
+    "sim.chart":"Zakat due selon le prix du gramme",
+    "sim.reset":"Revenir à mes chiffres",
+    "sim.note":"Ces curseurs ne modifient ni vos champs ni votre registre : ils servent à comprendre, pas à déclarer.",
+    "evo.title":"Mon évolution",
+    "evo.sub":"Comparaison avec l'exercice précédent, composition de l'assiette et part déjà versée.",
+    "evo.cur":"Assiette de l'exercice en cours",
+    "evo.prev":"Exercice précédent",
+    "evo.delta":"Variation",
+    "evo.paidTotal":"Total versé",
+    "evo.none":"aucun exercice clos",
+    "evo.mix":"Composition de l'assiette imposable",
+    "evo.mix.cash":"Liquidités, or et argent",
+    "evo.mix.metals":"Or et argent",
+    "evo.mix.trade":"Commerce et investissements",
+    "evo.mix.empty":"Aucune assiette pour l'instant",
+    "evo.mix.short":"assiette",
+    "evo.mix.gold":"Or","evo.mix.silver":"Argent",
+    "evo.empty":"Remplissez vos champs : la composition de l'assiette apparaîtra ici.",
+    "evo.sentence":"Votre assiette imposable est passée de {a} à {b} ({d}). Vous avez versé {p} de la zakat due.",
+    "evo.sentenceOne":"Votre assiette imposable est de {b}. Vous avez versé {p} de la zakat due.",
+    "foot.legal":"Version {v} — documents juridiques révisés le 31 octobre 2026 (version {l})."
+  },
+  en: {
+    "sim.title":"Simulator — what if…?",
+    "sim.sub":"Move the sliders: the nissab and the zakat are recalculated instantly, without changing your real calculation.",
+    "sim.price":"Price per gram ({metal})",
+    "sim.metal.gold":"gold",
+    "sim.metal.silver":"silver",
+    "sim.debts":"Debts deducted",
+    "sim.save":"Savings added",
+    "sim.nissab":"Simulated nissab","sim.net":"Net base","sim.zakat":"Simulated zakat",
+    "sim.gap":"You are {x} short of the nissab.",
+    "sim.above":"You are {x} above the nissab.",
+    "sim.zero":"With no net wealth, no zakat is due.",
+    "sim.chart":"Zakat due by gram price",
+    "sim.reset":"Back to my figures",
+    "sim.note":"These sliders change neither your fields nor your register: they are for understanding, not for declaring.",
+    "evo.title":"My progress",
+    "evo.sub":"Comparison with the previous exercise, breakdown of the base and share already paid.",
+    "evo.cur":"Base for the current exercise",
+    "evo.prev":"Previous exercise",
+    "evo.delta":"Change",
+    "evo.paidTotal":"Total paid",
+    "evo.none":"no closed exercise",
+    "evo.mix":"Breakdown of the zakatable base",
+    "evo.mix.cash":"Cash, gold and silver",
+    "evo.mix.metals":"Gold and silver",
+    "evo.mix.trade":"Trade and investments",
+    "evo.mix.empty":"No base yet",
+    "evo.mix.short":"base",
+    "evo.mix.gold":"Gold","evo.mix.silver":"Silver",
+    "evo.empty":"Fill in your fields: the breakdown of the base will appear here.",
+    "evo.sentence":"Your zakatable base went from {a} to {b} ({d}). You have paid {p} of the zakat due.",
+    "evo.sentenceOne":"Your zakatable base is {b}. You have paid {p} of the zakat due.",
+    "foot.legal":"Version {v} — legal documents revised on 31 October 2026 (version {l})."
+  },
+  ar: {
+    "sim.title":"المحاكي — ماذا لو…؟",
+    "sim.sub":"حرّكوا المؤشّرات فيُعاد حساب النصاب والزكاة في الحال، دون أي تغيير في حسابكم الفعلي.",
+    "sim.price":"سعر غرام {metal}",
+    "sim.metal.gold":"الذهب",
+    "sim.metal.silver":"الفضة",
+    "sim.debts":"الديون المخصومة",
+    "sim.save":"مدخرات مضافة",
+    "sim.nissab":"النصاب المحاكى","sim.net":"الوعاء الصافي","sim.zakat":"الزكاة المحاكاة",
+    "sim.gap":"ينقصكم {x} لبلوغ النصاب.",
+    "sim.above":"تتجاوزون النصاب بمقدار {x}.",
+    "sim.zero":"لا وعاء صافي، فلا زكاة مستحقة.",
+    "sim.chart":"الزكاة المستحقة حسب سعر الغرام",
+    "sim.reset":"العودة إلى أرقامي",
+    "sim.note":"هذه المؤشّرات لا تغيّر حقولكم ولا سجلكم: غايتها الفهم لا الإقرار.",
+    "evo.title":"تطوّري",
+    "evo.sub":"المقارنة بالسنة السابقة، وتكوين الوعاء، ونسبة ما أُدّي منه.",
+    "evo.cur":"وعاء السنة الجارية",
+    "evo.prev":"السنة السابقة",
+    "evo.delta":"التغيّر",
+    "evo.paidTotal":"مجموع ما أُدّي",
+    "evo.none":"لا سنة مقفلة",
+    "evo.mix":"تكوين الوعاء الخاضع للزكاة",
+    "evo.mix.cash":"النقود والذهب والفضة",
+    "evo.mix.metals":"الذهب والفضة",
+    "evo.mix.trade":"التجارة والاستثمارات",
+    "evo.mix.empty":"لا وعاء بعد",
+    "evo.mix.short":"الوعاء",
+    "evo.mix.gold":"الذهب","evo.mix.silver":"الفضة",
+    "evo.empty":"املأوا الحقول ليظهر تكوين الوعاء هنا.",
+    "evo.sentence":"انتقل وعاؤكم الخاضع للزكاة من {a} إلى {b} ({d}). وأدّيتم {p} من الزكاة المستحقة.",
+    "evo.sentenceOne":"وعاؤكم الخاضع للزكاة {b}. وأدّيتم {p} من الزكاة المستحقة.",
+    "foot.legal":"الإصدار {v} — روجعت الوثائق القانونية في 31 أكتوبر 2026 (الإصدار {l})."
+  }
+  };
+  Object.keys(extra).forEach(function (lang) { Object.assign(I18N[lang], extra[lang]); });
+})();
+
+/* ============================ SIMULATEUR « ET SI » ============================ */
+var simState = { price: null, debts: null, save: null };
+
+function simMetal() { return state.settings.nissabType === "gold" ? "gold" : "silver"; }
+function simRealPrice() {
+  const s = state.settings;
+  return parseFloat(simMetal() === "gold" ? s.goldPrice : s.silverPrice) || 0;
+}
+function setRange(el, min, max, step) {
+  if (!el) return;
+  el.min = String(min);
+  el.max = String(max);
+  el.step = String(Math.max(1, step));
+}
+/* Calcul jetable : mêmes formules que compute(), mais sur des copies. Aucune mutation d'état. */
+function simulate(ov) {
+  ov = ov || {};
+  const s = Object.assign({}, state.settings, ov.settings || {});
+  const f = Object.assign({}, state.fields, ov.fields || {});
+  if (ov.price !== undefined && ov.price !== null) {
+    if (s.nissabType === "gold") s.goldPrice = ov.price; else s.silverPrice = ov.price;
+  }
+  if (ov.debts !== undefined && ov.debts !== null) {
+    s.debtRule = "all";
+    f.shortTermDebts = Number(ov.debts) || 0;
+    f.longTermDebtAnnual = 0;
+  }
+  if (ov.save) f.cashXaf = (Number(f.cashXaf) || 0) + Number(ov.save);
+  const core = computeCore(s, f);
+  return Object.assign({}, core, { zakat: core.ownZakat });
+}
+
+function simChartPath(points, x, y) {
+  let d = "";
+  points.forEach((p, i) => { d += (i ? "L" : "M") + x(p[0]).toFixed(1) + " " + y(p[1]).toFixed(1); });
+  return d;
+}
+
+function renderSim() {
+  const priceEl = $("simPrice");
+  if (!priceEl) return;
+  const real = compute();
+  const metal = simMetal();
+  const basePrice = simRealPrice();
+
+  $("simPriceLab").textContent = t("sim.price", { metal: t(metal === "gold" ? "sim.metal.gold" : "sim.metal.silver") });
+
+  const pMin = Math.max(1, Math.round(basePrice * 0.2));
+  const pMax = Math.max(pMin + 100, Math.round(basePrice * 3));
+  setRange(priceEl, pMin, pMax, Math.max(1, Math.round((basePrice || 100) / 100)));
+  const dMax = Math.max(1000, Math.ceil((real.gross || 0) / 1000) * 1000);
+  setRange($("simDebts"), 0, dMax, Math.max(1000, Math.round(dMax / 100)));
+  const sMax = Math.max(50000, Math.ceil(Math.max(real.gross, real.nissab, 1000) / 1000) * 1000);
+  setRange($("simSave"), 0, sMax, Math.max(1000, Math.round(sMax / 100)));
+
+  const price = simState.price === null ? basePrice : clamp(simState.price, pMin, pMax);
+  const debts = simState.debts === null ? clamp(real.debts, 0, dMax) : clamp(simState.debts, 0, dMax);
+  const save = simState.save === null ? 0 : clamp(simState.save, 0, sMax);
+  priceEl.value = String(price);
+  $("simDebts").value = String(debts);
+  $("simSave").value = String(save);
+
+  const c = simulate({ price: price, debts: debts, save: save });
+  $("simPriceVal").textContent = fmt(price) + "/g";
+  $("simDebtsVal").textContent = fmt(debts);
+  $("simSaveVal").textContent = fmt(save);
+  $("simNissab").textContent = fmt(c.nissab);
+  $("simNet").textContent = fmt(c.net);
+  $("simZakat").textContent = fmt(c.zakat);
+
+  const v = $("simVerdict");
+  if (c.net <= 0) { v.textContent = t("sim.zero"); v.className = "sim-verdict no"; }
+  else if (!c.eligible) { v.textContent = t("sim.gap", { x: fmt(c.nissab - c.net) }); v.className = "sim-verdict no"; }
+  else { v.textContent = t("sim.above", { x: fmt(c.net - c.nissab) }); v.className = "sim-verdict"; }
+
+  drawSimChart({ c: c, price: price, pMin: pMin, pMax: pMax, debts: debts, save: save });
+}
+
+/* Courbe : zakat en fonction du prix du gramme, les deux autres curseurs restant fixés. */
+let simWidthCache = 0;
+function simChartWidth() {
+  if (!simWidthCache) {
+    const svg = $("simChart");
+    const rect = (svg && svg.getBoundingClientRect) ? svg.getBoundingClientRect() : { width: 320 };
+    simWidthCache = Math.max(240, Math.round(rect.width || 320));
+  }
+  return simWidthCache;
+}
+function drawSimChart(arg) {
+  const svg = $("simChart");
+  if (!svg) return;
+  const W = simChartWidth();
+  const H = 104, baseY = 92;
+  svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+  const N = 32, pts = [];
+  let zMax = 0;
+  for (let i = 0; i < N; i++) {
+    const p = arg.pMin + (arg.pMax - arg.pMin) * i / (N - 1);
+    const cc = simulate({ price: p, debts: arg.debts, save: arg.save });
+    zMax = Math.max(zMax, cc.zakat);
+    pts.push([p, cc.zakat]);
+  }
+  const top = Math.max(zMax, 1);
+  const x = p => 10 + (p - arg.pMin) / Math.max(1, arg.pMax - arg.pMin) * (W - 20);
+  const y = z => baseY - (z / top) * 78;
+  const line = simChartPath(pts, x, y);
+  const area = line + " L" + x(arg.pMax).toFixed(1) + " " + baseY + " L" + x(arg.pMin).toFixed(1) + " " + baseY + " Z";
+  const cx = x(arg.price), cy = y(arg.c.zakat);
+  svg.innerHTML =
+    '<defs><linearGradient id="simGrad" x1="0" y1="0" x2="0" y2="1">' +
+    '<stop offset="0" stop-color="#c2932e" stop-opacity=".38"/>' +
+    '<stop offset="1" stop-color="#c2932e" stop-opacity="0"/></linearGradient></defs>' +
+    '<line x1="10" y1="' + baseY + '" x2="' + (W - 10) + '" y2="' + baseY + '" style="stroke:var(--border-strong)" stroke-width="1"/>' +
+    '<path d="' + area + '" fill="url(#simGrad)"/>' +
+    '<path d="' + line + '" fill="none" style="stroke:var(--primary)" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>' +
+    '<line x1="' + cx.toFixed(1) + '" y1="8" x2="' + cx.toFixed(1) + '" y2="' + baseY + '" stroke="#c2932e" stroke-width="1.3" stroke-dasharray="3 3"/>' +
+    '<circle cx="' + cx.toFixed(1) + '" cy="' + cy.toFixed(1) + '" r="4.6" fill="#c2932e" stroke="#fff" stroke-width="1.6"/>';
+}
+
+function bindSim() {
+  const on = (id, key) => {
+    const el = $(id);
+    if (!el) return;
+    el.addEventListener("input", () => { simState[key] = Number(el.value); renderSim(); });
+  };
+  on("simPrice", "price"); on("simDebts", "debts"); on("simSave", "save");
+  const r = $("simReset");
+  if (r) r.addEventListener("click", () => { simState = { price: null, debts: null, save: null }; renderSim(); });
+}
+
+/* ============================ TABLEAU DE BORD DE L'ÉVOLUTION ============================ */
+const EVO_COLORS = ["#0f4b38", "#c2932e", "#6f9186", "#a8c0b6"];
+
+function evoPrevExercise() {
+  const list = state.exercises.slice().sort((a, b) => String(a.closedAt || "").localeCompare(String(b.closedAt || "")));
+  return list.length ? list[list.length - 1] : null;
+}
+function evoDonut(parts) {
+  const svg = $("evoDonut");
+  if (!svg) return;
+  const total = parts.reduce((s, p) => s + p.v, 0);
+  const C = 2 * Math.PI * 45;
+  let html = '<circle class="dn-bg" cx="60" cy="60" r="45" stroke-width="15"/>';
+  if (total <= 0) {
+    svg.innerHTML = html + '<text class="dn-lab" x="60" y="58">—</text><text class="dn-sub" x="60" y="74">' + escapeHtml(t("evo.mix.empty")) + "</text>";
+    return;
+  }
+  let offset = 0;
+  parts.forEach((p, i) => {
+    if (p.v <= 0) return;
+    const len = (p.v / total) * C;
+    const gap = Math.min(3, len * 0.35);
+    html += '<circle class="dn-c" cx="60" cy="60" r="45" stroke="' + EVO_COLORS[i] + '" stroke-width="15"' +
+      ' stroke-dasharray="' + Math.max(0.5, len - gap).toFixed(2) + " " + (C - Math.max(0.5, len - gap)).toFixed(2) + '"' +
+      ' stroke-dashoffset="' + (-offset).toFixed(2) + '" transform="rotate(-90 60 60)"/>';
+    offset += len;
+  });
+  const mainPct = Math.round((parts.reduce((s, p) => Math.max(s, p.v), 0) / total) * 100);
+  svg.innerHTML = html + '<text class="dn-lab" x="60" y="58">' + mainPct + '%</text>' +
+    '<text class="dn-sub" x="60" y="74">' + escapeHtml(t("evo.mix.short")) + "</text>";
+}
+
+function renderEvo() {
+  const curEl = $("evoCur");
+  if (!curEl) return;
+  const c = compute();
+  const prev = evoPrevExercise();
+  const prevNet = prev && prev.computed ? (Number(prev.computed.net) || 0) : 0;
+
+  curEl.textContent = fmt(c.net);
+  $("evoPrev").textContent = prev ? fmt(prevNet) : t("evo.none");
+
+  const dEl = $("evoDelta");
+  if (prev && prevNet > 0) {
+    const raw = ((c.net - prevNet) / prevNet) * 100;
+    const pct = Math.round(raw * 10) / 10;
+    const sign = pct > 0 ? "+" : (pct < 0 ? "−" : "");
+    dEl.textContent = sign + fmtNum(Math.abs(pct), 1) + " %";
+    dEl.className = pct > 0 ? "up" : (pct < 0 ? "down" : "");
+  } else {
+    dEl.textContent = "—";
+    dEl.className = "";
+  }
+
+  const totalPaid = (Number(c.paid) || 0) + state.exercises.reduce((s, e) => s + (Number(e.computed && e.computed.paid) || 0), 0);
+  $("evoPaid").textContent = fmt(totalPaid);
+
+  /* Composition de l'assiette : liquides d'un côté, métaux de l'autre, commerce ensuite */
+  const parts = [
+    { k: "cash", v: Math.max(0, c.cash), lab: t("evo.mix.cash") },
+    { k: "gold", v: Math.max(0, c.gold), lab: t("evo.mix.gold") },
+    { k: "silver", v: Math.max(0, c.silver), lab: t("evo.mix.silver") },
+    { k: "trade", v: Math.max(0, c.trade), lab: t("evo.mix.trade") }
+  ];
+  evoDonut(parts);
+
+  const total = parts.reduce((s, p) => s + p.v, 0);
+  const box = $("evoLegend");
+  if (box) {
+    box.innerHTML = "";
+    if (total <= 0) {
+      const p = document.createElement("div");
+      p.className = "hint";
+      p.textContent = t("evo.empty");
+      box.appendChild(p);
+    } else {
+      parts.forEach((p, i) => {
+        if (p.v <= 0) return;
+        const row = document.createElement("div");
+        row.className = "lg-row";
+        const pct = Math.round((p.v / total) * 1000) / 10;
+        row.innerHTML = '<span class="lg-dot" style="background:' + EVO_COLORS[i] + '"></span>' +
+          '<span class="lg-lab">' + escapeHtml(p.lab) + "</span>" +
+          "<b>" + escapeHtml(fmt(p.v)) + "</b>" +
+          "<i>" + escapeHtml(fmtNum(pct, 1)) + "%</i>";
+        box.appendChild(row);
+      });
+    }
+  }
+
+  const payPct = c.zakat > 0 ? Math.round(clamp((c.paid / c.zakat) * 100, 0, 100)) : 0;
+  const pTxt = fmtNum(payPct, 0) + " %";
+  const sent = $("evoSentence");
+  if (sent) {
+    if (prev && prevNet > 0) {
+      const raw = ((c.net - prevNet) / prevNet) * 100;
+      const pct = Math.round(raw * 10) / 10;
+      const dTxt = (pct > 0 ? "+" : (pct < 0 ? "−" : "")) + fmtNum(Math.abs(pct), 1) + " %";
+      sent.textContent = t("evo.sentence", { a: fmt(prevNet), b: fmt(c.net), d: dTxt, p: pTxt });
+    } else {
+      sent.textContent = t("evo.sentenceOne", { b: fmt(c.net), p: pTxt });
+    }
+  }
+}
+
+/* ============================ PIED DE PAGE ============================ */
+function renderFootLegal() {
+  const el = $("footLegal");
+  if (!el) return;
+  el.textContent = t("foot.legal", { v: VERSION, l: LEGAL_VERSION });
+}
+
+function renderPackA() {
+  renderSim();
+  renderEvo();
+  renderFootLegal();
+}
+
+bindSim();
+function invalidateSimWidth() { simWidthCache = 0; renderSim(); }
+window.addEventListener("resize", invalidateSimWidth);
+if (typeof ResizeObserver === "function") {
+  const svg = $("simChart");
+  if (svg) new ResizeObserver(invalidateSimWidth).observe(svg);
+}
+
+/* ===== v5.4 — Pack B : épargne longue, plan de paiement échelonné, répartition des 8 asnaf ===== */
+(function () {
+  var extra = {
+  fr: {
+    "ret.title":"Épargne longue et retraite",
+    "ret.sub":"Retraite complémentaire, plan d'épargne bloqué, assurance-vie : dites ce qui est réellement disponible.",
+    "ret.value":"Valeur actuelle du plan",
+    "ret.mode":"Traitement retenu",
+    "ret.mode.none":"Non compté — droit futur",
+    "ret.mode.part":"Compté au prorata disponible",
+    "ret.mode.full":"Compté intégralement",
+    "ret.share":"Part disponible (%)",
+    "ret.counted":"Montant retenu dans l'assiette",
+    "ret.hint":"Une retraite non encore accessible n'est pas un bien dont vous disposez : la plupart des savants ne la soumettent à la zakat qu'à l'encaissement. Choisissez « au prorata » si une part est déblocable.",
+    "sum.retire":"Épargne longue comptée",
+    "plan.title":"Plan de paiement échelonné",
+    "plan.sub":"Répartissez la zakat due sur plusieurs mois : chaque échéance reçoit sa date, son montant et un rappel.",
+    "plan.count":"Nombre d'échéances",
+    "plan.start":"Première échéance",
+    "plan.each":"Montant par échéance",
+    "plan.th.n":"N°","plan.th.date":"Date","plan.th.amount":"Montant","plan.th.state":"État",
+    "plan.state.paid":"versée","plan.state.late":"en retard","plan.state.soon":"à verser","plan.state.wait":"à venir",
+    "plan.progress":"{done}/{n} échéances versées — {paid} sur {total}.",
+    "plan.left":"Reste : {x}",
+    "plan.none":"Aucune zakat due pour l'instant : remplissez vos champs, le plan se calcule tout seul.",
+    "plan.ics":"Rappels (.ics)",
+    "plan.reset":"Recalculer",
+    "plan.icsSummary":"Zakat Al Mal — échéance {n} sur {c}",
+    "plan.icsDesc":"Montant de cette échéance : {x}",
+    "plan.icsDone":"Échéancier téléchargé",
+    "split.title":"Répartition entre les huit catégories",
+    "split.sub":"Fixez la part de chaque catégorie coranique ; le total doit faire 100 %.",
+    "split.th.pct":"Part %","split.th.amount":"Montant",
+    "split.total":"Total réparti",
+    "split.warn":"Le total n'est pas de 100 % : ajustez une part.",
+    "split.hint":"La répartition égale n'est qu'un point de départ : le Coran nomme les huit catégories sans imposer l'égalité entre elles.",
+    "split.even":"Répartir également",
+    "split.print":"Fiche de répartition",
+    "split.docTitle":"Fiche de répartition de la zakat",
+    "split.docSub":"Répartition proposée de la zakat due entre les huit catégories du Coran (9:60).",
+    "split.docTotal":"TOTAL",
+    "split.toast":"Fiche de répartition ouverte"
+  },
+  en: {
+    "ret.title":"Long-term savings and pensions",
+    "ret.sub":"Workplace pension, locked savings plan, life insurance: tell the app what is actually available.",
+    "ret.value":"Current value of the plan",
+    "ret.mode":"Treatment",
+    "ret.mode.none":"Not counted — future right",
+    "ret.mode.part":"Counted pro rata to what is available",
+    "ret.mode.full":"Counted in full",
+    "ret.share":"Available share (%)",
+    "ret.counted":"Amount included in the base",
+    "ret.hint":"A pension you cannot yet access is not wealth in your hands: most scholars only subject it to zakat when it is received. Choose \"pro rata\" if part of it can be withdrawn.",
+    "sum.retire":"Long-term savings counted",
+    "plan.title":"Instalment plan",
+    "plan.sub":"Spread the zakat due over several months: each instalment gets its date, its amount and a reminder.",
+    "plan.count":"Number of instalments",
+    "plan.start":"First instalment",
+    "plan.each":"Amount per instalment",
+    "plan.th.n":"No.","plan.th.date":"Date","plan.th.amount":"Amount","plan.th.state":"Status",
+    "plan.state.paid":"paid","plan.state.late":"late","plan.state.soon":"due","plan.state.wait":"upcoming",
+    "plan.progress":"{done}/{n} instalments paid — {paid} of {total}.",
+    "plan.left":"Left: {x}",
+    "plan.none":"No zakat due yet: fill in your fields and the plan computes itself.",
+    "plan.ics":"Reminders (.ics)",
+    "plan.reset":"Recalculate",
+    "plan.icsSummary":"Zakat Al Mal — instalment {n} of {c}",
+    "plan.icsDesc":"Amount of this instalment: {x}",
+    "plan.icsDone":"Schedule downloaded",
+    "split.title":"Split across the eight categories",
+    "split.sub":"Set the share of each Qur'anic category; the total must reach 100 %.",
+    "split.th.pct":"Share %","split.th.amount":"Amount",
+    "split.total":"Total allocated",
+    "split.warn":"The total is not 100 %: adjust one share.",
+    "split.hint":"An equal split is only a starting point: the Qur'an names the eight categories without requiring equality between them.",
+    "split.even":"Split equally",
+    "split.print":"Allocation sheet",
+    "split.docTitle":"Zakat allocation sheet",
+    "split.docSub":"Proposed allocation of the zakat due across the eight Qur'anic categories (9:60).",
+    "split.docTotal":"TOTAL",
+    "split.toast":"Allocation sheet opened"
+  },
+  ar: {
+    "ret.title":"الادخار الطويل الأمد والتقاعد",
+    "ret.sub":"تقاعد تكميلي، أو خطة ادخار مجمّدة، أو تأمين على الحياة: بيّنوا ما هو متاح فعلًا.",
+    "ret.value":"القيمة الحالية للخطة",
+    "ret.mode":"المعالجة المعتمدة",
+    "ret.mode.none":"غير محتسب — حقّ مستقبلي",
+    "ret.mode.part":"محتسب بنسبة المتاح",
+    "ret.mode.full":"محتسب بالكامل",
+    "ret.share":"النسبة المتاحة (%)",
+    "ret.counted":"المبلغ المحتسب في الوعاء",
+    "ret.hint":"التقاعد الذي لا يُنال بعدُ ليس مالًا في اليد؛ ولذلك لا يُزكّى عند أكثر أهل العلم إلا عند القبض. اختاروا «بنسبة المتاح» إذا كان جزء منه قابلًا للسحب.",
+    "sum.retire":"الادخار الطويل المحتسب",
+    "plan.title":"خطة السداد بالتقسيط",
+    "plan.sub":"وزّعوا الزكاة المستحقة على عدة أشهر: لكل قسط تاريخه ومبلغه وتذكيره.",
+    "plan.count":"عدد الأقساط",
+    "plan.start":"تاريخ أول قسط",
+    "plan.each":"مبلغ القسط",
+    "plan.th.n":"الرقم","plan.th.date":"التاريخ","plan.th.amount":"المبلغ","plan.th.state":"الحال",
+    "plan.state.paid":"مؤدّى","plan.state.late":"متأخر","plan.state.soon":"مستحق","plan.state.wait":"قادم",
+    "plan.progress":"{done}/{n} قسطًا مؤدّى — {paid} من {total}.",
+    "plan.left":"المتبقي: {x}",
+    "plan.none":"لا زكاة مستحقة بعد: املأوا حقولكم فتُحسب الخطة تلقائيًا.",
+    "plan.ics":"تذكيرات (.ics)",
+    "plan.reset":"إعادة الحساب",
+    "plan.icsSummary":"زكاة المال — القسط {n} من {c}",
+    "plan.icsDesc":"مبلغ هذا القسط: {x}",
+    "plan.icsDone":"تم تنزيل جدول الأقساط",
+    "split.title":"التوزيع على الأصناف الثمانية",
+    "split.sub":"حدّدوا نصيب كل صنف قرآني، ويجب أن يكون المجموع 100%.",
+    "split.th.pct":"النسبة %","split.th.amount":"المبلغ",
+    "split.total":"مجموع التوزيع",
+    "split.warn":"المجموع ليس 100%: عدّلوا إحدى النسب.",
+    "split.hint":"التساوي مجرّد نقطة بداية: ذكر القرآن الأصناف الثمانية ولم يوجب التساوي بينها.",
+    "split.even":"توزيع بالتساوي",
+    "split.print":"ورقة التوزيع",
+    "split.docTitle":"ورقة توزيع الزكاة",
+    "split.docSub":"توزيع مقترح للزكاة المستحقة على الأصناف الثمانية المذكورة في سورة التوبة (الآية 60).",
+    "split.docTotal":"المجموع",
+    "split.toast":"فُتحت ورقة التوزيع"
+  }
+  };
+  Object.keys(extra).forEach(function (lang) { Object.assign(I18N[lang], extra[lang]); });
+})();
+
+const ASNAF_KEYS = ["poor", "needy", "amil", "convert", "captive", "debt", "path", "traveler"];
+
+/* ============================ A. ÉPARGNE LONGUE ET RETRAITE ============================ */
+function renderRetire() {
+  const sel = $("retireMode");
+  const mode = state.settings.retireMode || "none";
+  if (sel && sel.value !== mode) sel.value = mode;
+  const shareEl = $("retireShare");
+  if (shareEl && document.activeElement !== shareEl) shareEl.value = String(state.settings.retireShare || 0);
+  const field = $("retireShareField");
+  if (field) field.classList.toggle("off", mode !== "part");
+
+  const c = compute();
+  const out = $("retireCounted");
+  if (out) out.textContent = fmt(c.retirement || 0);
+  const line = $("sRetireLine"), val = $("sRetire");
+  if (line && val) {
+    val.textContent = fmt(c.retirement || 0);
+    line.classList.toggle("hidden", !((c.retirement || 0) > 0));
+  }
+}
+
+/* ============================ B. PLAN DE PAIEMENT ÉCHELONNÉ ============================ */
+function planStartDate() {
+  const raw = state.settings.planStart;
+  const d = new Date((raw || isoToday()) + "T00:00:00");
+  return isNaN(d.getTime()) ? new Date() : d;
+}
+function planItems() {
+  const c = compute();
+  const total = Math.max(0, Math.round(c.zakat || 0));
+  const count = clamp(Math.round(Number(state.settings.planCount) || 12), 1, 24);
+  const start = planStartDate();
+  const base = Math.floor(total / count);
+  const items = [];
+  let cum = 0;
+  for (let i = 0; i < count; i++) {
+    const amount = (i === count - 1) ? total - base * (count - 1) : base;
+    cum += amount;
+    const d = new Date(start.getTime());
+    d.setMonth(d.getMonth() + i);
+    items.push({ n: i + 1, date: d, amount: amount, cum: cum });
+  }
+  return { total: total, count: count, base: base, items: items, paid: Math.round(Number(c.paid) || 0) };
+}
+function planStateOf(item, paid, current) {
+  if (paid >= item.cum) return "paid";
+  if (item.date < new Date(new Date().toDateString())) return "late";
+  return item.n === current ? "soon" : "wait";
+}
+function renderPlan() {
+  const body = $("planBody");
+  if (!body) return;
+  const cnt = $("planCount");
+  if (cnt && document.activeElement !== cnt) cnt.value = String(state.settings.planCount || 12);
+  const st = $("planStart");
+  if (st && document.activeElement !== st) st.value = state.settings.planStart || isoToday();
+
+  const p = planItems();
+  const each = $("planEach");
+  if (each) each.value = p.total > 0 ? fmt(p.base) : "—";
+
+  const done = p.items.filter(it => p.paid >= it.cum).length;
+  const current = p.items.find(it => p.paid < it.cum);
+  const bar = $("planBar");
+  if (bar) bar.style.width = (p.total > 0 ? clamp(Math.round((p.paid / p.total) * 100), 0, 100) : 0) + "%";
+  const txt = $("planProgressText");
+  if (txt) {
+    txt.textContent = p.total > 0
+      ? t("plan.progress", { done: fmtNum(done, 0), n: fmtNum(p.count, 0), paid: fmt(p.paid), total: fmt(p.total) })
+      : t("plan.none");
+  }
+  const paidTxt = $("planPaidTxt");
+  if (paidTxt) paidTxt.textContent = p.total > 0 ? t("plan.left", { x: fmt(Math.max(0, p.total - p.paid)) }) : "—";
+
+  body.innerHTML = "";
+  if (p.total <= 0) {
+    body.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--muted)">' + escapeHtml(t("plan.none")) + "</td></tr>";
+    return;
+  }
+  p.items.forEach(it => {
+    const s = planStateOf(it, p.paid, current ? current.n : 0);
+    const tr = document.createElement("tr");
+    tr.innerHTML = '<td class="num">' + it.n + "</td>" +
+      "<td>" + escapeHtml(fmtDate(it.date)) + "</td>" +
+      '<td class="num">' + escapeHtml(fmt(it.amount)) + "</td>" +
+      '<td><span class="st-dot ' + s + '"><i></i>' + escapeHtml(t("plan.state." + s)) + "</span></td>";
+    body.appendChild(tr);
+  });
+}
+function downloadPlanIcs() {
+  const p = planItems();
+  if (p.total <= 0) { toast(t("plan.none"), true); return; }
+  const ymd = d => d.getFullYear() + String(d.getMonth() + 1).padStart(2, "0") + String(d.getDate()).padStart(2, "0");
+  const stamp = new Date().toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+  const out = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Zakat Al Mal//FR//", "CALSCALE:GREGORIAN"];
+  p.items.forEach(it => {
+    const summary = t("plan.icsSummary", { n: it.n, c: p.count });
+    out.push("BEGIN:VEVENT",
+      "UID:zakat-al-mal-echeance-" + it.n + "-" + ymd(it.date) + "@local",
+      "DTSTAMP:" + stamp,
+      "DTSTART;VALUE=DATE:" + ymd(it.date),
+      "DTEND;VALUE=DATE:" + ymd(new Date(it.date.getTime() + 86400000)),
+      "SUMMARY:" + summary,
+      "DESCRIPTION:" + t("plan.icsDesc", { x: fmt(it.amount) }),
+      "BEGIN:VALARM", "TRIGGER:-P2D", "ACTION:DISPLAY", "DESCRIPTION:" + summary, "END:VALARM",
+      "END:VEVENT");
+  });
+  out.push("END:VCALENDAR");
+  download("zakat-al-mal-echeancier.ics", out.join("\r\n"), "text/calendar;charset=utf-8");
+  toast(t("plan.icsDone"));
+}
+
+/* ============================ C. RÉPARTITION ENTRE LES 8 ASNAF ============================ */
+function splitShares() {
+  const s = state.split || {};
+  return ASNAF_KEYS.map(k => clamp(Number(s[k]) || 0, 0, 100));
+}
+function ensureSplitRows() {
+  const body = $("splitBody");
+  if (!body || body.children.length === ASNAF_KEYS.length) return;
+  body.innerHTML = "";
+  ASNAF_KEYS.forEach(k => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = "<td>" + escapeHtml(t("cat." + k)) + "</td>" +
+      '<td class="num"><input type="number" class="split-in" data-asnaf="' + k + '" min="0" max="100" step="0.5" inputmode="decimal" aria-label="' +
+      escapeHtml(t("cat." + k)) + '"></td>' +
+      '<td class="num split-amt" data-amt="' + k + '">—</td>';
+    body.appendChild(tr);
+  });
+  body.querySelectorAll("input.split-in").forEach(inp => {
+    inp.value = String(clamp(Number((state.split || {})[inp.dataset.asnaf]) || 0, 0, 100));
+    inp.addEventListener("input", () => {
+      const v = clamp(numVal(inp.value.replace(",", ".")), 0, 100);
+      state.split[inp.dataset.asnaf] = v;
+      persistState();
+      updateSplitAmounts();
+    });
+  });
+}
+function updateSplitAmounts() {
+  const c = compute();
+  const total = Math.max(0, c.zakat || 0);
+  const shares = splitShares();
+  let pctSum = 0, amtSum = 0;
+  ASNAF_KEYS.forEach((k, i) => {
+    const cell = document.querySelector('#splitBody td[data-amt="' + k + '"]');
+    const pct = shares[i];
+    const amt = Math.round((total * pct) / 100);
+    pctSum += pct; amtSum += amt;
+    if (cell) cell.textContent = pct > 0 ? fmt(amt) : "—";
+  });
+  const line = $("splitTotal");
+  if (line) line.textContent = fmtNum(Math.round(pctSum * 10) / 10, 1) + " % · " + fmt(amtSum);
+  const warn = $("splitWarn");
+  if (warn) warn.classList.toggle("hidden", Math.abs(pctSum - 100) < 0.05);
+}
+function renderSplit() {
+  ensureSplitRows();
+  updateSplitAmounts();
+}
+function printSplit() {
+  const c = compute();
+  const total = Math.max(0, c.zakat || 0);
+  const shares = splitShares();
+  let rows = "", pctSum = 0, amtSum = 0;
+  ASNAF_KEYS.forEach((k, i) => {
+    const pct = shares[i];
+    if (pct <= 0) return;
+    const amt = Math.round((total * pct) / 100);
+    pctSum += pct; amtSum += amt;
+    rows += "<tr><td>" + escapeHtml(t("cat." + k)) + '</td><td class="num">' + escapeHtml(fmtNum(pct, 1)) + " %" +
+      '</td><td class="num">' + escapeHtml(fmt(amt)) + "</td></tr>";
+  });
+  if (!rows) rows = '<tr><td colspan="3">' + escapeHtml(t("split.warn")) + "</td></tr>";
+  const body =
+    '<table><thead><tr><th>' + escapeHtml(t("asnaf.th.cat")) + '</th><th class="num">' + escapeHtml(t("split.th.pct")) +
+    '</th><th class="num">' + escapeHtml(t("split.th.amount")) + "</th></tr></thead><tbody>" + rows +
+    '<tr class="tot"><td>' + escapeHtml(t("split.docTotal")) + '</td><td class="num">' + escapeHtml(fmtNum(pctSum, 1)) + " %" +
+    '</td><td class="num">' + escapeHtml(fmt(amtSum)) + "</td></tr></tbody></table>" +
+    '<p style="margin-top:12px;font-size:.82em;line-height:1.5">' + escapeHtml(t("split.hint")) + "</p>";
+  outputDocument(docShell({
+    title: t("split.docTitle") + " — " + t("brand.name"),
+    sub: t("split.docSub"),
+    meta: [
+      t("doc.meta.date") + " : " + fmtDateTime(new Date()),
+      t("sum.zakat") + " : " + fmt(total),
+      t("split.total") + " : " + fmtNum(pctSum, 1) + " %"
+    ],
+    body: body,
+    footer: t("foot.line")
+  }), "Zakat_Al_Mal_repartition_" + isoToday() + ".pdf");
+  toast(t("split.toast"));
+}
+
+/* ============================ LIAISONS ============================ */
+function bindPackB() {
+  const on = (id, ev, fn) => { const el = $(id); if (el) el.addEventListener(ev, fn); };
+
+  on("retireMode", "change", () => { save(); renderAll(); });
+  on("retireShare", "input", () => { save(); renderRetire(); renderSummary(); });
+  on("retireValue", "input", () => { save(); renderRetire(); renderSummary(); });
+
+  on("planCount", "input", () => { save(); renderPlan(); });
+  on("planStart", "change", () => { save(); renderPlan(); });
+  on("planResetBtn", "click", () => {
+    state.settings.planCount = 12;
+    state.settings.planStart = isoToday();
+    save(); renderPlan(); toast(t("plan.reset"));
+  });
+  on("planIcsBtn", "click", downloadPlanIcs);
+
+  on("splitEven", "click", () => {
+    ASNAF_KEYS.forEach(k => { state.split[k] = 12.5; });
+    ensureSplitRows();
+    document.querySelectorAll("#splitBody input.split-in").forEach(inp => { inp.value = "12.5"; });
+    persistState(); updateSplitAmounts();
+  });
+  on("splitPrint", "click", printSplit);
+
+  /* une saisie de bien ou de versement change le plan et la répartition */
+  FIELD_KEYS.forEach(k => on(k, "input", () => { renderPlan(); updateSplitAmounts(); }));
+  on("payAmount", "input", () => { renderPlan(); });
+}
+
+function renderPackB() {
+  renderRetire();
+  renderPlan();
+  renderSplit();
+}
+
+bindPackB();
 
 
 /* ============================ 21. TOAST & MODALE ============================ */

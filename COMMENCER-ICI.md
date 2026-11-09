@@ -108,11 +108,39 @@ https://<votre-compte>.github.io/zakat-al-mal/
 
 ---
 
-*Zakat Al Mal 5.2.1 — documents juridiques révisés le 31 octobre 2026 (version 1.1).*
+*Zakat Al Mal 5.4.0 — documents juridiques révisés le 31 octobre 2026 (version 1.1).*
 
 ---
 
-## Version 5.2.1 — à savoir avant de publier
+## Version 5.4.0 — à savoir avant de publier
+
+- **Épargne longue : le mode par défaut est « non compté ».** C'est la position prudente (un droit
+  futur n'est pas un bien en main). Si votre public suit l'avis opposé, réglez-le une fois : les
+  champs restent enregistrés.
+- **Plan de paiement** : il ne crée pas de versement. Il calcule un calendrier à partir de la zakat
+  due et coche les échéances au fur et à mesure que vous enregistrez de vrais versements. Un
+  échéancier `.ics` peut être importé dans Google Agenda, Apple Calendrier ou Outlook.
+- **Répartition** : les parts sont un outil de préparation, pas une obligation religieuse. La fiche
+  imprimée le rappelle explicitement.
+
+## Version 5.3.0 — à savoir avant de publier
+
+- **Deux nouveaux écrans** : le simulateur (dernière carte de l'onglet Calcul) et « Mon évolution »
+  (haut de l'onglet Registre, avant le graphique annuel). Rien à configurer.
+- **Le simulateur n'écrit jamais** : il travaille sur des copies des réglages et des champs. Vos
+  chiffres, votre registre et vos sauvegardes restent intacts pendant la manipulation.
+- **Le tableau de bord a besoin d'un exercice clos** pour afficher une variation : la première
+  année, il montre l'assiette courante et la composition, sans comparaison inventée.
+
+## Version 5.2.2 — à savoir avant de publier
+
+- **Textes arabes relus** : les 734 chaînes arabes et les documents juridiques arabes ont été
+  relus et corrigés (nissab, hawl, vocabulaire, tanwīn, séparateurs décimaux). Faites tout de même
+  relire la couche religieuse — nissab, hawl, taux, avis par école — par une personne qualifiée
+  avant publication : aucun logiciel ne remplace cet avis.
+- **Code PIN** : aucun code par défaut n'existe. L'ancien texte d'aide mentionnait `1234` ; il a
+  été corrigé dans les trois langues.
+
 
 - **Image de partage** : `og-image.png` est déjà à la racine. Si votre site est à une adresse du type
   `https://votrenom.github.io/zakat-al-mal/`, remplacez dans `index.html` les deux lignes
