@@ -42,6 +42,10 @@ Français, anglais et arabe (affichage de droite à gauche), thème clair, sombr
 taille de texte réglable, fonctionne hors ligne, et s'installe sur l'écran d'accueil d'un téléphone
 comme une application ordinaire.
 
+**Mode simple** : quatre sections suffisent — vos liquidités, vos métaux, vos dettes, vos paramètres.
+Le reste (crypto, commerce, récoltes, foyer, retraite, simulateur) s'affiche d'un clic, et le montant
+dû reste visible en permanence sur téléphone.
+
 ## Ce que l'application ne fait pas
 
 - Elle **ne collecte pas d'argent** et ne l'achemine vers personne : vous versez directement à qui
@@ -76,4 +80,4 @@ transférable. Voir `LICENSE.md`.
 
 ---
 
-*Version 5.4.0 — octobre 2026.*
+*Version 5.5.0 — octobre 2026.*

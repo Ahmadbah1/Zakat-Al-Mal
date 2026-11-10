@@ -59,7 +59,7 @@
             radial-gradient(900px 500px at -10% 20%, #f6f1e2 0%, rgba(246,241,226,0) 60%);
   --surface:#ffffff; --surface-2:#f7fbf9; --surface-3:#eaf2ee;
   --border:#dfe9e4; --border-strong:#c6d8cf;
-  --ink:#16241f; --muted:#63756c;
+  --ink:#16241f; --muted:#5e7067;
   --primary:#0f4b38; --primary-strong:#0a3628; --on-primary:#ffffff;
   --accent:#0f4b38; --accent-ink:#0f4b38; --accent-soft:#e4efe9;
   --gold-ink:#8a6112; --gold-soft:#fbf2dd; --gold-line:#e6cf9a;
@@ -604,6 +604,32 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
 .sim-chart-wrap{margin-top:12px}
 .sim-chart{width:100%;height:108px;display:block;overflow:visible}
 .rc-head h4{font-size:.76rem;font-weight:800;color:var(--accent-ink)}
+/* ---- v5.5 : mode simple, bilan collant, aiguillage ---- */
+.mode-bar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;justify-content:space-between;
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:10px 14px;box-shadow:var(--shadow-sm)}
+.mode-txt{display:flex;flex-direction:column;gap:2px;min-width:0}
+.mode-txt b{font-size:.8rem;font-weight:800;color:var(--accent-ink)}
+.mode-txt span{font-size:.7rem;color:var(--muted);line-height:1.4}
+.mode-bar .seg{flex:none}
+.mode-bar .seg button{min-width:74px}
+/* bilan collant : téléphone et tablette uniquement */
+.msum{display:none}
+@media (max-width:1040px){
+  .msum{display:flex;align-items:center;justify-content:space-between;gap:12px;
+    position:fixed;inset-inline:0;bottom:0;z-index:60;padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+    background:var(--surface);border-top:1px solid var(--border-strong);
+    box-shadow:0 -10px 26px rgba(8,34,24,.16)}
+  .msum-txt{display:flex;flex-direction:column;gap:1px;min-width:0}
+  .msum-txt span{font-size:.6rem;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--muted)}
+  .msum-txt b{font-size:1.02rem;font-weight:800;color:var(--accent-ink);font-variant-numeric:tabular-nums}
+  #view-calc{padding-bottom:86px}
+}
+@media (max-width:420px){ .msum .btn.sm span{display:none} }
+@media print{ .msum{display:none !important} }
+.intro-tip{display:flex;align-items:flex-start;gap:8px;margin-top:12px;padding:10px 12px;border-radius:10px;
+  background:var(--gold-soft);border:1px solid var(--gold-line);color:var(--gold-ink);
+  font-size:.74rem;font-weight:600;line-height:1.45}
+.intro-tip svg{flex:none;margin-top:1px}
 /* ---- v5.4 : épargne longue, plan de paiement, répartition ---- */
 .ret-out{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;
   margin-top:14px;padding:12px 14px;border-radius:12px;background:var(--gold-soft);border:1px solid var(--gold-line)}
@@ -752,10 +778,10 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
           <span class="chip"><span data-i18n="hero.chip3">100 % local, sans compte</span></span>
         </div>
         <div class="btn-row">
+          <button class="btn gold lg" id="expressBtn" type="button"><svg><use href="#i-compass"/></svg><span data-i18n="express.btn">Calcul express (60 s)</span></button>
           <button class="btn lg" id="heroCta" type="button"><svg><use href="#i-scale"/></svg><span data-i18n="hero.cta1">Commencer le calcul</span></button>
           <button class="btn ghost lg" id="heroTour" type="button"><svg><use href="#i-help"/></svg><span data-i18n="hero.cta2">Visite guidée</span></button>
           <button class="btn quiet lg" id="demoBtn" type="button"><svg><use href="#i-spark"/></svg><span data-i18n="demo.try">Essayer avec un exemple</span></button>
-          <button class="btn ghost lg" id="expressBtn" type="button"><svg><use href="#i-compass"/></svg><span data-i18n="express.btn">Calcul express (60 s)</span></button>
         </div>
       </div>
       <div class="hero-art">
@@ -765,6 +791,17 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
           <div class="fc-val" id="heroGold">— FCFA/g</div>
           <div class="fc-sub" id="heroGoldSub" data-i18n="hero.liveSub">—</div>
         </div>
+      </div>
+    </div>
+
+    <div class="mode-bar" id="modeBar">
+      <div class="mode-txt">
+        <b data-i18n="mode.title">Mode simple</b>
+        <span data-i18n="mode.sub">L'essentiel : vos liquidités, vos métaux, vos dettes. Le reste d'un clic.</span>
+      </div>
+      <div class="seg" id="modeSeg" role="group" aria-label="Niveau de détail">
+        <button type="button" data-ui-mode="simple" data-i18n="mode.simple">Simple</button>
+        <button type="button" data-ui-mode="expert" data-i18n="mode.expert">Complet</button>
       </div>
     </div>
 
@@ -826,7 +863,7 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
     </div>
 
     <!-- Cours en direct -->
-    <div class="card" id="cardPrices">
+    <div class="card" id="cardPrices" data-adv="1">
       <div class="card-head">
         <span class="icon-tile gold"><svg><use href="#i-trend"/></svg></span>
         <span class="sec-num">02</span>
@@ -945,7 +982,7 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
     </div>
 
     <!-- 4 Crypto-actifs -->
-    <div class="card" id="cardCrypto" role="group" aria-labelledby="secCryptoTitle">
+    <div class="card" id="cardCrypto" data-adv="1" role="group" aria-labelledby="secCryptoTitle">
         <div class="sec-head"><span class="legend-num">05</span><h2 data-i18n="sec.crypto" id="secCryptoTitle">Crypto-actifs et stablecoins</h2><span class="ref" data-i18n="ref.crypto">Valeur du jour</span></div>
         <div class="grid g3">
           <div class="field"><label for="btcQty" data-i18n="f.btcQty">Bitcoin (BTC)</label><input type="number" id="btcQty" min="0" step="0.00001"><div class="hint" id="hintBtc"></div></div>
@@ -968,7 +1005,7 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
     </div>
 
     <!-- 5 Commerce -->
-    <div class="card" id="cardTrade" role="group" aria-labelledby="secTradeTitle">
+    <div class="card" id="cardTrade" data-adv="1" role="group" aria-labelledby="secTradeTitle">
         <div class="sec-head"><span class="legend-num">06</span><h2 data-i18n="sec.trade" id="secTradeTitle">Commerce et investissements</h2></div>
         <div class="grid g2">
           <div class="field"><label for="stock" data-i18n="f.stock">Stock de marchandises (valeur marchande)</label><input type="number" id="stock" min="0" step="1000"></div>
@@ -992,7 +1029,7 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
     </div>
 
     <!-- 5 Hawl -->
-    <div class="card" id="cardHawl" role="group" aria-labelledby="secHawlTitle">
+    <div class="card" id="cardHawl" data-adv="1" role="group" aria-labelledby="secHawlTitle">
         <div class="sec-head"><span class="legend-num">08</span><h2 data-i18n="sec.hawl" id="secHawlTitle">Cycle du hawl</h2></div>
         <div class="grid g2">
           <div class="field"><label for="hawlStart" data-i18n="f.hawlStart">Date d'ouverture du cycle</label><input type="date" id="hawlStart"><div class="hint" data-i18n="f.hawlStart.hint">Jour où le patrimoine a atteint le nissab pour la première fois.</div></div>
@@ -1005,7 +1042,7 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
     </div>
 
     <!-- 6 Zakat al-fitr -->
-    <div class="card" id="cardFitr" role="group" aria-labelledby="secFitrTitle">
+    <div class="card" id="cardFitr" data-adv="1" role="group" aria-labelledby="secFitrTitle">
         <div class="sec-head"><span class="legend-num">09</span><h2 data-i18n="sec.fitr" id="secFitrTitle">Offrande de fin de Ramadan</h2></div>
         <div class="grid g3">
           <div class="field"><label for="fitrPersons" data-i18n="fitr.persons">Personnes du foyer</label><input type="number" id="fitrPersons" min="0" step="1" value="1"></div>
@@ -1018,7 +1055,7 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
         </div>
     </div>
     <!-- 10 Récoltes et cheptel -->
-    <div class="card" id="cardAgri" role="group" aria-labelledby="secAgriTitle">
+    <div class="card" id="cardAgri" data-adv="1" role="group" aria-labelledby="secAgriTitle">
         <div class="sec-head"><span class="legend-num">10</span><h2 data-i18n="sec.agri" id="secAgriTitle">Récoltes et cheptel</h2><span class="ref" data-i18n="agri.ref">Nissab 653 kg</span></div>
         <div class="grid g3">
           <div class="field"><label for="cropKg" data-i18n="f.cropKg">Récolte de la saison (kg)</label><input type="number" id="cropKg" min="0" step="10"></div>
@@ -1048,7 +1085,7 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
     </div>
 
     <!-- 11 Foyer -->
-    <div class="card" id="cardHousehold" role="group" aria-labelledby="secHouseholdTitle">
+    <div class="card" id="cardHousehold" data-adv="1" role="group" aria-labelledby="secHouseholdTitle">
         <div class="sec-head"><span class="legend-num">11</span><h2 data-i18n="sec.household" id="secHouseholdTitle">Le foyer</h2>
           <button class="btn ghost sm" id="addMemberBtn" type="button" style="margin-inline-start:auto"><svg><use href="#i-plus"/></svg><span data-i18n="hh.add">Ajouter un membre</span></button>
         </div>
@@ -1064,7 +1101,7 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
     </div>
 
     <!-- Épargne longue et retraite -->
-    <div class="card" id="cardRetire">
+    <div class="card" id="cardRetire" data-adv="1">
       <div class="card-head">
         <span class="icon-tile"><svg><use href="#i-shield"/></svg></span>
         <div><h3 data-i18n="ret.title">Épargne longue et retraite</h3>
@@ -1087,7 +1124,7 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
     </div>
 
     <!-- Vérification -->
-    <div class="card" id="verifyCard">
+    <div class="card" id="verifyCard" data-adv="1">
       <div class="card-head">
         <span class="icon-tile gold"><svg><use href="#i-shield"/></svg></span>
         <div><h3 data-i18n="verify.title">Comment ce calcul est vérifié</h3>
@@ -1108,8 +1145,16 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
       </div>
     </div>
 
+    <div class="msum" id="msum">
+      <div class="msum-txt">
+        <span data-i18n="sum.zakat">Zakat à verser</span>
+        <b id="msumVal" aria-live="polite">0 FCFA</b>
+      </div>
+      <button class="btn gold sm" id="msumBtn" type="button"><svg><use href="#i-chart"/></svg><span data-i18n="msum.detail">Voir le bilan</span></button>
+    </div>
+
     <!-- Simulateur et si -->
-    <div class="card" id="cardWhatIf" role="group" aria-labelledby="simTitle">
+    <div class="card" id="cardWhatIf" data-adv="1" role="group" aria-labelledby="simTitle">
       <div class="card-head">
         <span class="icon-tile"><svg><use href="#i-trend"/></svg></span>
         <div><h3 data-i18n="sim.title" id="simTitle">Simulateur — et si… ?</h3>
@@ -1451,7 +1496,7 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
     <div class="card">
       <div class="card-head"><span class="icon-tile"><svg><use href="#i-info"/></svg></span><div><h3 data-i18n="set.about">À propos et avertissement</h3></div></div>
       <div id="aboutBody" style="font-size:.8rem;color:var(--muted);line-height:1.6;margin-top:8px"></div>
-      <div class="kv" style="margin-top:10px"><span data-i18n="set.version">Version</span><b id="versionLabel">5.4.0</b></div>
+      <div class="kv" style="margin-top:10px"><span data-i18n="set.version">Version</span><b id="versionLabel">5.5.0</b></div>
       <div class="kv"><span data-i18n="set.storage">Stockage</span><b id="storageLabel"></b></div>
     </div>
   </section>
@@ -1533,6 +1578,7 @@ html[dir="rtl"] .toast,html[dir="rtl"] .toast.show{transform:translate(50%,0)}
       <button class="btn" id="introStart" type="button"><span data-i18n="intro.start">Compris, continuer</span><svg><use href="#i-chev-r"/></svg></button>
       <button class="btn ghost" id="introLearn" type="button"><svg><use href="#i-help"/></svg><span data-i18n="intro.learn">Questions fréquentes</span></button>
     </div>
+    <p class="intro-tip"><svg width="14" height="14"><use href="#i-compass"/></svg><span data-i18n="intro.tip">Première visite ? Trois chiffres suffisent : le calcul express vous donne un montant en une minute.</span></p>
     <p class="intro-foot" data-i18n="intro.foot">Aucune donnée ne part sur Internet : tout reste sur cet appareil, et vous pouvez tout exporter ou effacer quand vous voulez.</p>
   </div>
 </div>
@@ -1778,7 +1824,7 @@ fr: {
   "f.realEstate":"Immobilier et terrains destinés à la revente",
   "f.rental":"Revenus locatifs nets accumulés",
   "f.rental.hint":"Seul le cumul non consommé entre dans l'assiette.",
-  "f.shares":"Actions, parts sociales et OPCVM",
+  "f.shares":"Actions, parts sociales et OPCVM (fonds d'investissement)",
   "f.shares.hint":"Retenues à leur valeur de marché à l'échéance.",
   "f.shortDebts":"Dettes à court terme et factures exigibles",
   "f.longDebts":"Dettes à long terme — échéances des 12 prochains mois",
@@ -1992,7 +2038,7 @@ en: {
   "f.realEstate":"Property and land held for resale",
   "f.rental":"Accumulated net rental income",
   "f.rental.hint":"Only the unconsumed balance enters the zakatable base.",
-  "f.shares":"Shares, partnership interests and funds",
+  "f.shares":"Shares, partnership interests and mutual funds (OPCVM)",
   "f.shares.hint":"Valued at market price on the maturity date.",
   "f.shortDebts":"Short-term debts and due invoices",
   "f.longDebts":"Long-term debts — instalments due within 12 months",
@@ -2206,7 +2252,7 @@ ar: {
   "f.realEstate":"العقارات والأراضي المعدّة للبيع",
   "f.rental":"الإيرادات الإيجارية الصافية المتراكمة",
   "f.rental.hint":"لا يدخل في الوعاء إلا ما لم يُستهلك منها.",
-  "f.shares":"الأسهم والحصص وصناديق الاستثمار",
+  "f.shares":"الأسهم والحصص وصناديق الاستثمار المشتركة (OPCVM)",
   "f.shares.hint":"تُقوَّم بسعر السوق عند الاستحقاق.",
   "f.shortDebts":"الديون قصيرة الأجل والفواتير المستحقة",
   "f.longDebts":"الديون طويلة الأجل — الأقساط المستحقة خلال 12 شهراً",
@@ -2839,7 +2885,7 @@ ar: {
     "import.encPrompt":"Ce fichier est chiffré. Saisissez le mot de passe utilisé lors de l'export.",
     "import.encField":"Mot de passe du fichier",
     "import.encBad":"Mot de passe incorrect, ou fichier endommagé.",
-    "f.cashOther":"Autres devises (contre-valeur FCFA)",
+    "f.cashOther":"Autres devises (valeur en FCFA)",
     "f.cashOther.hint":"Livres, nairas, dollars canadiens : convertissez vous-même en FCFA.",
     "f.receivablesDoubtful":"Créances douteuses (hors calcul)",
     "f.receivablesDoubtful.hint":"Argent qu'on vous doit sans certitude : compté seulement à l'encaissement.",
@@ -2923,7 +2969,7 @@ ar: {
     "import.encPrompt":"This file is encrypted. Enter the password used at export.",
     "import.encField":"File password",
     "import.encBad":"Wrong password, or damaged file.",
-    "f.cashOther":"Other currencies (FCFA equivalent)",
+    "f.cashOther":"Other currencies (value in FCFA)",
     "f.cashOther.hint":"Pounds, naira, Canadian dollars: convert to FCFA yourself.",
     "f.receivablesDoubtful":"Doubtful receivables (excluded)",
     "f.receivablesDoubtful.hint":"Money owed to you with no certainty: counted only when received.",
@@ -3007,7 +3053,7 @@ ar: {
     "import.encPrompt":"هذا الملف مشفّر. أدخل كلمة المرور المستعملة عند التصدير.",
     "import.encField":"كلمة مرور الملف",
     "import.encBad":"كلمة المرور غير صحيحة أو الملف تالف.",
-    "f.cashOther":"عملات أخرى (مقابلها بالفرنك)",
+    "f.cashOther":"عملات أخرى (القيمة بالفرنك)",
     "f.cashOther.hint":"الجنيه والنيرة والدولار الكندي: حوّلها بنفسك إلى فرنك سيفا.",
     "f.receivablesDoubtful":"ديون مشكوك فيها (خارج الحساب)",
     "f.receivablesDoubtful.hint":"مال يُستحق لك دون يقين: يُحسب عند القبض فقط.",
@@ -3025,7 +3071,7 @@ ar: {
 const LANGS = ["fr","en","ar"];
 const LOCALES = { fr:"fr-FR", en:"en-GB", ar:"ar-EG-u-nu-latn" };
 const EUR_XAF = 655.957, GOLD_NISSAB_G = 85, SILVER_NISSAB_G = 595, TROY_OZ_G = 31.1034768;
-const VERSION = "5.4.0";
+const VERSION = "5.5.0";
 const KEY_STATE = "zakat_al_mal_state_v5";
 const KEY_PIN = "zakat_al_mal_pin_v5";
 const KEY_AUTH = "zakat_al_mal_auth_v5";
@@ -3095,6 +3141,7 @@ function defaultState() {
       livestockSheep: 0, livestockCattle: 0, livestockCamels: 0,
       btcPrice: 60000000, ethPrice: 2000000, usdtPrice: 600,
       rateGbp: 760, rateCad: 430, rateNgn: 0.42,
+      uiMode: "simple",
       retireMode: "none", retireShare: 0,
       planCount: 12, planStart: iso
     },
@@ -3469,6 +3516,7 @@ function renderAll() {
   if (typeof renderLots === "function") renderLots();
   if (typeof renderPackA === "function") renderPackA();
   if (typeof renderPackB === "function") renderPackB();
+  if (typeof renderPackC === "function") renderPackC();
 }
 
 
@@ -7559,6 +7607,106 @@ function renderPackB() {
 
 bindPackB();
 
+/* ===== v5.5 — accessibilité débutant : mode simple, bilan collant, aiguillage ===== */
+(function () {
+  var extra = {
+  fr: {
+    "mode.title":"Mode simple",
+    "mode.titleExpert":"Mode complet",
+    "mode.sub":"L'essentiel : vos liquidités, vos métaux, vos dettes. Le reste d'un clic.",
+    "mode.subExpert":"Tous les postes : crypto, commerce, récoltes, foyer, retraite, simulateur.",
+    "mode.simple":"Simple","mode.expert":"Complet",
+    "mode.toast.simple":"Mode simple : seuls les postes courants sont affichés.",
+    "mode.toast.expert":"Mode complet : tous les postes sont affichés.",
+    "msum.detail":"Voir le bilan",
+    "intro.tip":"Première visite ? Trois chiffres suffisent : le calcul express vous donne un montant en une minute."
+  },
+  en: {
+    "mode.title":"Simple mode",
+    "mode.titleExpert":"Full mode",
+    "mode.sub":"The essentials: your cash, your metals, your debts. The rest is one tap away.",
+    "mode.subExpert":"Every section: crypto, trade, crops, household, pensions, simulator.",
+    "mode.simple":"Simple","mode.expert":"Full",
+    "mode.toast.simple":"Simple mode: only the common sections are shown.",
+    "mode.toast.expert":"Full mode: every section is shown.",
+    "msum.detail":"See the summary",
+    "intro.tip":"First visit? Three figures are enough: the express calculation gives you an amount in a minute."
+  },
+  ar: {
+    "mode.title":"الوضع المبسّط",
+    "mode.titleExpert":"الوضع الكامل",
+    "mode.sub":"الضروري فقط: نقودكم ومعادنكم وديونكم، والباقي بنقرة واحدة.",
+    "mode.subExpert":"كل الأقسام: العملات المشفّرة والتجارة والزروع والأسرة والتقاعد والمحاكي.",
+    "mode.simple":"مبسّط","mode.expert":"كامل",
+    "mode.toast.simple":"الوضع المبسّط: تُعرض الأقسام الشائعة فقط.",
+    "mode.toast.expert":"الوضع الكامل: تُعرض كل الأقسام.",
+    "msum.detail":"عرض الخلاصة",
+    "intro.tip":"أول زيارة؟ ثلاثة أرقام تكفي: الحساب السريع يعطيكم مبلغًا في دقيقة."
+  }
+  };
+  Object.keys(extra).forEach(function (lang) { Object.assign(I18N[lang], extra[lang]); });
+})();
+
+function uiMode() { return state.settings.uiMode === "expert" ? "expert" : "simple"; }
+
+function applyUiMode() {
+  const mode = uiMode();
+  document.querySelectorAll("[data-adv]").forEach(el => el.classList.toggle("hidden", mode === "simple"));
+  document.querySelectorAll("#modeSeg [data-ui-mode]").forEach(b => {
+    const on = b.dataset.uiMode === mode;
+    b.classList.toggle("active", on);
+    b.setAttribute("aria-pressed", String(on));
+  });
+  const bar = document.querySelector("#modeBar .mode-txt");
+  if (bar) {
+    const titre = mode === "expert" ? "mode.titleExpert" : "mode.title";
+    const sous = mode === "expert" ? "mode.subExpert" : "mode.sub";
+    const b = bar.querySelector("b"), sp = bar.querySelector("span");
+    if (b) { b.setAttribute("data-i18n", titre); b.textContent = t(titre); }
+    if (sp) { sp.setAttribute("data-i18n", sous); sp.textContent = t(sous); }
+  }
+}
+
+function setUiMode(mode, opts) {
+  const next = mode === "expert" ? "expert" : "simple";
+  const change = uiMode() !== next;
+  state.settings.uiMode = next;
+  persistState();
+  applyUiMode();
+  if (change && !(opts && opts.silent)) toast(t(next === "expert" ? "mode.toast.expert" : "mode.toast.simple"));
+}
+
+function renderMsum() {
+  const val = $("msumVal");
+  if (!val) return;
+  const c = compute();
+  val.textContent = fmt(c.zakat);
+  const btn = $("msumBtn");
+  if (btn) btn.setAttribute("aria-label", t("msum.detail") + " — " + fmt(c.zakat));
+}
+
+function bindPackC() {
+  document.querySelectorAll("#modeSeg [data-ui-mode]").forEach(b => {
+    b.addEventListener("click", () => setUiMode(b.dataset.uiMode));
+  });
+  /* le bandeau doit suivre chaque frappe : ces champs ne passent pas par renderAll */
+  if (typeof FIELD_KEYS !== "undefined") {
+    FIELD_KEYS.forEach(k => { const el = $(k); if (el) el.addEventListener("input", () => { save(); renderMsum(); }); });
+  }
+  const btn = $("msumBtn");
+  if (btn) btn.addEventListener("click", () => {
+    const p = $("sumPanel");
+    if (p && p.scrollIntoView) p.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+}
+
+function renderPackC() {
+  applyUiMode();
+  renderMsum();
+}
+
+bindPackC();
+
 
 /* ============================ 21. TOAST & MODALE ============================ */
 let toastTimer = null;
@@ -7667,6 +7815,11 @@ function tourTarget(step) {
   return document.querySelector(step.sel);
 }
 function openTour(start) {
+  /* la visite montre tous les postes : on passe en mode complet le temps du parcours */
+  if (!tour.open && typeof uiMode === "function" && typeof setUiMode === "function" && uiMode() === "simple") {
+    tour.forcedExpert = true;
+    setUiMode("expert", { silent: true });
+  }
   tour.i = typeof start === "number" ? start : 0;
   tour.open = true;
   $("tourOverlay").classList.add("show");
@@ -7678,6 +7831,10 @@ function closeTour(done) {
   tour.open = false;
   $("tourOverlay").classList.remove("show");
   document.body.style.overflow = "";
+  if (tour.forcedExpert) {
+    tour.forcedExpert = false;
+    if (typeof setUiMode === "function") setUiMode("simple", { silent: true });
+  }
   if (done) { state.meta.tourDone = true; save(); }
 }
 let tourArrowsBound = false;
